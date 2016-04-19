@@ -3,9 +3,10 @@
 <head>
   <title>Pure Mixtures</title>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="/css/git_md.css" />
-  <!--<link rel="stylesheet" href="/css/pure.css" />-->
-  <link rel="stylesheet" href="/css/split_screen.css" />
+  <link rel="stylesheet" href="css/highlight_md.css" />
+  <link rel="stylesheet" href="css/git_md.css" />
+  <!--<link rel="stylesheet" href="css/pure.css" />-->
+  <link rel="stylesheet" href="css/split_screen.css" />
   <meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf=-8">
 </head>
 
@@ -15,6 +16,10 @@
     $page = pathinfo($URI['path'])['filename'];
     parse_str(html_entity_decode($URI['query']), $q );
     $q = $q['q'];
+    if (empty($q))
+    { 
+        $q = 'tags_all';
+    }
     ?>
 
     <div id="c_menu">
@@ -22,7 +27,7 @@
     </div>
 
     <div id="c_content" >
-        <?php readfile("./".$q.".html"); ?> 
+        <?php readfile("html/".$q.".html"); ?> 
     </div>
 </body>
 

@@ -1,0 +1,10 @@
+<p><span class="citation">@git</span> <span class="citation">@recipe</span></p>
+<h2 id="make-the-current-commit-the-only-initial-commit-in-a-git-repository">Make the current commit the only (initial) commit in a Git repository</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> branch new_branch_name <span class="ot">$(</span><span class="kw">echo</span> <span class="st">&quot;init message&quot;</span> <span class="kw">|</span> <span class="kw">git</span> commit-tree HEAD^<span class="dt">{tree}</span><span class="ot">)</span> 
+<span class="kw">git</span> checkout new_branch_name <span class="co"># swith to new branch mirror just created</span>
+<span class="kw">git</span> branch -D master <span class="co"># delete master</span>
+<span class="kw">git</span> branch -m master <span class="co"># rename new_branch to master</span>
+<span class="kw">%git</span> push -f origin master <span class="co"># eventually push the reseted repository</span></code></pre></div>
+<h2 id="ammend-author-name-and-email">Ammend author name and email</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config user... <span class="st">&#39;new_name..&#39;</span>
+<span class="kw">git</span> commit --amend --reset-author</code></pre></div>
