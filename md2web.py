@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os, random
+import sys, os, random
 import pypandoc
+
+#sys.path.append(os.path.realpath('..'))
+_bd = os.path.dirname(__file__)
 
 
 '''
@@ -23,10 +26,10 @@ import pypandoc
 _ext = '.md'
 _rev = 1
 _main = 'index.php'
-_html_path = 'html/'
-_md_path = 'md/'
+_html_path = _bd + '/html/'
+_md_path = _bd + '/md/'
 
-def get_md(path='.'):
+def get_md(path=_bd):
     # Return a the list of markdown files under the @path.
 
     ext = _ext
@@ -62,7 +65,7 @@ def get_tags_files_dict(files):
     return tags_files
 
 
-def gen_tagmenu_md(tags, pathout='.'):
+def gen_tagmenu_md(tags):
     # Return an MD formated list of @tag from the input list
     menu = {}
     main = _main
@@ -70,12 +73,11 @@ def gen_tagmenu_md(tags, pathout='.'):
     l = ''
     for t in tags:
         l += '* [%s](%s?rev=%s&q=tag_%s)\n' % (t.title(), main, rev, t)
-    #menu[os.path.join(pathout, 'tags_list')] = l
     menu['tags_list'] = l
     return menu
 
 
-def gen_taggroup_md(tags_files_dict, pathout='.'):
+def gen_taggroup_md(tags_files_dict):
     # Return dict of MD content grouping by @tag.
     #   * keys are the file, also ref in the @tagmenu pages
     #   * values are list of MD pages associated to tags
@@ -88,7 +90,6 @@ def gen_taggroup_md(tags_files_dict, pathout='.'):
             md_code += '* [%s](%s?rev=%s&q=%s)\n' % (f.title().replace('_', ' '), main, rev, f)
         md_code += '\n'
         tag_ref =  'tag_' + t
-        #tag_ref = os.path.join(pathout, 'tag_' + t)
         taggroup[tag_ref] = md_code
 
     return taggroup
@@ -118,10 +119,11 @@ if __name__ == '__main__':
 
     pathin = (_md_path)
     pathout = _html_path
+    os.path.exists(pathout) or os.makedirs(pathout)
     tags_files = get_tags_files_dict(get_md(pathin))
     files = set(sum(tags_files.values(), []))
-    menu = gen_tagmenu_md(tags_files.keys(), pathout)
-    taggroup = gen_taggroup_md(tags_files, pathout)
+    menu = gen_tagmenu_md(tags_files.keys())
+    taggroup = gen_taggroup_md(tags_files)
 
     tagall = {'tags_all': '\n'.join(set(taggroup.values())) }
     #tagall = {os.path.join(pathout, 'tags_all'): '\n'.join(set(taggroup.values())) }
