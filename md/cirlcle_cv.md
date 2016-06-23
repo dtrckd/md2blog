@@ -1,8 +1,6 @@
 @cv
 @python
 
-view-source:http://txt.arboreus.com/2014/10/21/remove-circles-from-an-image-in-python.html
-
 <div id="header" class="pure-menu pure-menu-open pure-menu-horizontal">
 
 *   [<< contents](/ "*.txt")
@@ -130,3 +128,5 @@ view-source:http://txt.arboreus.com/2014/10/21/remove-circles-from-an-image-in-p
   </div>
 
   <script>hljs.initHighlightingOnLoad();</script>
+  
+source: http://txt.arboreus.com/2014/10/21/remove-circles-from-an-image-in-python.html

@@ -1,5 +1,5 @@
 # md2web
---- Ultra light, simple and easy website generator based on markdown syntax.
+**Ultra light, simple and easy website generator based on markdown syntax.**
 
 1. get things {tags, pages etc} from markdonws files,
 2. generatate HTML:
@@ -7,9 +7,20 @@
     * all tags pages list [sqare by title]
     * unique html from markdowns
 
+
+## Files Tree
+    ./
+    ./index.php
+    ./menu.php 
+    ./md/   -- Markdown input
+    ./html/ -- Html output
+    ./css/  -- Static style files
+
 ## Usage
     python md2web.py
 
-##### CSS/style Customization.
-##### Markown enhencement for special HTML and Javascstipt features...
+## Todo
+* CSS/style Customization.
+* Markown enhencement for special HTML and Javascstipt features...
+* integration of MEAN.
 
