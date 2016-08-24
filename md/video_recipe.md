@@ -1,6 +1,6 @@
 @video
 @linux
-@recipe
+@recipes
 
 # Video tools on Linux
 

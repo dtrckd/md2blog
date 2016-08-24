@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="css/highlight_md.css" />
   <link rel="stylesheet" href="css/git_md.css" />
-  <!--<link rel="stylesheet" href="css/pure.css" />-->
   <link rel="stylesheet" href="css/split_screen.css" />
   <meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf=-8">
 </head>

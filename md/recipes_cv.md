@@ -1,5 +1,5 @@
 @cv
-@recipe
+@recipes
 
 
 

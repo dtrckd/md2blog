@@ -1,6 +1,6 @@
 @web
 @design
-@recipe
+@recipes
 
 # Open source web Generator
 

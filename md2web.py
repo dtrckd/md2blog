@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys, os, random
-import pypandoc
+from pypandoc import convert
+#from markdown import Markdown
+#convert = Markdown.convert
+
+# @Todo: play xith markdown(extension)
+#        interface it with pandoc.
 
 #sys.path.append(os.path.realpath('..'))
 _bd = os.path.dirname(__file__)
@@ -105,12 +110,12 @@ def dump_html(input, pathin,  pathout):
             fin = os.path.join(pathin, f + _ext)
             fout = os.path.join(pathout, f + '.html')
             print 'creating %s' % (fout)
-            pypandoc.convert(fin, 'html', outputfile=fout)
+            convert(fin, 'html', outputfile=fout)
     elif type(input) is dict:
         for f , content in input.items():
             fout = os.path.join(pathout, f + '.html')
             print 'creating %s' % (fout)
-            pypandoc.convert(content, 'html', format='md', outputfile=fout)
+            convert(content, 'html', format='md', outputfile=fout)
     else:
         raise NotImplementedError()
 

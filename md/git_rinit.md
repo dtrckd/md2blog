@@ -1,5 +1,5 @@
 @git
-@recipe
+@recipes
 
 ##  Make the current commit the only (initial) commit in a Git repository
 
