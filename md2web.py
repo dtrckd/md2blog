@@ -75,10 +75,10 @@ def gen_tagmenu_md(tags):
     menu = {}
     main = _main
     rev = _rev
-    l = ''
+    l = []
     for t in tags:
-        l += '* [%s](%s?rev=%s&q=tag_%s)\n' % (t.title(), main, rev, t)
-    menu['tags_list'] = l
+        l.append('* [%s](%s?rev=%s&q=tag_%s)' % (t.title(), main, rev, t))
+    menu['tags_list'] = '\n'.join(sorted(l))
     return menu
 
 
@@ -91,11 +91,14 @@ def gen_taggroup_md(tags_files_dict):
     main = _main
     for t, lf in tags_files_dict.items():
         md_code = '# %s \n\n' % t
+        _md_code = []
         for f in lf:
-            md_code += '* [%s](%s?rev=%s&q=%s)\n' % (f.title().replace('_', ' '), main, rev, f)
-        md_code += '\n'
+            _md_code.append('* [%s](%s?rev=%s&q=%s)' % (f.title().replace('_', ' '), main, rev, f))
         tag_ref =  'tag_' + t
-        taggroup[tag_ref] = md_code
+        taggroup[tag_ref] = md_code + '\n'.join(sorted(_md_code))
+
+    #for k, v in taggroup.items():
+    #    taggroup[k] = list(sorted(v))
 
     return taggroup
 

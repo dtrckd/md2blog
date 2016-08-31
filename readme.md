@@ -12,9 +12,10 @@
     ./
     ./index.php
     ./menu.php 
-    ./md/   -- Markdown input
-    ./html/ -- Html output
-    ./css/  -- Static style files
+    ./images/ -- Images input
+    ./md/     -- Markdown input
+    ./html/   -- Html output
+    ./css/    -- Static style files
 
 ## Usage
     python md2web.py
@@ -22,5 +23,5 @@
 ## Todo
 * CSS/style Customization.
 * Markown enhencement for special HTML and Javascstipt features...
-* integration of MEAN.
+* integration of MEAN/Meteor.
 
