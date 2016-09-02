@@ -99,7 +99,6 @@ def gen_taggroup_md(tags_files_dict):
 
     #for k, v in taggroup.items():
     #    taggroup[k] = list(sorted(v))
-    print taggroup
 
     return taggroup
 
