@@ -1,4 +1,4 @@
-# md2web
+# md2blog
 **Ultra light, simple and easy website generator based on markdown syntax.**
 
 1. get things {tags, pages etc} from markdonws files,
@@ -18,7 +18,7 @@
     ./css/    -- Static style files
 
 ## Usage
-    python md2web.py
+    python md2blog.py
 
 ## Todo
 * CSS/style Customization.

@@ -95,10 +95,11 @@ def gen_taggroup_md(tags_files_dict):
         for f in lf:
             _md_code.append('* [%s](%s?rev=%s&q=%s)' % (f.title().replace('_', ' '), main, rev, f))
         tag_ref =  'tag_' + t
-        taggroup[tag_ref] = md_code + '\n'.join(sorted(_md_code))
+        taggroup[tag_ref] = md_code + '\n'.join(sorted(_md_code)) + '\n'
 
     #for k, v in taggroup.items():
     #    taggroup[k] = list(sorted(v))
+    print taggroup
 
     return taggroup
 
@@ -115,7 +116,9 @@ def dump_html(input, pathin,  pathout):
             print 'creating %s' % (fout)
             convert(fin, 'html', outputfile=fout)
     elif type(input) is dict:
-        for f , content in input.items():
+
+        for f , content in sorted(input.items(), key=lambda t: t[0]):
+        #for f , content in input.items():
             fout = os.path.join(pathout, f + '.html')
             print 'creating %s' % (fout)
             convert(content, 'html', format='md', outputfile=fout)
@@ -133,7 +136,7 @@ if __name__ == '__main__':
     menu = gen_tagmenu_md(tags_files.keys())
     taggroup = gen_taggroup_md(tags_files)
 
-    tagall = {'tags_all': '\n'.join(set(taggroup.values())) }
+    tagall = {'tags_all': '\n'.join(sorted(set(taggroup.values()))) }
     #tagall = {os.path.join(pathout, 'tags_all'): '\n'.join(set(taggroup.values())) }
 
     renderer = [menu, tagall, taggroup, files]
