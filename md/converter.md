@@ -12,7 +12,4 @@
 
 ...
 
-# Jupyter notebook
-
-How to share an Ipython notyebook: http://txt.arboreus.com/2012/09/27/how-to-share-an-ipython-notebook.html 
 

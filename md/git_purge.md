@@ -2,13 +2,39 @@
 
 http://blog.ostermiller.org/git-remove-from-history
 
+# git-fatfiles
+
+git rev-list --all --objects | \
+    sed -n $(git rev-list --objects --all | \
+    cut -f1 -d' ' | \
+    git cat-file --batch-check | \
+    grep blob | \
+    sort -n -k 3 | \
+    tail -n40 | \
+    while read hash type size; do 
+    echo -n "-e s/$hash/$size/p ";
+    done) | \
+    sort -n -k1
+
 (warning  those command permanent remove bunch of files)
+
+# git-eradicate
+
+git filter-branch -f  --index-filter \
+    'git rm --force --cached --ignore-unmatch video/parasite-intro.avi' \
+     -- --all
+rm -Rf .git/refs/original && \
+    git reflog expire --expire=now --all && \
+    git gc --aggressive && \
+    git prune
+
 # Purging git history
-git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch YOURFILENAME" HEAD
-rm -rf .git/refs/original/ 
-git reflog expire --all 
-git gc --aggressive --prune
-git push origin master --force
+
+    git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch YOURFILENAME" HEAD
+    rm -rf .git/refs/original/ 
+    git reflog expire --all 
+    git gc --aggressive --prune
+    #git push origin master --force
 
 
 # Removing and purging files from git history (Advanced)
