@@ -37,11 +37,15 @@ _md_path = _bd + '/md/'
 def get_md(path=_bd):
     # Return a the list of markdown files under the @path.
 
-    ext = _ext
     files = []
-    for f in os.listdir(pathin):
-        if f.endswith(ext):
-            files.append(os.path.join(path, f[:-len(ext)]))
+    if len(sys.argv) >= 3:
+        os.chdir(os.getenv('PWD'))
+        files = sys.argv[2:]
+    else:
+        ext = _ext
+        for f in os.listdir(pathin):
+            if f.endswith(ext):
+                files.append(os.path.join(path, f[:-len(ext)]))
     return files
 
 def get_tags_files_dict(files):

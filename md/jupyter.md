@@ -1,16 +1,17 @@
 @jupyter
+@python
 
 # Ipython reload
 
-To reload a updated modules in ipython:
+To reload a updated modules in ipython :
 
     import imp
     imp.reload(module)
 
-or for reloading a scrip
+or for reloading a script :
 
-    %autoreload 2
     %load_ext autoreload
+    %autoreload 2
 
 # Jupyter notebook sharing
 

@@ -1,5 +1,5 @@
 @bash
-@recipe
+@recipes
 
 
 ```
