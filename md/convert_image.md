@@ -1,5 +1,6 @@
 @video
 @linux
+@X
 
 % control compression quality
 convert -quality 25 im.bmp im.jpeg

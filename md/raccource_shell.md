@@ -1,5 +1,5 @@
 @linux
-@shell
+@bash
 
 Raccourcis clavier pour Bash
 Posted on May 4, 2010 by pascal.rapaz

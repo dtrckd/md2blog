@@ -1,5 +1,6 @@
 @disk
 @linux
+@system
 
 >>> Graver un iso bootable sur une clé usb
 
