@@ -1,5 +1,6 @@
 @bash
 @video
+@X
 
 Information sur le serveur X                                : `xdpyinfo`
 trouver les noms des polices de caractères X11              : `xfontsel ou gfontsel`

@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import sys, os, random
-from pypandoc import convert
+import pypandoc as pypd
 #from markdown import Markdown
 #convert = Markdown.convert
 
@@ -107,7 +107,7 @@ def gen_taggroup_md(tags_files_dict):
     return taggroup
 
 
-def dump_html(input, pathin,  pathout):
+def dump_html(input, pathin,  pathout, _format='md'):
     # Dump the html file of the dictionnary input,
     # if dict: keys are the files name, and values the HTML content.
     # else list: list of MD files
@@ -116,15 +116,13 @@ def dump_html(input, pathin,  pathout):
         for f in input:
             fin = os.path.join(pathin, f + _ext)
             fout = os.path.join(pathout, f + '.html')
-            print 'creating %s' % (fout)
-            convert(fin, 'html', outputfile=fout)
+            print('creating %s' % (fout))
+            pypd.convert_file(fin, 'html', format=_format, outputfile=fout)
     elif type(input) is dict:
 
         for f , content in sorted(input.items(), key=lambda t: t[0]):
-        #for f , content in input.items():
             fout = os.path.join(pathout, f + '.html')
-            print 'creating %s' % (fout)
-            convert(content, 'html', format='md', outputfile=fout)
+            pypd.convert_text(content, 'html', format=_format, outputfile=fout)
     else:
         raise NotImplementedError()
 

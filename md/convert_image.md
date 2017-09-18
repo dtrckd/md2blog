@@ -1,4 +1,4 @@
-@video
+@cv
 @linux
 @X
 

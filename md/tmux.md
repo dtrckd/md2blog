@@ -3,6 +3,11 @@
 @linux
 
 
+Rename a buffer :
+    tmux rename -t _1-22097 2
+
+#### Pasting
+
 Enable mouse scroll in tmux
     <C-s>: set [-g] mouse on
 
