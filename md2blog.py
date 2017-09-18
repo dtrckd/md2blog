@@ -116,10 +116,12 @@ def dump_html(input, pathin,  pathout, _format='md'):
         for f in input:
             fin = os.path.join(pathin, f + _ext)
             fout = os.path.join(pathout, f + '.html')
-            print('creating %s' % (fout))
-            pypd.convert_file(fin, 'html', format=_format, outputfile=fout)
+            tmin = os.path.getmtime(fin)
+            tmout = os.path.getmtime(fout)
+            if tmin > tmout:
+                print('converting %s' % (fout))
+                pypd.convert_file(fin, 'html', format=_format, outputfile=fout)
     elif type(input) is dict:
-
         for f , content in sorted(input.items(), key=lambda t: t[0]):
             fout = os.path.join(pathout, f + '.html')
             pypd.convert_text(content, 'html', format=_format, outputfile=fout)
