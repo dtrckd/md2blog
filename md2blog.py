@@ -117,7 +117,10 @@ def dump_html(input, pathin,  pathout, _format='md'):
             fin = os.path.join(pathin, f + _ext)
             fout = os.path.join(pathout, f + '.html')
             tmin = os.path.getmtime(fin)
-            tmout = os.path.getmtime(fout)
+            if os.path.isfile(fout):
+                tmout = os.path.getmtime(fout)
+            else:
+                tmout = 0
             if tmin > tmout:
                 print('converting %s' % (fout))
                 pypd.convert_file(fin, 'html', format=_format, outputfile=fout)

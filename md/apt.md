@@ -1,6 +1,10 @@
 @apt
 @linux
 
+# Dowload source and compile (easy)
+
+    apt-get source --compile awesome_package
+
 # Dowload Source / Apply a patche / Compile and Install
     apt-get build-dep nautilus
     apt-get source nautilus
