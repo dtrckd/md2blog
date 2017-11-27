@@ -3,8 +3,13 @@
 @linux
 
 
+#### Utils
+
 Rename a buffer :
     tmux rename -t _1-22097 2
+
+Swap/move pane: 
+    <C-s>swap-pane -t <pos>
 
 #### Pasting
 

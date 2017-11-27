@@ -56,3 +56,12 @@ Pour le cas où vous voudriez vous amuser avec votre mailbox (qui contient des a
 - Extraire des fichiers uuencodés ou en base64 : uudeview -i <fichier>
 (note : parfois les fichiers sont affublés de l'extension b64 ou uue, mais la plupart du temps, non) 
 
+
+### Cut files
+
+cut:
+    split --bytes=10M --filter='gzip > $FILE.gz' stirling.npy  path/to/stirling
+    zip -r package  path/to 
+
+join:
+    gunzip path/to/* && cat path/to/* > stirling.npy
