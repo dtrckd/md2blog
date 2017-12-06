@@ -29,9 +29,21 @@ switch config:
      wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
      tar xf Python-3.6.1.tar.xz
      cd Python-3.6.1
-     ./configure --enable-optimizations
-     make -j 8
-     sudo make altinstall
+     ./configure 
+     CXX="/usr/bin/g++"             \
+          ./configure --prefix=/usr/local \
+          --enable-optimizations    \
+          --enable-shared     \
+          --with-system-expat \
+          --with-system-ffi   \
+          --with-ensurepip=yes &&
+          make -j8
+     #sudo make altinstall
+     sudo make install
+     sudo chmod 755 /usr/local/lib/libpython3.6m.so
+     sudo chmod 755 /usr/local/lib/libpython3.so
+     sudo ln -s /usr/local/lib/libpython3.so /usr/local/lib/libpython3.6.so
+
 
      # In case of lsb_release error when trying install pip with easy_install
      aptitude install lsb-core # (update-alternative set on python2.7)
