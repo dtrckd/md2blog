@@ -186,3 +186,35 @@ or if they have no work outstanding commits, they can just set their repository 
     git gc --aggressive --prune=now
 
 
+### Detack a subdirectory into a new repo
+
+Prepare the old repo
+
+    pushd <big-repo>
+    git subtree split -P <name-of-folder> -b <name-of-new-branch>
+    popd
+
+    Note: <name-of-folder> must NOT contain leading or trailing characters. For instance, the folder named subproject MUST be passed as subproject, NOT ./subproject/
+
+    Note for windows users: when your folder depth is > 1, <name-of-folder> must have *nix style folder separator (/). For instance, the folder named path1\path2\subproject MUST be passed as path1/path2/subproject
+
+Create the new repo
+
+    mkdir <new-repo>
+    pushd <new-repo>
+
+    git init
+    git pull </path/to/big-repo> <name-of-new-branch>
+
+Link the new repo to Github or wherever
+
+    git remote add origin <git@github.com:my-user/new-repo.git>
+    git push origin -u master
+
+Cleanup, if desired
+
+    popd # get out of <new-repo>
+    pushd <big-repo>
+
+    git rm -rf <name-of-folder>
+

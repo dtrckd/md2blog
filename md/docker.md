@@ -4,11 +4,11 @@
 # Docker Recipes
 
 ###### Show objects
-list containers:
+list (all) ontainers:
 
-    docker ps
+    docker ps -a
 
-list images (non running containers):
+list (all) images:
 
     docker images -a
 
@@ -30,14 +30,32 @@ Enter inside a container:
 
     docker exec -it container-id bash
 
+
+
 Remove all containers:
 
     docker stop $(docker ps -a -q)
     docker rm $(docker ps -a -q)
 
+Remove all exited containers
+
+    docker ps -aq -f status=exited
+
+Remove stopped containers
+
+    docker ps -aq --no-trunc | xargs docker rm
+
+
+
+
 Remove all images:
 
     docker rmi $(docker images -q)
+
+Remove dangling/untagged images
+    docker images -q --filter dangling=true | xargs docker rmi
+
+
 
 Remove unused volumes:
 

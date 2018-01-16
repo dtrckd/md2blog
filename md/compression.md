@@ -19,7 +19,7 @@ Avant toute chose, si vous ne savez pas ce que contient un fichier : file <fichi
 (Ces informations sont basées sur le fichier /etc/magic)
 
 - Extraire un rpm : rpm2cpio <fichier.rpm> | cpio -mid
-- Extraire un deb : depkg-deb -x <fichier.deb>
+- Extraire un deb : dpkg-deb -x <fichier.deb>
 
 - Extraire un cab Microsoft : cabextract <fichier.cab>
 cabextract peut s'obtenir sur uklinux.net
