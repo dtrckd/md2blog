@@ -45,5 +45,5 @@ switch config:
      sudo ln -s /usr/local/lib/libpython3.so /usr/local/lib/libpython3.6.so
 
 
-     # In case of lsb_release error when trying install pip with easy_install
+     # In case of lsb_release error when trying install pip with easy_install
      aptitude install lsb-core # (update-alternative set on python2.7)

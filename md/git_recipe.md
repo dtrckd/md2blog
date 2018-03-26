@@ -64,7 +64,7 @@ git commit --amend --reset-author
     then export GIT_AUTHOR_NAME="dtrckd"; export GIT_AUTHOR_EMAIL=ddtracked@gmail.com;
     fi; git commit-tree "$@"'
 
-## Remove Backup
+## Remove Backup
 
     git update-ref -d refs/original/refs/heads/master
 
@@ -186,7 +186,7 @@ or if they have no work outstanding commits, they can just set their repository 
     git gc --aggressive --prune=now
 
 
-### Detack a subdirectory into a new repo
+### Detack a subdirectory into a new repo
 
 Prepare the old repo
 

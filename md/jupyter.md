@@ -1,7 +1,7 @@
 @jupyter
 @python
 
-# Ipython reload
+# Ipython reload
 
 To reload a updated modules in ipython :
 

@@ -11,16 +11,16 @@ Rename a buffer :
 Swap/move pane: 
     <C-s>swap-pane -t <pos>
 
-#### Pasting
+#### Pasting
 
 Enable mouse scroll in tmux
     <C-s>: set [-g] mouse on
 
 copy paste (see alsotmux list-buffers)
     <C-s>[             # go into paste mode
-    <space> or <S-v>   # select a region
+    <space> or <S-v>   # select a region
     <C-space>          # to copy the selection
-    <C-s>]             # to paste the selection
+    <C-s>]             # to paste the selection
 
 if mouse is "on", just select the text with mouse, then you can paste directly with : `<C-s>]`
 

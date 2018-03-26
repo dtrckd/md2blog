@@ -8,7 +8,7 @@ chargement des ressources par défaut du client X            : `xrdb -merge Xres
 modifier les préférences d'affichage X (souris, clavier...) : `xset`
 information sur une fenêtre X : `xwininfo`
 
-Get configuration of X server : 
+Get configuration of X server :
     service lightdm|gdm stop
     Xorg -configure
 
@@ -21,5 +21,7 @@ Get configuration of X server :
 	xrandr --output VGA-1 --mode 1280x1024 --auto --output LVDS-1 --mode 1280x800 --auto
 
 
-Note: On xfce, the position of the panel can be changed in the xfce4 panel's settiings
-    
+Note
+----
+
+On xfce, the position of the panel can be changed in the xfce4 panel's settiings

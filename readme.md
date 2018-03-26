@@ -14,7 +14,7 @@
     ./menu.php 
     ./images/ -- Images input
     ./md/     -- Markdown input
-    ./html/   -- Html output
+    ./html/   --XULHtml output
     ./css/    -- Static style files
 
 ## Usage

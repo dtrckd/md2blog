@@ -1,7 +1,7 @@
 @recipe
 @android
 
-# getting file trough MTP.
+# getting file trough MTP.
 
 install `mtp-tools`
 

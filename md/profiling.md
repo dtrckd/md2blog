@@ -31,10 +31,10 @@ Using pycallgraph  :
 ## Installing Tools
 * pip install pyprof2calltree
 * aptitude install kcachegrind
-* pip install runsnalkerun # aptitude install  python-profiler python-wxgtk2.8
+* pip install runsnalkerun # aptitude install  python-profiler python-wxgtk2.8
 * pip install pycallgraph
 
-# Python debugging : 
+# Python debugging : 
 
 * tutorial gdb : http://cs.brynmawr.edu/cs312/gdb-tutorial-handout.pdf 
 * https://www.cs.cmu.edu/~gilpin/tutorial/

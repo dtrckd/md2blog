@@ -16,8 +16,8 @@
     apt-get --build source nautilus
 
 
-# Purge broken package
+# Purge broken package
         
-    # Find bad package with dpkg -l pattern*
+    # Find bad package with dpkg -l pattern*
     apt-get --force-yes remove <package_name>
     dpkg --force-all --purge nom_du_paquet # || dpkg --force-all --remove <package_name>

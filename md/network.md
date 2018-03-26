@@ -27,7 +27,7 @@ Edit in `/etc/default/grub ` :
 * set `AddressFamily inet`  in  `/etc/ssh/sshd_config`.  Restart sshd
 
 
-### redirect service/port to enable non-root service on unreserved port
+### redirect service/port to enable non-root service on unreserved port
 ### (example redict the 80 request to local port 3000.
 sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
 
