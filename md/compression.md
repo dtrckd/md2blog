@@ -13,6 +13,7 @@ tar                tar xvf <fichier.tar>   tar czvf f.tar f
 tgz ou un tar.gz   tar zxvf                tar czvf <fn>.tar.gz <fn>
 tar.bz2            tar jxvf
 tar.xz             tar xvfJ
+rar                unrar x <file>
 zip                unzip <fichier.zip>     zip -r data *               zip / infozip
 
 Avant toute chose, si vous ne savez pas ce que contient un fichier : file <fichier>
