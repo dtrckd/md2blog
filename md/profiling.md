@@ -60,6 +60,17 @@ to file + visualization :
 
 https://github.com/jmdana/memprof
 
+J'ai essayé ce moyen pour profiler la mémoire ca marche pas mal, ca donne la consommation ligne par ligne, voila comment procéder:
+* installer memory_profiler en suivant conseil ici: http://scikit-learn.org/stable/developers/performance.html#memory-usage-profiling   (en fait si on l'utilise   sans ipython, il suffit de faire `pip3 install -U memory_profiler`)
+
+* mettre un `@profile` sur la fonction à profiler
+* copier le "binaire"(script python en fait) pmk dans le repo `cp ~/.local/bin/pmk pmk.py`
+* excuter avec le profiling `python3 -m memory_profiler pmk.py spec_name -x fit`
+
+
+
+
+
 ## Installing Tools
 * pip install pyprof2calltree
 * aptitude install kcachegrind
