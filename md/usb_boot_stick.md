@@ -30,7 +30,7 @@ mkfs.vfat /dev/sdb1 # -F 32 ?
 (fs is umounted)
 
 ###### from a Image:
-	cp debian.iso /dev/sdxx
+	cp debian.iso /dev/sdX # e.g. sdb not sdb1.
 	sync
 
 ###### from a File:
