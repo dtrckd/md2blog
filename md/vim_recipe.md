@@ -16,3 +16,10 @@ https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
 % soft line break : :set wrap linebreak nolist
 ```
 
+## justify text
+
+    apt-get install par
+
+then
+:set formatprg=par\ -w50
+then select line to align nand type `gq`.

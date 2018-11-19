@@ -1,3 +1,6 @@
+@ssh
+@linux
+
 # https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files
 
 ### Create private and public keys (default -t rsa ???):
