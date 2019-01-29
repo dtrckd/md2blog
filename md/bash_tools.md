@@ -1,6 +1,9 @@
 @bash
 @recipes
 
+# increase the max number of open file
+    ulimit -n NUMBER
+
 # Compare two directory content
     diff -qNr .  /other/path/ | grep -vE "(\.git|\.pyc)"
 
@@ -8,5 +11,5 @@
 
     find /path/to/files -name '*.csv' | cpio -pdm /target
 
-     
+
 

@@ -2,14 +2,19 @@
 @recipe
 @system
 
-# repair corrupted disk 
+# repair corrupted disk
 
     fsck -r /dev/sdb1
     dosfsck -a /dev/sdb1
     mkfs.vfat /dev/sdb1
 
-# Relabel a USB/Drive
+# Relabel disk
+
+## Linux type (EXT,..)
     MTOOLS_SKIP_CHECK=1 mlabel -i /dev/sdb1 ::MARS
+
+## Windiws type (ntfs,..)
+    ntfslabel <device> <label> # e.g. <device>=sdb1
 
 
 # Rescuscitate
@@ -20,7 +25,7 @@
 
 
 # Copy an iso
-     cp a.iso /dev/sdb 
+     cp a.iso /dev/sdb
      # or
      dd if=a.iso of=/dev/sdb1
 

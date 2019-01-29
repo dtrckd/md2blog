@@ -1,12 +1,31 @@
 # Use of ctags (great in use with taglist)
 
-# recursive on current folder (RTFM)
-ctags -R .
+recursive on current folder (RTFM)
+	ctags -R
+
+Ctrl+] - go to definition
+Ctrl+T - Jump back from the definition.
+Ctrl+W Ctrl+] - Open the definition in a horizontal split
+
+Add these lines in vimrc
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+Ctrl+\ - Open the definition in a new tab
+Alt+] - Open the definition in a vertical split
+
+After the tags are generated. You can use the following keys to tag into and tag out of functions:
+
+Ctrl+Left MouseClick - Go to definition
+Ctrl+Right MouseClick - Jump back from definition
+
+
+""""""""""""""""""""""""
 
 <CTRL-]> -- got to the object under cursor
 <CTRL-t> -- got back
 
-:ta <method> -- got to the method or list of method (ex: /^get) 
+:ta <method> -- got to the method or list of method (ex: /^get)
 :ts -- shows the list.
 :tn -- goes to the next tag in that list.
 :tp -- goes to the previous tag in that list.
@@ -28,5 +47,8 @@ After the tags are generated. You can use the following keys to tag into and tag
 
 Ctrl-Left_MouseClick - Go to definition
 Ctrl-Right_MouseClick - Jump back from definition
+
+"""""""""""""""""""""""""
+
 
 
