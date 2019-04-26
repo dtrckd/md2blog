@@ -24,7 +24,7 @@ Rename an image:
 ###### Interact with Objects
 Run a container:
 
-    docker run [-i|d] repository [--name container-id] 
+    docker run [-i|d] repository [--name container-id]
 
 Enter inside a container:
 
@@ -62,3 +62,11 @@ Remove unused volumes:
     find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf <(
             docker ps -aq | xargs docker inspect | jq -r '.[] | .Mounts | .[] | .Name | select(.)'
             ) | xargs -r rm -fr
+
+# Use cases
+
+## mongodb
+
+Mongodb provides an official containe r that will be automagically downladed. (you can just instal `mongodb-clients`
+
+    docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db mongo

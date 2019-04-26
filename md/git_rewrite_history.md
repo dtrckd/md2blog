@@ -1,5 +1,8 @@
+nice tuto about amend/rebase(-i)/cherry-pick/etc:
+    https://backlog.com/git-tutorial/rewriting-history/#git-rebase
 
-Even easier solution:
+
+Assuming a list of commit starting from A, suppose you want to change order of a previous commit:
 
     Create your new commit at the end, D. Now you have:
 
