@@ -7,14 +7,29 @@ Git diff on previous commit (e.g. head bacward 2 commits):
 
     git diff HEAD~2 -- <path>
 
-## merge an authorative branch "dev" into "master"
+Diff between Head and a other branch
+
+    git diff branch-name -- a-file
+    or
+    git diff branch-name..HEAD -- a-file
+
+## branch
+
+remove a remote branch
+
+    git push origin --delete <remote_branch_name>
+
+## Merge
+
+merge an authorative branch "dev" into "master"
+
     git checkout master
     git merge -Xtheirs dev
     git diff --name-only --diff-filter=U | xargs -I{} git checkout dev {}
 
-## Selective merge
-http://stackoverflow.com/questions/449541/how-do-you-merge-selective-files-with-git-merge
-http://jasonrudolph.com/blog/2009/02/25/git-tip-how-to-merge-specific-files-from-another-branch/
+Selective merge
+    http://stackoverflow.com/questions/449541/how-do-you-merge-selective-files-with-git-merge
+    http://jasonrudolph.com/blog/2009/02/25/git-tip-how-to-merge-specific-files-from-another-branch/
 
 Checkout the path(s) from the branch you want to merge,
 
@@ -44,7 +59,7 @@ An alias for this:
 ##  Make the current commit the only (initial) commit in a Git repository
 
 ```bash
-git branch new_branch_name $(echo "init message" | git commit-tree HEAD^{tree}) 
+git branch new_branch_name $(echo "init message" | git commit-tree HEAD^{tree})
 git checkout new_branch_name # swith to new branch mirror just created
 git branch -D master # delete master
 git branch -m master # rename new_branch to master
@@ -77,7 +92,7 @@ git commit --amend --reset-author
         grep blob | \
         sort -n -k 3 | \
         tail -n40 | \
-        while read hash type size; do 
+        while read hash type size; do
         echo -n "-e s/$hash/$size/p ";
         done) | \
         sort -n -k1

@@ -24,7 +24,7 @@ Rename an image:
 ###### Interact with Objects
 Run a container:
 
-    docker run [-i|d] repository [--name container-id]
+    docker run [-i|d] [--rm] [--name container-id] repository
 
 Enter inside a container:
 
