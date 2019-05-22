@@ -3,15 +3,15 @@
 @linux
 
 
-#### Utils
+### Utils
 
 Rename a buffer :
     tmux rename -t _1-22097 2
 
-Swap/move pane: 
+Swap/move pane:
     <C-s>swap-pane -t <pos>
 
-#### Pasting
+### Pasting
 
 Enable mouse scroll in tmux
     <C-s>: set [-g] mouse on
@@ -22,6 +22,13 @@ copy paste (see alsotmux list-buffers)
     <C-space>          # to copy the selection
     <C-s>]             # to paste the selection
 
+or?
+    <space> # go in selection mode
+    (move)
+    <space> to copy in the buffer
+    (exit eventually ?)
+    tmux save-buffer buffer.txt
+
 if mouse is "on", just select the text with mouse, then you can paste directly with : `<C-s>]`
 
 View paste buffers
@@ -30,12 +37,18 @@ View paste buffers
 
 
 
-###### Next steps
+### Next steps
 
 tmux.conf ?
 copy yo clipboard ?
 
-###### Ressources
+### Ressources
 
 https://gist.github.com/russelldb/06873e0ad4f5ba1c4eec1b673ff4d4cd
+
+http://www.deanbodenham.com/learn/tmux-conf-file.html
+
+### Plugins
+
+https://github.com/tmux-plugins/tpm
 

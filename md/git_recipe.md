@@ -19,6 +19,22 @@ remove a remote branch
 
     git push origin --delete <remote_branch_name>
 
+
+move a branch base to another commit:
+Example, move branch feature starting at C to F:
+
+    A---B---C---D---E---F---G master
+            \
+             P---Q---R feature
+
+    A---B---C---D---E---F---G master
+                        \
+                         P---Q---R feature
+
+
+    git rebase --onto F C feature
+
+
 ## Merge
 
 merge an authorative branch "dev" into "master"

@@ -17,11 +17,13 @@ Rename an image:
     docker tag d583c3ac45fad(image_id) myname/server:latest
 
 ###### Backup objects
+
     docker export container-id | gzip > backup.tar.gz
     zcat backup.tar.gz | docker import - repository[:tag]
 
 
 ###### Interact with Objects
+
 Run a container:
 
     docker run [-i|d] [--rm] [--name container-id] repository
@@ -29,8 +31,6 @@ Run a container:
 Enter inside a container:
 
     docker exec -it container-id bash
-
-
 
 Remove all containers:
 
@@ -45,17 +45,12 @@ Remove stopped containers
 
     docker ps -aq --no-trunc | xargs docker rm
 
-
-
-
 Remove all images:
 
     docker rmi $(docker images -q)
 
 Remove dangling/untagged images
     docker images -q --filter dangling=true | xargs docker rmi
-
-
 
 Remove unused volumes:
 
@@ -67,6 +62,6 @@ Remove unused volumes:
 
 ## mongodb
 
-Mongodb provides an official containe r that will be automagically downladed. (you can just instal `mongodb-clients`
+Mongodb provides an official container that will be automagically downladed. (you can just instal `mongodb-clients`
 
     docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db mongo
