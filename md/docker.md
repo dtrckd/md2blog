@@ -62,6 +62,6 @@ Remove unused volumes:
 
 ## mongodb
 
-Mongodb provides an official container that will be automagically downladed. (you can just instal `mongodb-clients`
+Mongodb provides an official container that will be automagically downladed. (you can just instal `mongodb-clients`)
 
     docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db mongo

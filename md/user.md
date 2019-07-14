@@ -1,4 +1,5 @@
 @linux
+@bash
 
 
 Add new user (with HOME !)

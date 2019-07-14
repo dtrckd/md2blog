@@ -1,7 +1,7 @@
 @git
 @recipes
 
-## Git Diff
+## Diffs
 
 Git diff on previous commit (e.g. head bacward 2 commits):
 
@@ -13,7 +13,21 @@ Diff between Head and a other branch
     or
     git diff branch-name..HEAD -- a-file
 
-## branch
+## Stashes
+
+Pop only one file from a stash          # https://stackoverflow.com/questions/15264553/how-to-unstash-only-certain-files
+
+    git checkout stash@{0} -- <filename>
+
+or save it under another name
+
+    git show stash@{0}:<full filename>  >  <newfile>
+
+or  check change
+
+    git difftool stash@{0}..HEAD -- <filename>
+
+## branches
 
 remove a remote branch
 

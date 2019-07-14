@@ -1,4 +1,4 @@
-nice tuto about amend/rebase(-i)/cherry-pick/etc:
+Nice tuto about amend/rebase(-i)/cherry-pick/etc for *rewriting history* !:
     https://backlog.com/git-tutorial/rewriting-history/#git-rebase
 
 
