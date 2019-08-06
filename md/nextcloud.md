@@ -1,6 +1,6 @@
 @hosting
 
-## Setup nexrtcloud
+## Setup nextcloud
 
 setup script
     https://github.com/PietsHost/Nextcloud-Installation-Script/blob/master/nc_install.sh
@@ -38,12 +38,12 @@ for nginx (not needed if log-format=COMBINED)
 
 run
 
-    sudo goaccess --log-format=COMBINED -f /var/log/nginx/access.log -o ~/report-goa.html --real-time-html -a -d --real-os \
-
-        --ws-url=chocobo.space --port 7890
+    goaccess --log-format=COMBINED -f /var/log/nginx/access.log -o /var/www/private/stats.html --real-time-html -a -d --real-os --ws-url=chocobo.space --port 7890
 or better (all logs)
-    sudo zcat -f /var/log/nginx/access.log* | sudo goaccess --log-format=COMBINED -o ~/report-goa.html --real-time-html -a -d --real-os \
-        --ws-url=chocobo.space --port 7890
+
+    zcat -f /var/log/nginx/access.log* | sudo goaccess --log-format=COMBINED -o /var/www/private/stats.html --real-time-html -a -d --real-os --ws-url=chocobo.space --port 7890
+
+    zcat -f /var/log/nginx/access.log* | sudo goaccess --log-format=COMBINED -o /var/www/private/stats.html --real-time-html -a -d --real-os --ws-url=chocobo.space --port 7890 --ssl-cert /etc/letsencrypt/live/cloud.chocobo.space/cert.pem --ssl-key /etc/letsencrypt/live/cloud.chocobo.space/privkey.pem
 
 
 
