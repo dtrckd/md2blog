@@ -29,6 +29,11 @@ or  check change
 
 ## branches
 
+add a remote branch
+
+    # simply push the branch
+    git push origin new_branch
+
 remove a remote branch
 
     git push origin --delete <remote_branch_name>
