@@ -2,6 +2,9 @@
 @recipes
 @design
 
+* Nextcloud diagram is great...
+* https://casual-effects.com/markdeep/ seems cool
+
 # WYSIWYG Wireframe
 * [Dia](https://en.wikipedia.org/wiki/Dia_%28software%29): light, semms cool, free,
 * [Moqups](https://app.moqups.com/edit/): powerfull, intuitive,, cloud non-free,

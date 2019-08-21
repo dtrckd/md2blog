@@ -3,9 +3,12 @@
 @linux
 
 
-### Utils
 
-Rename a buffer :
+### Utils
+reload tmuconf:
+    <C-s>source-file ~/.tmux.conf
+
+Rename a buffer:
     tmux rename -t _1-22097 2
 
 Swap/move pane:

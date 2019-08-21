@@ -1,11 +1,16 @@
-@python
+@ui
 @tools
 
-# Printing nice table in python
+see config/snippets/print_16colors.sh
+see config/snippets/print_256colors.sh
+
+# Python
+
+## Printing nice table in python
 
 [http://txt.arboreus.com/2013/03/13/pretty-print-tables-in-python.html](http://txt.arboreus.com/2013/03/13/pretty-print-tables-in-python.html)
 
-# Printing colors / terminal effect
+## Printing colors / terminal effect
 
     print("\033[0;37;40m Normal text\n")
     print("\033[2;37;40m Underlined text\033[0;37;40m \n")
