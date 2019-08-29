@@ -4,10 +4,15 @@
 ## Diffs
 
 Show commits where a file was modified:
+
     git log --pretty=oneline dotfiles/.vimrc
+
 with patch
+
     git log --pretty=oneline -u dotfiles/.vimrc
+
 between given line
+
     git log --pretty=oneline -u -L lineStart,lineEnd:dotfiles/.vimrc
 
 Git diff on previous commit (e.g. head bacward 2 commits):

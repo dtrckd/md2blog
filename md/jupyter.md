@@ -1,4 +1,5 @@
 @jupyter
+@ipython
 @python
 
 # Ipython reload

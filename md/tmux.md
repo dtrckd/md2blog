@@ -2,11 +2,11 @@
 @bash
 @linux
 
-
-
 ### Utils
 reload tmuconf:
     <C-s>source-file ~/.tmux.conf
+or
+    <prefix> r
 
 Rename a buffer:
     tmux rename -t _1-22097 2
@@ -22,8 +22,9 @@ Enable mouse scroll in tmux
 copy paste (see alsotmux list-buffers)
     <C-s>[             # go into paste mode
     <space> or <S-v>   # select a region
-    <C-space>          # to copy the selection
+    <ENTER>            # to copy the selection
     <C-s>]             # to paste the selection
+    or <C-s>=          # to see the paste buffer
 
 or?
     <space> # go in selection mode
