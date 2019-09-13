@@ -17,3 +17,9 @@ or for reloading a script :
 # Jupyter notebook sharing
 
 How to share an Ipython notyebook: http://txt.arboreus.com/2012/09/27/how-to-share-an-ipython-notebook.html 
+
+# Theme
+
+pip install jupyterthemes
+jt -l
+jt -t chesterish

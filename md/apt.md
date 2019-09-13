@@ -21,3 +21,8 @@
     # Find bad package with dpkg -l pattern*
     apt-get --force-yes remove <package_name>
     dpkg --force-all --purge nom_du_paquet # || dpkg --force-all --remove <package_name>
+
+
+# Search which package contains a file
+
+    dpkg -S $(which a_command)

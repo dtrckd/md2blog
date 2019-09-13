@@ -56,3 +56,11 @@ http://www.deanbodenham.com/learn/tmux-conf-file.html
 
 https://github.com/tmux-plugins/tpm
 
+To enable plugins if tmux is already running:
+
+    tmux source ~/.tmux.conf 
+
+or tmux command:
+
+     <prefix> I
+

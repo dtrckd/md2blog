@@ -3,10 +3,17 @@
 
 Push website  on neocoties
 
-Install ruby and neocites
+# Install
+
+ruby and neocites
 
     sudo apt-get install ruby-full
     sudo gem install neocities
+
+go and neocities
+
+    go get -u github.com/peterhellberg/neocities
+
 
 
 push site 
