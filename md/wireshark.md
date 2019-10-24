@@ -14,6 +14,12 @@ https://blog.wireshark.org/2010/02/running-wireshark-as-you/
 ### Tcpdump
 TCPDUMP expressions
 
+Capture DNS address
+
+    tcpdump -nt -i any/eth0 udp port 53
+
+
+
 TCPDUMP expressions are also known as BPF, or Berkeley Packet Filters. On a TCPDUMP command line it is recommended to place them inside single quotes (UNIX) or double quotes (Windows) to avoid confusion and possible parsing errors.
 Expressions
 

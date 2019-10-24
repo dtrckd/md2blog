@@ -30,3 +30,14 @@ count duplicate in a field
 	}
 	res = db.MyCollection.mapReduce(m,r, { out : "my_output" });
 	db[res.result].find({value: {$gt: 1}});
+
+
+dump/restore
+
+dump a collection only (--forceTableScan prevenet the following error: `Failed: error writing data for collection "mycol" to disk: error reading collection: Failed to parse: [...]`)
+    
+    mongodump -d mydb -c mycol --forceTableScan --gzip -o dumpout/
+
+restore that collection
+
+     mongorestore -d mydb2  [-c mycol] --gzip win32_doc/doc/win32.bson.gz
