@@ -1,9 +1,10 @@
-# download
+# Manual install
+download
 
     git clone https://git.skewed.de/count0/graph-tool.git
 
 
-# requirements.txt
+requirements.txt
 
     libboost-all-dev libboost-python-dev expat libsparsehash-dev libcgal-dev libcairo2-dev libcairomm-1.0-dev python3-cairo-dev libsparsehash-dev
 
@@ -18,7 +19,7 @@
     # libcdt5{u} libcgal12{u} libcgraph6{u} libgts-0.7-5{u} libgts-bin{u} libgv-python{u} libgvc6{u} libjs-jquery-ui{u} libpathplan4{u} libxdot4{u} python-cycler{u} python-dateutil{u} python-matplotlib{u}
     # python-matplotlib-data{u} python-olefile{u} python-pil{u} python-pyparsing{u} python-subprocess32{u} python3-decorator{u} python3-graph-tool python3-numpy{u} python3-scipy{u}
 
-# install.sh
+install.sh
 
     #!/bin/bash
 
@@ -35,3 +36,6 @@
         sudo make install
 
 
+docker install
+
+    docker pull tiagopeixoto/graph-tool

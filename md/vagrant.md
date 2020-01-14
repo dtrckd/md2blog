@@ -30,3 +30,8 @@ Copy a file a VM. (obtain the port with `vagrant port`)
 Or more generaly
 
     vagrant upload local_file [detination] vm-name
+
+
+work around apt error “repository no longer has a Release file”
+
+    apt get update --allow-releaseinfo-change

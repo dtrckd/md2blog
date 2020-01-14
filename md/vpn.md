@@ -16,13 +16,13 @@ pull-filter ignore "route-ipv6 "
 # Auto Boot openvpn + add 'openvpn --config  /etc/openvpn/aqn.ovpn' in rc.local
 echo 'AUTOSTART="aqn"' >> /etc/default/openvpn
 systemctl start openvpn 
-# 
+#reboot
+
 # DNS de Aquilenet: 185.233.100.100 et 185.233.100.101
 # DNS de FDN: 80.67.169.12 et 80.67.169.40
 
-# reboot
 # myip
-#  Si elles commencent par 185.233.101.x ou 2a0c:e300:4: c'est que vous passez par le vpn aquilenet.
+# Si elles commencent par 185.233.101.x ou 2a0c:e300:4: c'est que vous passez par le vpn aquilenet.
 ```
 
 run the vpn with `openvpn /etc/openvpn/aqn.conf`
