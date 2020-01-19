@@ -1,6 +1,33 @@
 @git
 @recipes
 
+## Submodule
+
+clone with submodule
+
+    git clone --recursive [URL to Git repo]
+
+get after cloning
+
+    git submodule update --init --recursive
+
+Pull change including submodule
+    
+    git pull --recurse-submodules
+
+Pull in submodule only
+
+    git submodule update --remote
+
+Executing a command in every submodule
+    
+    git submodule foreach --recursive 'git reset --hard'
+
+adding submodule
+
+    git submodule add -b master [URL to Git repo] path/to/submodule
+    git submodule init # if not present
+
 ## Diffs
 
 Show commits where a file was modified:

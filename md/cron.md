@@ -1,6 +1,18 @@
 @linux
 @system
 
+## Example
+
+Run a script 2 times a month ?
+
+    0  2  7 * * /bin/bash -c "$HOME/nextcloud_backup.sh"
+
+Run a script every day
+
+    0 */12 * * * python3 $HOME/neocities_stats.py pull
+
+## Doc
+
 kvz.io
 Schedule Tasks on Linux Using Crontab
 Kevin van Zonneveld
