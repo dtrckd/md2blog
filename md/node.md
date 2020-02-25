@@ -6,11 +6,15 @@ env error resolve in some distribution by:
 Configure module path
     echo 'export NODE_PATH="'$(npm root -g)'"'
 
+list pavkage
+    npm list [-g] [--depth 0]
+
 inside a package, test and show error (dependenciye typically)
     npm test
 
 Run a module 
     npm start
+
 
 # Packages
 

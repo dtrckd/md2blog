@@ -1,5 +1,5 @@
 
-# install
+# Install
 
 pre-compiled binary 
 
@@ -13,11 +13,19 @@ with npm
 
     npm install --global elm
 
-# test explore
+# Testing
 
 open a browser app to browser elm rendered
 
     elm reactor
+
+# Tools
+
+**elm-spa**
+
+elm-spa --ui Html init
+elm-spa --ui Html add Hello
+elm-spa --ui Html element Path.Dynamic
 
 # Plugin
 
