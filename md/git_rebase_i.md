@@ -1,3 +1,11 @@
+
+Rebase until the last 9 commits:
+
+    git rebase -i @~9
+
+(example: replace "pick" by "reword" of a commit in the editor to ammend its name)
+
+
 Nice tuto about amend/rebase(-i)/cherry-pick/etc for *rewriting history* !:
     https://backlog.com/git-tutorial/rewriting-history/#git-rebase
 
