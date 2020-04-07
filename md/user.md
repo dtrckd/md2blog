@@ -15,3 +15,7 @@ With privilege
 Remove user
 
     deluser --remove-home username
+
+remove group
+
+    delgroup GROUPNAME

@@ -1,7 +1,15 @@
 
+install (don't add in go.mod if in a module)
+
+    GO111MODULE=off go get github.com/usr/repo
+
 installed package
 
     go list ...
+
+update a packate
+
+    go get -u <package_name>
 
 with imported package
 
