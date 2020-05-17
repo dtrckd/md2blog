@@ -22,6 +22,9 @@ Update a packate
 
     go get -u <package_name>
 
+Rmove dependancie unuse
+    go mod tidy
+
 Install a given tag (only possible with mod in v1.11)
 
     mkdir temp
@@ -39,3 +42,9 @@ Used forked repo or rename a module
     # if buffy, just do
     #rg before --files-with-matches |xargs sed -i "s/before/after" 
 
+
+## Core
+
+What's the difference betwen json.Unmarshall and json.Decode
+    -> Decode operate on stream (e.g like http). Unmarshall on bytes (i.e need to be fully loaded in memory).
+       Thus unmarshall may be a bit faster.

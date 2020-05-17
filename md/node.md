@@ -1,22 +1,50 @@
 @node
 
+
+
 env error resolve in some distribution by:
+
     sudo ln -s "$(which nodejs)" /usr/bin/node
 
 Configure module path
+
     echo 'export NODE_PATH="'$(npm root -g)'"'
 
-list pavkage
+list package
+
     npm list [-g] [--depth 0]
 
 inside a package, test and show error (dependenciye typically)
+
     npm test
 
 Run a module 
+
     npm start
 
+**Updates**
 
-# Packages
+See updates
+
+    npm outdated
+
+update
+
+    npm update
+    # or with version
+    npm install npm@latest [-g]
+
+update to last version (with new **major** release, ie potentielly dependency break)
+
+    # first install
+    npm install -g npm-check-updates
+    # then upgrade repo (depencies and devDependencies)
+    ncu -u
+    # then update
+    npm update
+
+
+# Packages /  NPM
 
 **nodemon**: hot reload server on changed
 i:
