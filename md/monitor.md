@@ -11,7 +11,7 @@ Copy what after Modeline, and paste it like so
 
 Then
 
-    xrandr --addmode VGA-1 1366x768_60.00   # not that the reslution is an the best approcimation §µ$¤?
+    xrandr --addmode VGA-1 1368x768_60.00   # not that the reslution is an the best approcimation §µ$¤?
 
 Then the new mode should selectionable.
 
