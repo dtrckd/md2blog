@@ -18,11 +18,16 @@ other uses
      or
      go list -f '{{.ImportPath}} {{join .Imports "\n"}}' [path|...]
 
-Update a packate
+Update a package at a given commit
+
+    go get github.com/someone/some_module@af044c0995fe
+
+Update a package
 
     go get -u <package_name>
 
-Rmove dependancie unuse
+Remove dependancie unuse
+
     go mod tidy
 
 Install a given tag (only possible with mod in v1.11)

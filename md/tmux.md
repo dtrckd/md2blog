@@ -27,7 +27,7 @@ Swap/move pane:
 
     <C-s>swap-pane -t <pos>
 
-Got resied from a smaller client. Exit tmux  and re attach with
+Got resized from a smaller client. Exit tmux  and re attach with
 
     tmux attach -d [-t session]
 
