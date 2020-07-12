@@ -1,6 +1,10 @@
 @git
 @recipes
 
+cred timeout store/cache
+
+    git config --global credential.helper 'cache --timeout=3600'
+
 ## Submodule
 
 clone with submodule

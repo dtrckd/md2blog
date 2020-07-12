@@ -2,22 +2,23 @@
 
 ## Setup nextcloud
 
+howto
+    https://howto.wared.fr/ubuntu-installation-nextcloud-nginx/
+
 setup script
     https://github.com/PietsHost/Nextcloud-Installation-Script/blob/master/nc_install.sh
 
-howto
-    https://howto.wared.fr/ubuntu-installation-nextcloud-nginx/
 
 ## Certbot
 setup:
 
     sudo certbot certonly --webroot -w /var/www/nextcloud --agree-tos --no-eff-email --email dtrck@gmail.com -d cloud.chocobo.space --rsa-key-size 4096
 
-(chexk if cron.d/cerbot exists with the line
+(check if cron.d/cerbot exists with the line
 
     0 */12 * * * root test -x /usr/bin/certbot -a \! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew
 
-to auto reload nginx adter renew, add this line in /etc/letsencrypt/cli.ini
+to auto reload nginx after renew, add this line in /etc/letsencrypt/cli.ini
 
     renew-hook = systemctl reload nginx
 
