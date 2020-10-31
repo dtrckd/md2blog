@@ -1,6 +1,12 @@
-docker start/restart
+start/restart (docker)
 
-    docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db mongo
+    docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db --name mongodb mongo:4.2 
+
+launch mongo terminal (docker)
+
+    docker exec -it mongodb mongo
+    #docker exec -it mongodb bash
+
 
 limit memory (cache) use by mongodb:
 

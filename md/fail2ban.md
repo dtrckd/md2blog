@@ -1,6 +1,11 @@
 **install**
 
-    apt install fail2ban
+    apt install fail2ban postfix
+
+
+to receive email alert, set
+
+    root: me@mydomain.tld
 
 
 **Configure**
@@ -11,7 +16,7 @@ setup
 
 edit jail.local
 
-    ignoreip = 127.0.0.1/8 your_home_IP
+    ignoreip = 127.0.0.1/8 [your_home_IP]
     ...
     bantime = 3600
     findtime = 600   # These lines combine to ban clients that fail

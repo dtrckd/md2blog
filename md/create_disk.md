@@ -2,19 +2,27 @@
 @recipe
 @system
 
-# repair corrupted disk
+# Format a disk
+
+    fdisk + mkfs
+    # or 
+    gparted
+
+# Relabel disk
+
+**Linux type (EXT/FAT32)**
+
+    MTOOLS_SKIP_CHECK=1 mlabel -i /dev/sdb1 ::my-usb-key
+
+**Windows type (NTFS)**
+
+    ntfslabel /dev/sdb1 my-sub-key
+
+# Repair corrupted disk
 
     fsck -r /dev/sdb1
     dosfsck -a /dev/sdb1
     mkfs.vfat /dev/sdb1
-
-# Relabel disk
-
-## Linux type (EXT,..)
-    MTOOLS_SKIP_CHECK=1 mlabel -i /dev/sdb1 ::MARS
-
-## Windiws type (ntfs,..)
-    ntfslabel <device> <label> # e.g. <device>=sdb1
 
 
 # Rescuscitate
@@ -25,6 +33,7 @@
 
 
 # Copy an iso
+
      cp a.iso /dev/sdb
      # or
      dd if=a.iso of=/dev/sdb1

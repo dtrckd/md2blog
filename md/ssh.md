@@ -24,6 +24,22 @@ Encrypt the new entry If ~/.ssh/known_hosts is encrypted (HashKnownHosts=True) :
 
     ssh-keygen -H
 
+**List**
+
 show fingerprint of a public key
 
-    ssh-keygen  -l -E md5 -f ~/.ssh/id_rsa.pub
+    #ssh-keygen  -l -f [-E md5] ~/.ssh/id_rsa.pub
+
+show/list fingerprint of authorized keys (sshd)
+
+    ssh-keygen -l -f ~/.ssh/authorized_keys
+
+**remove**
+
+remove an entry from the authorized_keys
+
+    sed -i.bak '/REGEX-USER-EMAIL/d' ~/.ssh/authorized_keys
+
+remove a domain from known_hosts
+
+    ssh-keygen -R my-code.skusku.site

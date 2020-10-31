@@ -13,11 +13,12 @@ It will automatically build the VMs environment according to the files descripti
 Some command
 
     vagrant status   # see the status of the VMs
+    vagrant reload    # reload the VM after the VagrantFile get modified
     vagrant suspend  # suspend the VMs
     vagrant destroy  # destroy the VMs
     vagrant box list # (global command (*)) see the available box in vagrant
-    vagrant global-status # (global command (*)) see the available box in vagrant
-    vagrant ssh # connect to a vm
+    vagrant global-status # (global command (*)) see all the existing VMs
+    vagrant ssh # connect to a VM
 
 (\*) dont need to be in vagrant repo (i.e. where there is a Vagrant File)
 
