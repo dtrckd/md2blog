@@ -36,3 +36,22 @@ Or more generaly
 work around apt error “repository no longer has a Release file”
 
     apt get update --allow-releaseinfo-change
+
+**UI**
+
+in VagrantFile
+
+    config.vm.provider "virtualbox" do |vb|
+        # Display the VirtualBox GUI when booting the machine
+        vb.gui = true
+        # Customize the amount of memory on the VM:
+        vb.memory = "1024"
+    end
+    config.ssh.forward_agent = true
+    config.ssh.forward_x11 = true
+
+
+install i3
+
+    apt install i3 xterm lightdm
+
