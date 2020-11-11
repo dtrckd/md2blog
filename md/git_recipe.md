@@ -96,6 +96,20 @@ Example, move branch feature starting at C to F:
 
     git rebase --onto F C feature
 
+Bring back lost commit did in a "detached branch"
+
+1. Look up the SHA-1 hashes of the commits you made in detached HEAD state with 
+ 
+    git reflog
+
+2. Then execute, with all the commit hashes ordered from oldest to most recent:
+
+    git cherry-pick <hash1> <hash2> <hash3> ...
+
+3. For example if I had only one, given in the "first 7 characters" short hash format:
+
+    git cherry-pick a21d053
+
 
 ## Merge
 
