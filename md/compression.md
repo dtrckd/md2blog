@@ -14,7 +14,7 @@ tgz ou un tar.gz   tar zxvf                   tar czvf <fn>.tar.gz <fn>
 tar.bz2            tar jxvf
 tar.xz             tar Jxvf
 rar                unrar x <file>
-zip                unzip <fichier.zip>        zip -r data *                zip / infozip
+zip                unzip <fichier.zip>        zip -r data.zip <fn>          zip / infozip
 
 
 Avant toute chose, si vous ne savez pas ce que contient un fichier : file <fichier>
