@@ -5,6 +5,18 @@ cred timeout store/cache
 
     git config --global credential.helper 'cache --timeout=3600'
 
+## Reset
+
+cancel the last commit (commit on bad branch for example!)
+
+    git reset --soft HEAD~1
+
+
+How to undo a git reset (if the above command is type in the wrong directory for example!)
+
+    git reset 'HEAD@{1}'
+
+
 ## Submodule
 
 clone with submodule
