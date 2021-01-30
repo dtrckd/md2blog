@@ -28,6 +28,8 @@ then select line to align nand type `gq`.
 
 **build**
 
+    # apt install cmake
+    # apt install mono-complete golang nodejs default-jdk npm   # remove go and npm if manually installed...
     cd ~/.vim/bundle/YouCompleteMe/
     python3 install.py --all
 

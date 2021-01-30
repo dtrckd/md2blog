@@ -3,7 +3,17 @@
 
 # Docker Recipes
 
-###### Show objects
+## Cleaning
+
+clean unused volumes
+
+    docker system prune --all --force --volumes
+
+clean unused images
+
+    docker image prune -f
+
+## Show objects
 list (all) ontainers:
 
     docker ps -a
@@ -16,13 +26,13 @@ Rename an image:
 
     docker tag d583c3ac45fad(image_id) myname/server:latest
 
-###### Backup objects
+## Backup objects
 
     docker export container-id | gzip > backup.tar.gz
     zcat backup.tar.gz | docker import - repository[:tag]
 
 
-###### Interact with Objects
+## Interact with Objects
 
 Run a container:
 
