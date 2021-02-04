@@ -6,7 +6,7 @@ check if server can send mail / smtp port is filtered
 
     telnet smtp.gmail.com 25
     telnet smtp.gmail.com 587
-    nc -v smtp.gmail.com 25
+    nc smtp.gmail.com 25
 
 check tls smtp connection
     

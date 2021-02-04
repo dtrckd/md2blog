@@ -2,13 +2,35 @@
 
     apt install fail2ban postfix
 
+restart
+
+    service fail2ban restart
+
+**query**
+
+See active jail
+
+    fail2ban-client status
+
+Show IP banned in a jail
+
+    fail2ban-client status <JAIL-NAME>
+
+if you want to manually ban an IP
+
+    fail2ban-client set <JAIL-NAME> banip <IP-ADDRESS>
+
+if you want to manually unban an IP
+
+    fail2ban-client set <JAIL-NAME> unbanip <IP-ADDRESS>
+
+
+
+**Configure**
 
 to receive email alert, set
 
     root: me@mydomain.tld
-
-
-**Configure**
 
 setup 
 
@@ -84,10 +106,3 @@ Create filters
     ignoreregex =
     EOF
 
-restart
-
-    service fail2ban restart
-
-**query**
-
-    fail2ban-client status
