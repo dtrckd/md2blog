@@ -22,6 +22,16 @@ Some command
 
 (\*) dont need to be in vagrant repo (i.e. where there is a Vagrant File)
 
+# KVM/QEMU provider
+
+    apt install virt-manager
+    vagrant plugin install vagrant-libvirt
+    vagrant plugin install vagrant-mutate
+
+    # NFS issue
+    maybe: echo "NEED_STATD=yes" >> /etc/default/ngs-common 
+    maybe: echo "config.vm.synced_folder "~/src/data/vagrant_virt", "/home/vagrant/vagrant_projects", type: "nfs", nfs_version: 4, "nfs_udp": false, mount_options: ["rw", "vers=4", "tcp", "nolock"]" >> Vagrantfile
+
 ## Utils
 
 Copy a file a VM. (obtain the port with `vagrant port`)

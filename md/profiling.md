@@ -9,46 +9,48 @@
 Basic profiling a script.py :
 to stdout :
     python -m cProfile -s time script.py
-                                                                                                                                                      
-The fit script can be profiled wuith the `--profile` options. it will create the profile file build by cProfile (cumtime sorting by default). The     format of the file is as follows `{expe_name}.{run_id}.{description}.profile`                                                                         
-                                                                                                                                                      
-To read this file the easiet way and dump the text info of process times:                                                                             
-                                                                                                                                                      
+
+The fit script can be profiled with the `--profile` options.
+it will create the profile file build by cProfile (cumtime sorting by default).
+The format of the file is as follows `{expe_name}.{run_id}.{description}.profile`
+
+To read this file the easiet way and dump the text info of process times:
+
     ff=file.profile python3 -c "__import__('pstats').Stats('$ff').sort_stats('cumtime').print_stats()" # can be cumtime, time, etc
-                                                                                                                                                      
-                                                                                                                                                      
-An onther tool that simply make the profiling visible in a browser:                                                                                   
+
+
+An onther tool that simply make the profiling visible in a browser:
     pip install cprofilev
- 
-and then                                                                                                                                              
-                                                                                                                                                      
+
+and then
+
     cprofilev -f file.profile
-                                                                                                                                                      
-### Graph                                                                                                                                             
-                                                                                                                                                      
-To observe the graph of execution (really cool!)                                                                                                      
+
+### Graph
+
+To observe the graph of execution (really cool!)
     pip install gprof2dot
-                                                                                                                                                      
-then create the graph with                                                                                                                            
-                                                                                                                                                      
+
+then create the graph with
+
     gprof2dot -f pstats filename.profile | dot -Tpng -o profile_graph.png
-                                                                                                                                                      
-### Snakeviz                                                                                                                                          
-An other cool tool with cool interactive dive in the profile results:                                                                                 
+
+### Snakeviz
+An other cool tool with cool interactive dive in the profile results:
     pip install snakeviz
-                                                                                                                                                      
-then                                                                                                                                                  
-                                                                                                                                                      
+
+then
+
     snakeviz file.profile
 
 
 ### others
 
-Using pycallgraph  
+Using pycallgraph
 
     pycallgraph graphviz -f svg -o script.svg script.py
 
-    
+
 to file + visualization :
 
     python -m cProfile -o file.profile file.profile
@@ -77,8 +79,8 @@ J'ai essayé ce moyen pour profiler la mémoire ca marche pas mal, ca donne la c
 * pip install runsnalkerun # aptitude install  python-profiler python-wxgtk2.8
 * pip install pycallgraph
 
-# Python debugging : 
+# Python debugging :
 
-* tutorial gdb : http://cs.brynmawr.edu/cs312/gdb-tutorial-handout.pdf 
+* tutorial gdb : http://cs.brynmawr.edu/cs312/gdb-tutorial-handout.pdf
 * https://www.cs.cmu.edu/~gilpin/tutorial/
 * debug c program with gdb : http://www.thegeekstuff.com/2010/03/debug-c-program-using-gdb
