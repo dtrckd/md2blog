@@ -38,6 +38,10 @@ Copy a file a VM. (obtain the port with `vagrant port`)
 
     scp -P 2222 vagrant@127.0.0.1:/vagrant/some-file.txt .
 
+Get IP addresse of VM
+
+    $(vagrant ssh-config | awk 'NR>1 {print " -o "$1"="$2}')
+
 Or more generaly
 
     vagrant upload local_file [detination] vm-name

@@ -15,7 +15,7 @@ List dependencies package
 other uses
 
      go list -f '{{join .Imports "\n"}}' [path|...]
-     or
+     # or
      go list -f '{{.ImportPath}} {{join .Imports "\n"}}' [path|...]
 
 Update a package at a given commit
@@ -53,3 +53,4 @@ Used forked repo or rename a module
 What's the difference betwen json.Unmarshall and json.Decode
     -> Decode operate on stream (e.g like http). Unmarshall on bytes (i.e need to be fully loaded in memory).
        Thus unmarshall may be a bit faster.
+

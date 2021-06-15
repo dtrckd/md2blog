@@ -35,3 +35,7 @@ auto code completion and lookup, install
 
     npm install -g elm-oracle
 
+
+# Learning
+
+scaling app conf R. Feldman: https://www.youtube.com/watch?v=DoA4Txr4GUs
