@@ -55,6 +55,11 @@ Remove stopped containers
 
     docker ps -aq --no-trunc | xargs docker rm
 
+Remove all volume
+
+    docker volume rm $(docker volume ls -q)
+    # or docker-compose down -v
+
 Remove all images:
 
     docker rmi $(docker images -q)

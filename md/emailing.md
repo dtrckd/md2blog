@@ -1,12 +1,17 @@
-Good tuto/course on setuing up Postal
+Good tuto/course on seting up Postal
 
     https://blog.h-educate.com/free-smtp-server-postal/
 
+Get a MX address
+    dig smtp.gmail.com MX
+
 check if server can send mail / smtp port is filtered 
 
+    nc -z -v -w1 domain.com 25
+    nc smtp.gmail.com 25
     telnet smtp.gmail.com 25
     telnet smtp.gmail.com 587
-    nc smtp.gmail.com 25
+    netcat --ssl smtp.gmail.com 587
 
 check tls smtp connection
     
@@ -38,7 +43,7 @@ mail checker
 
     # black list
     Spamhaus - http://spamhaus.org
-    CBL - http://cbl.abuseat.org/ -Trend Micro MAPS - http://www.mail-abuse.com/
+    CBL - http://cbl.abuseat.org/ - Trend Micro MAPS - http://www.mail-abuse.com/
 
 
 tools
@@ -48,6 +53,16 @@ tools
 ---
 
 send email with telnet/nc
+
+    HELO server.com
+    MAIL FROM:bar@example.com
+    RCPT TO:foo@server.com
+    DATA
+    Hi stranger !
+    .
+    QUIT
+
+Full exchange sample
 
 	telnet smtp.domain.com 25
 	   Trying 192.168.0.1...
