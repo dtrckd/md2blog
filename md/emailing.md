@@ -7,7 +7,7 @@ Get a MX address
 
 check if server can send mail / smtp port is filtered 
 
-    nc -z -v -w1 domain.com 25
+    nc -zv -w1 domain.com 25
     nc smtp.gmail.com 25
     telnet smtp.gmail.com 25
     telnet smtp.gmail.com 587
