@@ -13,6 +13,10 @@ check if server can send mail / smtp port is filtered
     telnet smtp.gmail.com 587
     netcat --ssl smtp.gmail.com 587
 
+Open a basic server for test with netcat
+
+    sudo nc -l -p 25 -c 'echo -e "HTTP/1.1 200 OK\n\n $(date)"'
+
 check tls smtp connection
     
     openssl s_client -connect localhost:25 -starttls smtp

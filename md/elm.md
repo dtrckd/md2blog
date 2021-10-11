@@ -19,6 +19,12 @@ open a browser app to browser elm rendered
 
     elm reactor
 
+# Updating package
+
+First remove the line pointing the package in the `elm.json` file, then type 
+
+    elm install name/of/thepackage
+
 # Tools
 
 **elm-spa**
@@ -31,7 +37,7 @@ elm-spa --ui Html element Path.Dynamic
 
 https://github.com/ElmCast/elm-vim
 
-auto code completion and lookup, install
+For auto code completion and lookup, install
 
     npm install -g elm-oracle
 
@@ -39,3 +45,4 @@ auto code completion and lookup, install
 # Learning
 
 scaling app conf R. Feldman: https://www.youtube.com/watch?v=DoA4Txr4GUs
+
