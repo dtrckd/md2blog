@@ -27,6 +27,7 @@ Some command
     apt install virt-manager
     vagrant plugin install vagrant-libvirt
     vagrant plugin install vagrant-mutate
+    #systemctl enable libvirtd
 
     # NFS issue
     maybe: echo "NEED_STATD=yes" >> /etc/default/ngs-common 

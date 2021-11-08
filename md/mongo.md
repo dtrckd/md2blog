@@ -1,6 +1,6 @@
 start/restart (docker)
 
-    docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db --name mongodb mongo:4.2 
+    docker run -d -p 27017:27017 -v ~/src/data/mongo-docker:/data/db --net host --name mongodb mongo:4.2 
 
 launch mongo terminal (docker)
 
