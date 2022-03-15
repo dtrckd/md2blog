@@ -11,7 +11,7 @@ pre-compiled binary
 
 with npm 
 
-    npm install --global elm
+    npm install --g elm
 
 # Testing
 
@@ -40,6 +40,10 @@ https://github.com/ElmCast/elm-vim
 For auto code completion and lookup, install
 
     npm install -g elm-oracle
+
+# Analye
+
+    npm install -g elm-analyse
 
 
 # Learning

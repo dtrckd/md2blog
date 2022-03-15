@@ -12,6 +12,10 @@ List dependencies package
 
     go list -m [all|package]
 
+Equivalent to `npm-outdated`
+
+    go list -mod=readonly -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all
+
 other uses
 
      go list -f '{{join .Imports "\n"}}' [path|...]
@@ -26,9 +30,18 @@ Update a package
 
     go get -u <package_name>
 
+Updata all package
+
+    go get -u all
+
 Remove dependancie unuse
 
     go mod tidy
+
+Change the go version of a module 
+
+    go mod edit -go=1.14
+    #or simply edit go.mod manually...
 
 Install a given tag (only possible with mod in v1.11)
 
@@ -54,3 +67,39 @@ What's the difference betwen json.Unmarshall and json.Decode
     -> Decode operate on stream (e.g like http). Unmarshall on bytes (i.e need to be fully loaded in memory).
        Thus unmarshall may be a bit faster.
 
+## Using reflect
+
+Creating a new struct from an interface:
+
+https://stackoverflow.com/questions/7850140/how-do-you-create-a-new-instance-of-a-struct-from-its-type-at-run-time-in-go
+
+```
+package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+
+    type Product struct {
+        Name  string
+        Price string
+    }
+
+    var product Product
+    productType := reflect.TypeOf(product)       // this type of this variable is reflect.Type
+    productPointer := reflect.New(productType)   // this type of this variable is reflect.Value. 
+    productValue := productPointer.Elem()        // this type of this variable is reflect.Value.
+    productInterface := productValue.Interface() // this type of this variable is interface{}
+    product2 := productInterface.(Product)       // this type of this variable is product
+
+    product2.Name = "Toothbrush"
+    product2.Price = "2.50"
+
+    fmt.Println(product2.Name)
+    fmt.Println(product2.Price)
+
+}
+```
