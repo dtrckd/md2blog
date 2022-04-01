@@ -3,26 +3,31 @@
 
 generate a certificate
 
-openssl req -x509 -new -newkey rsa:2048 -nodes -keyout postal.key -out postal.crt
+    openssl req -x509 -new -newkey rsa:2048 -nodes -keyout postal.key -out postal.crt
 
-a,d then in yout /etc/nginx/site-available/site, add
+then write `/etc/nginx/site-available/site` as
 
-    listen                        443 ssl http2;
-    listen                        [::]:443 ssl http2;
-    ssl on;
-    ssl_certificate /etc/nginx/postal.crt;
-    ssl_certificate_key /etc/nginx/postal.key;
+```
+listen                        443 ssl http2;
+listen                        [::]:443 ssl http2;
+ssl on;
+ssl_certificate /etc/nginx/postal.crt;
+ssl_certificate_key /etc/nginx/postal.key;
+```
 
 
 # forward to reverse proxy
 
+```
 server {
     listen                        80;
     listen                        [::]:80;
     server_name                   postal.chocobo.space;
     return                        301 https://$server_name$request_uri;
 }
+```
 
+```
 server {
     listen                        443 ssl http2;
     listen                        [::]:443 ssl http2;
@@ -41,6 +46,7 @@ server {
         proxy_set_header  X-Forwarded-Host $host;
     }
 }
+```
 
 
 
