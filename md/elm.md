@@ -27,11 +27,17 @@ First remove the line pointing the package in the `elm.json` file, then type
 
 # Tools
 
+**elm-outdated**
+
+Inspired from `npm outdated`
+
+    npm i -g elm-outdated
+
 **elm-spa**
 
-elm-spa --ui Html init
-elm-spa --ui Html add Hello
-elm-spa --ui Html element Path.Dynamic
+    elm-spa --ui Html init
+    elm-spa --ui Html add Hello
+    elm-spa --ui Html element Path.Dynamic
 
 # Plugin
 

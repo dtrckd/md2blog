@@ -16,6 +16,10 @@ Equivalent to `npm-outdated`
 
     go list -mod=readonly -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all
 
+Only list dependencies tat have updates
+
+    go list -mod=readonly -u -m -f '{{if .Update}}{{.}}{{end}}' all
+
 other uses
 
      go list -f '{{join .Imports "\n"}}' [path|...]

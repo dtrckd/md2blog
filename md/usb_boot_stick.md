@@ -27,11 +27,14 @@ fdisk /dev/sdb
 mkfs.vfat /dev/sdb1 # -F 32 ?
 
 >>> EASY WAY %%%%%%%%%%%%%%%%%%%%%%%
+
 (fs is umounted)
 
 ###### from a Image:
+
 	cp debian.iso /dev/sdX # e.g. sdb not sdb1.
 	sync
+
 
 ###### from a File:
 	zcat boot.img.gz > /dev/sdxx
@@ -39,6 +42,7 @@ mkfs.vfat /dev/sdb1 # -F 32 ?
 	cp debian.iso /mnt
 
 End reboot.
+
 
 ### Else 
 Pour commencer, installez les paquets syslinux et mbr>

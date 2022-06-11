@@ -11,6 +11,18 @@ Run a script every day
 
     0 */12 * * * python3 $HOME/neocities_stats.py pull
 
+every two days 
+
+    0 0 */2 * * python3 $HOME/neocities_stats.py pull
+
+Modify a cron without directly editing
+
+    crontab -l -u <user> | sed 's/find/replace/g' | crontab -u <user> -
+
+Add a rule in a cron one-liner
+    
+    (crontab -l 2>/dev/null || true; echo "*/5 * * * * /path/to/job") | crontab -
+
 ## Doc
 
 kvz.io
