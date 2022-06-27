@@ -24,15 +24,29 @@ Run a module
 
 **Updates**
 
+Upgrade node
+
+    # this will install the lastest version
+    nvm install
+
+    # Reinstall npm package for this node version
+    nvm reinstall-packages [an-old-version]
+
 See updates
 
-    npm outdated
+    npm outdated [-g]
 
 update
 
     npm update
+
     # or with version
     npm install npm@latest [-g]
+
+    # If package.json no sync with package.lock 
+    npm update --save
+
+
 
 update to last version (with new **major** release, ie potentielly dependency break)
 

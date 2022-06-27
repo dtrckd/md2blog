@@ -14,9 +14,9 @@ List dependencies package
 
 Equivalent to `npm-outdated`
 
-    go list -mod=readonly -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all
+    go list -mod=readonly -u -m -f '{{if not .Indirect}}{{if .Update}}{{.}}{{end}}{{end}}' all
 
-Only list dependencies tat have updates
+List all dependencies that have updates (including indirect depencies)
 
     go list -mod=readonly -u -m -f '{{if .Update}}{{.}}{{end}}' all
 
@@ -36,6 +36,10 @@ Update a package
 
 Updata all package
 
+    # Current Module
+    go get -u
+
+    # Global
     go get -u all
 
 Remove dependancie unuse
