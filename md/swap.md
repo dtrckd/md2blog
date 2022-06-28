@@ -1,5 +1,5 @@
 
-# Create a swap on on VPS
+Create a swap on on VPS
 
 
     sudo fallocate -l 4G /swapfile
@@ -8,19 +8,19 @@
     sudo swapon /swapfile
 
 
-optimize
+Optimize
 
     sudo sysctl vm.swappiness=10
     sudo sysctl vm.vfs_cache_pressure=50
     echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
     echo 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
 
-setup at bootime
+Setup at bootime
 
     sudo cp /etc/fstab /etc/fstab.bak
     echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-check
+Check
 
     sudo swapon --show
     free -h
