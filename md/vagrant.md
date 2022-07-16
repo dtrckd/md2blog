@@ -35,6 +35,11 @@ Some command
 
 ## Utils
 
+    vagrant plugin install vagrant-scp
+    vagrant scp <some_local_file_or_dir> <somewhere_on_the_vm>
+
+@deprecated
+
 Copy a file a VM. (obtain the port with `vagrant port`)
 
     scp -P 2222 vagrant@127.0.0.1:/vagrant/some-file.txt .
