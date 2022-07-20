@@ -9,6 +9,8 @@ Create private and public keys (default -t rsa ???):
     #.... The name-of-the-file
     #.... No password for passwordless login
 
+    ssh-keygen -t ed25519 -C "gitea mirroring" -f ~/.ssh/id_ed25519 -N ""
+
 Populate public key in a server for passwordless login
 
     ssh-copy-id -i <name-of-the-file> user@hostname
