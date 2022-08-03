@@ -29,6 +29,10 @@ How to undo a git reset (if the above command is type in the wrong directory for
 
     git reset 'HEAD@{1}'
 
+Abort a conflictual "stash pop"
+
+    git checkout -f
+
 
 ## Submodule
 
@@ -78,12 +82,13 @@ Git diff on previous commit (e.g. head bacward 2 commits):
 Diff between Head and a other branch
 
     git diff branch-name -- a-file
-    or
+    # or
     git diff branch-name..HEAD -- a-file
 
 ## Stashes
 
-Pop only one file from a stash          # https://stackoverflow.com/questions/15264553/how-to-unstash-only-certain-files
+Pop only one file from a stash
+https://stackoverflow.com/questions/15264553/how-to-unstash-only-certain-files
 
     git checkout stash@{0} -- <filename>
 
@@ -91,11 +96,11 @@ or save it under another name
 
     git show stash@{0}:<full filename>  >  <newfile>
 
-or  check change
+or check change
 
     git difftool stash@{0}..HEAD -- <filename>
 
-## branches
+## Branches
 
 add a remote branch
 
@@ -107,8 +112,11 @@ remove a remote branch
     git push origin --delete <remote_branch_name>
 
 
-move a branch base to another commit:
-Example, move branch feature starting at C to F:
+Move a branch base to another commit:
+
+    git rebase --onto F C feature
+
+Will move branch feature starting at C to F:
 
     A---B---C---D---E---F---G master
             \
@@ -119,22 +127,21 @@ Example, move branch feature starting at C to F:
                          P---Q---R feature
 
 
-    git rebase --onto F C feature
 
 Bring back lost commit did in a "detached branch"
 
-1. Look up the SHA-1 hashes of the commits you made in detached HEAD state with 
- 
+    # 1. Look up the SHA-1 hashes of the commits you made in detached HEAD state with 
     git reflog
 
-2. Then execute, with all the commit hashes ordered from oldest to most recent:
-
+    # 2. Then execute, with all the commit hashes ordered from oldest to most recent:
     git cherry-pick <hash1> <hash2> <hash3> ...
 
-3. For example if I had only one, given in the "first 7 characters" short hash format:
-
+    # 3. For example if I had only one, given in the "first 7 characters" short hash format:
     git cherry-pick a21d053
 
+## Rebase
+
+    git rebase -i hash-of-last-commit-to-rebase
 
 ## Merge
 
