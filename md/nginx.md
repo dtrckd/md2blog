@@ -1,4 +1,12 @@
 
+test conf syntax
+
+    nginx -t
+
+relaod nginx
+
+    nginx -s reload
+
 # enable https
 
 generate a certificate
@@ -14,6 +22,16 @@ ssl on;
 ssl_certificate /etc/nginx/postal.crt;
 ssl_certificate_key /etc/nginx/postal.key;
 ```
+
+# enable HTTP bAsic auth
+
+    apt install apache2-utils
+    htpasswd -c /etc/nginx/certs/htpasswd admin
+    # more user: htpasswd /etc/nginx/certs/htpasswd user2
+
+    # add in sites's conf
+        auth_basic           "Admin Area";
+        auth_basic_user_file /etc/nginx/certs/htpasswd; 
 
 
 # forward to reverse proxy
