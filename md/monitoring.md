@@ -21,27 +21,13 @@ Real-time run
 
     goaccess access.log -o /var/www/html/report.html --log-format=COMBINED --real-time-html
 
-pre run in all existing logs
+Run in all existing logs
 
-    zcat -f /var/log/nginx/access.log* | goaccess --log-format=COMBINED -a -d --real-os -o /var/www/private/stats.html 
+    sudo zcat /var/log/nginx/access.log.*.gz | sudo goaccess /var/log/nginx/access.log - -o /var/www/goaccess/report.html --log-format=COMBINED --real-time-html
+
 
 Other options...
 
     goaccess /var/log/nginx/access.log --log-format=COMBINED  -o /var/www/private/stats.html --real-time-html -a -d --real-os --ws-url=chocobo.space --port 7890 [--ssl-cert /etc/letsencrypt/live/cloud.chocobo.space/cert.pem --ssl-key /etc/letsencrypt/live/cloud.chocobo.space/privkey.pem]
-
-
-For nginx (not needed if log-format=COMBINED)
-
-    cat << EOF >> /etc/goaccess.conf
-    log-format %h %^[%d:%t %^] %v "%r" %s %b "%R" "%u" %^ %T %^
-    time-format %H:%M:%S
-    date-format %d/%b/%Y
-    EOF
-
-
-
-
-
-
 
 
