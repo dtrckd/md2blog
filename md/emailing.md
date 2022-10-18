@@ -26,6 +26,10 @@ settings DMARC
     https://www.linuxbabe.com/mail-server/create-dmarc-record
     https://www.mailjet.com/blog/news/some-words-about-dmarc/
 
+Decode dmarc-report email content/body
+
+    echo -n "$body" | base64 --decode > feedback.zip
+
 mail checker
 
     #+ help check and set configuration
