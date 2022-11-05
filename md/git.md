@@ -247,3 +247,26 @@ All collaborator that cloned the repo must run
 references:
 https://blog.ostermiller.org/removing-and-purging-files-from-git-history/
 https://marcofranssen.nl/remove-files-from-git-history-using-git-filter-repo
+
+### Rename branch master name
+    
+
+    git branch -m master prod
+
+    git push origin prod
+    # Eventually change default branch on server before
+    git push origin --delete master
+
+    # update the remote's Head
+    git remote set-head origin -a
+
+    #
+    # Delete refs?
+    git remote prune origin
+
+    #
+    # For eventual collaborators that have that have clone.
+    git fetch --all
+    git remote set-head origin -a
+    git branch --set-upstream-to origin/main
+    git branch -m master prod

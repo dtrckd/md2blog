@@ -18,7 +18,6 @@ then write `/etc/nginx/site-available/site` as
 ```
 listen                        443 ssl http2;
 listen                        [::]:443 ssl http2;
-ssl on;
 ssl_certificate /etc/nginx/postal.crt;
 ssl_certificate_key /etc/nginx/postal.key;
 ```

@@ -19,14 +19,21 @@ Open a basic server for test with netcat
 
 check tls smtp connection
     
-    openssl s_client -connect localhost:25 -starttls smtp
+
+    # For StartTLS on port 587 or 25 you can try
+        openssl s_client -starttls smtp -connect <host>:<port>
+    For implicit TLS on port 465 you can try 
+        openssl s_client -connect <host>:465
+
+    You can use Swaks to send test emails and testssl.sh for TLS checks.
+
 
 settings DMARC
 
     https://www.linuxbabe.com/mail-server/create-dmarc-record
     https://www.mailjet.com/blog/news/some-words-about-dmarc/
 
-Decode dmarc-report email content/body
+Decode dmarc-report email content/body (as from Postal dowloads email...)
 
     echo -n "$body" | base64 --decode > feedback.zip
 
@@ -36,12 +43,16 @@ mail checker
     https://www.mail-tester.com
     https://mxtoolbox.com/emailhealth
     https://mxtoolbox.com/SuperTool.aspx
+    https://toolbox.googleapps.com
 
     # SSL/TLS
     https://luxsci.com/smtp-tls-checker
     https://www.checktls.com/
 
-    # reputation
+    # DNS
+    https://intodns.com/
+
+    # Reputation
     https://www.senderscore.org
     https://www.barracudacentral.org
     Senderbase.org

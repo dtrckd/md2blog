@@ -34,7 +34,7 @@ Update a package
 
     go get -u <package_name>
 
-Updata all package
+Update all package
 
     # Current Module
     go get -u

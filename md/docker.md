@@ -5,13 +5,52 @@
 
 ## Cleaning
 
-clean unused volumes
-
-    docker system prune --all --force --volumes
-
+**images**
 clean unused images
 
     docker image prune -f
+
+Remove all images:
+
+    docker rmi $(docker images -q)
+
+Remove dangling/untagged images
+
+    docker images -q --filter dangling=true | xargs docker rmi
+
+**container**
+remove all exited container
+
+    docker rm $(docker ps -a -f status=exited -q)
+
+Remove all stopped containers
+
+    docker rm $(docker ps -aq --no-trunc)
+
+Remove all containers:
+
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+
+**volume**
+Prune volume 
+
+    docker volume prune
+
+clean unused volumes, containers and images
+
+    docker system prune --all --force --volumes
+
+Remove all volume
+
+    docker volume rm $(docker volume ls -q)
+    # or docker-compose down -v
+
+Remove unused volumes (docu ?):
+
+    find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf <(
+            docker ps -aq | xargs docker inspect | jq -r '.[] | .Mounts | .[] | .Name | select(.)'
+            ) | xargs -r rm -fr
 
 ## Show objects
 list (all) ontainers:
@@ -20,11 +59,23 @@ list (all) ontainers:
 
 list (all) images:
 
-    docker images -a
+    docker images -a   # docker image ls
 
 Rename an image:
 
     docker tag d583c3ac45fad(image_id) myname/server:latest
+
+Show docker disk image 
+
+    docker system df
+
+Show volumes
+
+    docker volume ls
+
+Show container file creation since started
+
+    docke diff <container name>
 
 ## Backup objects
 
@@ -42,36 +93,6 @@ Enter inside a container:
 
     docker exec -it container-id bash
 
-Remove all containers:
-
-    docker stop $(docker ps -a -q)
-    docker rm $(docker ps -a -q)
-
-Remove all exited containers
-
-    docker ps -aq -f status=exited
-
-Remove stopped containers
-
-    docker ps -aq --no-trunc | xargs docker rm
-
-Remove all volume
-
-    docker volume rm $(docker volume ls -q)
-    # or docker-compose down -v
-
-Remove all images:
-
-    docker rmi $(docker images -q)
-
-Remove dangling/untagged images
-    docker images -q --filter dangling=true | xargs docker rmi
-
-Remove unused volumes:
-
-    find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf <(
-            docker ps -aq | xargs docker inspect | jq -r '.[] | .Mounts | .[] | .Name | select(.)'
-            ) | xargs -r rm -fr
 
 # Use cases
 

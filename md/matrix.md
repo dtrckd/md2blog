@@ -6,4 +6,4 @@ Get a credential
 
 Send a message
 
-    curl "https://matrix.org/_matrix/client/r0/rooms/ROOM_NAME/send/m.room.message/?access_token=TOKEN" -X PUT --data '{"msgtype":"m.text","body":"hello world"}'
+    curl -XPUT "https://matrix.org/_matrix/client/r0/rooms/ROOM_NAME/send/m.room.message/123?access_token=TOKEN" -d '{"msgtype":"m.text","body":"hello world"}'
