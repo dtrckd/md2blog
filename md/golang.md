@@ -38,6 +38,7 @@ Update all package
 
     # Current Module
     go get -u
+    go mod tidy
 
     # Global
     go get -u all
