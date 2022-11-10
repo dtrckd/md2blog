@@ -63,6 +63,10 @@ adding submodule
 
 ## Diffs
 
+Show the files modified in the last commit
+
+    git diff --name-status HEAD HEAD~1
+
 Show commits where a file was modified:
 
     git log --pretty=oneline dotfiles/.vimrc
@@ -109,14 +113,14 @@ add a remote branch
 
 remove a remote branch
 
-    git push origin --delete <remote_branch_name>
+    git push origin <remote_branch_name> --delete 
 
 
 Move a branch base to another commit:
 
     git rebase --onto F C feature
 
-Will move branch feature starting at C to F:
+-> It will move branch feature starting at C to F:
 
     A---B---C---D---E---F---G master
             \
