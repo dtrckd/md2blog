@@ -25,7 +25,7 @@ cancel the last commit (commit on bad branch for example!)
     git reset --soft HEAD~1
 
 
-How to undo a git reset (if the above command is type in the wrong directory for example!)
+How to undo a git reset (if the above command is typed in the wrong directory for example!)
 
     git reset 'HEAD@{1}'
 
@@ -144,6 +144,20 @@ Bring back lost commit did in a "detached branch"
     git cherry-pick a21d053
 
 ## Rebase
+
+Rebase a branch in the current
+
+    git rebase <branch-name>
+
+In case of of rebase conflit, when resolved
+
+    git rebase --continue 
+
+To cancel a conflicted rebase
+
+    git rebase --abort 
+
+interactive 
 
     git rebase -i hash-of-last-commit-to-rebase
 
