@@ -32,6 +32,8 @@ How to undo a git reset (if the above command is typed in the wrong directory fo
 Abort a conflictual "stash pop"
 
     git checkout -f
+    # OR
+    git reset --merge
 
 
 ## Submodule
@@ -88,6 +90,9 @@ Diff between Head and a other branch
     git diff branch-name -- a-file
     # or
     git diff branch-name..HEAD -- a-file
+
+    # exclude some path from the diff
+    git diff dev op  -- ':!\_op/*'
 
 ## Stashes
 

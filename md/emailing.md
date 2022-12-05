@@ -18,14 +18,20 @@ Open a basic server for test with netcat
     sudo nc -l -p 25 -c 'echo -e "HTTP/1.1 200 OK\n\n $(date)"'
 
 check tls smtp connection
-    
+
 
     # For StartTLS on port 587 or 25 you can try
-        openssl s_client -starttls smtp -connect <host>:<port>
-    For implicit TLS on port 465 you can try 
-        openssl s_client -connect <host>:465
+    openssl s_client -starttls smtp -connect <host>:<port>
+    # For implicit TLS on port 465 you can try 
+    openssl s_client -connect <host>:465
 
     You can use Swaks to send test emails and testssl.sh for TLS checks.
+
+Check a certificate expritation date 
+
+    openssl x509 -enddate -noout -in file.pem
+
+    openssl s_client -servername <SERVERNAME> -connect <HOST>:<PORT> 2>/dev/null | openssl x509 -noout -dates
 
 
 settings DMARC
