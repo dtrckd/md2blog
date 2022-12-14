@@ -63,6 +63,7 @@ mail checker
     https://www.barracudacentral.org
     Senderbase.org
     Reputationauthority.org
+    https://www.blacklistmaster.com
 
     postmaster.google.com ???
 
@@ -79,6 +80,14 @@ tools
 
 send email with telnet/nc
 
+	telnet smtp.domain.com 25
+
+Or with ssl
+
+    openssl s_client -starttls smtp -crlf -connect smtp.mailgun.org:587
+
+---
+
     HELO server.com
     MAIL FROM:bar@example.com
     RCPT TO:foo@server.com
@@ -89,36 +98,35 @@ send email with telnet/nc
 
 Full exchange sample
 
-	telnet smtp.domain.com 25
-	   Trying 192.168.0.1...
-	   Connected to smtp.domain.com (192.168.0.1).
-	   Escape character is '^]'.
-	   220 myrelay.domain.com ESMTP
-	   HELO smtp.domain.com
-	   250 myrelay.domain.com
-	   MAIL FROM:<alice@hacker.com>
-	   250 sender <alice@hacker.com> ok
-	   RCPT TO:<bob@secure.net>
-	   250 recipient <bob@secure.net> ok
-	   DATA
-	   354 go ahead
-	   From: [Alice Hacker] <alice@hacker.com>
-	   To: [Bob Smith] <bob@secure.net>
-	   Date: Mon, 12 Apr 2010 14:21:26 -0400
-	   Subject: Test Message
+    Trying 192.168.0.1...
+    Connected to smtp.domain.com (192.168.0.1).
+    Escape character is '^]'.
+    220 myrelay.domain.com ESMTP
+    HELO smtp.domain.com
+    250 myrelay.domain.com
+    MAIL FROM:<alice@hacker.com>
+    250 sender <alice@hacker.com> ok
+    RCPT TO:<bob@secure.net>
+    250 recipient <bob@secure.net> ok
+    DATA
+    354 go ahead
+    From: [Alice Hacker] <alice@hacker.com>
+    To: [Bob Smith] <bob@secure.net>
+    Date: Mon, 12 Apr 2010 14:21:26 -0400
+    Subject: Test Message
 
-	   Hi there!
-	   This is supposed to be a real email...
+    Hi there!
+    This is supposed to be a real email...
 
-	   Have a good day!
-	   Alice
+    Have a good day!
+    Alice
 
 
-	   .
-	   250 ok:  Message 222220902 accepted
-	   QUIT
-	   221 myrelay.domain.com
-	   Connection closed by foreign host.
+    .
+    250 ok:  Message 222220902 accepted
+    QUIT
+    221 myrelay.domain.com
+    Connection closed by foreign host.
 
 
 ## Concepts
