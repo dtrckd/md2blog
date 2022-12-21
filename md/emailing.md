@@ -54,6 +54,7 @@ mail checker
     # SSL/TLS
     https://luxsci.com/smtp-tls-checker
     https://www.checktls.com/
+    https://www.ssllabs.com/ssltest/
 
     # DNS
     https://intodns.com/
