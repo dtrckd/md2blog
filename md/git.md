@@ -191,6 +191,15 @@ Finally commit
 
 	git commit -m "'Merge' these changes"
 
+## Subtree
+
+Merge git repository in subdirectory - 
+To merge a repository <repo> at revision <rev> as subdirectory <prefix>, use git subtree add as follows:
+
+    git subtree add -P <prefix> <repo> <rev>
+
+see https://stackoverflow.com/questions/6426247/merge-git-repository-in-subdirectory
+
 ## reseting files permission change only (git diff | git apply)
 
     git diff -p \
