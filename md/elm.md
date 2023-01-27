@@ -56,3 +56,26 @@ For auto code completion and lookup, install
 
 scaling app conf R. Feldman: https://www.youtube.com/watch?v=DoA4Txr4GUs
 
+
+# Snippets
+
+Using foldl to convert a list of tuple to a dict
+
+    let
+        addParam : Tension -> Maybe (List Tension) -> Maybe (List Tension)
+        addParam value maybeValues =
+            case maybeValues of
+            Just values ->
+                Just (values ++ [ value ])
+
+            Nothing ->
+                Just [ value ]
+
+        toDict2 : List ( String, Tension ) -> Dict String (List Tension)
+        toDict2 parameters =
+            List.foldl
+                (\( k, v ) dict -> Dict.update k (addParam v) dict)
+                Dict.empty
+                parameters
+    in
+    List.map (\x -> ( x.name, x )) data |> toDict2
