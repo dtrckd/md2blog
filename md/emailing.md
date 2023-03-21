@@ -1,4 +1,4 @@
-Good tuto/course on seting up Postal
+Goo tuto/course on seting up Postal
 
     https://blog.h-educate.com/free-smtp-server-postal/
 
@@ -27,7 +27,7 @@ check tls smtp connection
 
     You can use Swaks to send test emails and testssl.sh for TLS checks.
 
-Check a certificate expritation date 
+Check a certificate expiration date 
 
     openssl x509 -enddate -noout -in file.pem
 
