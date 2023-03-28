@@ -53,7 +53,7 @@ update to last version (with new **major** release, ie potentielly dependency br
     # first install
     npm install -g npm-check-updates
     # then upgrade repo (depencies and devDependencies)
-    ncu -u
+    ncu -u -i  # -i fo interactive, let you select which package to upgrade
     # then update
     npm update
 
