@@ -30,6 +30,10 @@ then
 
 then select line to align and type `gq`.
 
+## Ctags
+
+    see [[ctags]]
+
 ## Ycm
 
 **build**

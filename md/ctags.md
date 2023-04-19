@@ -1,13 +1,17 @@
-# Use of ctags (great in use with taglist)
+**Use of ctags (great in use with taglist)**
 
 recursive on current folder (RTFM)
 	ctags -R
 
+
+**Usage with vim**
 from https://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks
 
     Ctrl+] - go to definition
     Ctrl+t - Jump back from the definition.
-    Ctrl+W Ctrl+] - Open the definition in a horizontal split
+    Ctrl+W Ctrl+] - Open the definition in a horizontal split. alternatively <C-W> <C-S>
+
+    g+] see def in helper.
 
     Add these lines in vimrc
     map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
