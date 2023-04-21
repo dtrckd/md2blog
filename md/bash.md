@@ -1,6 +1,29 @@
 @linux
 @bash
 
+### Tooling 
+
+Increase the max number of open file
+
+    ulimit -n NUMBER
+
+Compare two directory content
+
+    diff -qNr .  /other/path/ | grep -vE "(\.git|\.pyc)"
+
+Copy file with the tree structure of the source file
+
+    find /path/to/files -name '*.csv' | cpio -pdm /target
+
+Delete multiple line around a matching pattern (grep + sed)
+
+    grep -n -A1 -B2 PATTERN infile | \
+    sed -n 's/^\([0-9]\{1,\}\).*/\1d/p' | \
+    sed -f - infile
+
+
+### Syntax
+
 Manipulation de variables simples
 
 	var=val ou var="a b"   affectation de la variable "var"
