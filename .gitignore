@@ -9,3 +9,8 @@ tags
 *.byobu
 
 html/**
+
+md/Cheatsheets/
+md/cheatsheets/
+md/lzone-cheat-sheets/
+md/reference/
