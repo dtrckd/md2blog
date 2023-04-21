@@ -67,7 +67,7 @@ Used forked repo or rename a module
     go mod edit -replace="github.com/someone/repo@v0.0.0=github.com/you/repo@v1.1.1"
 
     # if buffy, just do
-    #rg before --files-with-matches |xargs sed -i "s/before/after" 
+    #rg before -l | xargs sed -i "s/before/after" 
 
 
 ## Core
