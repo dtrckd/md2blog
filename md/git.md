@@ -125,7 +125,7 @@ Move a branch base to another commit:
 
     git rebase  C --onto G feature
 
--> It will move branch feature starting at C to G:
+-> It will move branch feature starting at `C` to `G`:
 
     A---B---C---D---E---F---G master
             \
