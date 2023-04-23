@@ -123,17 +123,17 @@ remove a remote branch
 
 Move a branch base to another commit:
 
-    git rebase --onto F C feature
+    git rebase  C --onto G feature
 
--> It will move branch feature starting at C to F:
+-> It will move branch feature starting at C to G:
 
     A---B---C---D---E---F---G master
             \
              P---Q---R feature
 
     A---B---C---D---E---F---G master
-                        \
-                         P---Q---R feature
+                            \
+                             P---Q---R feature
 
 
 
