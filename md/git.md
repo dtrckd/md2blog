@@ -71,7 +71,10 @@ Show the files modified in the last commit
 
 Show commits where a file was modified:
 
-    git log --pretty=oneline dotfiles/.vimrc
+    git log --pretty=oneline filename
+    git log --all --first-parent --remotes --reflog --author-date-order -- filename
+    # With gitk
+    gitk --all --first-parent --remotes --reflog --author-date-order -- filename
 
 with patch
 

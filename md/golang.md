@@ -112,3 +112,16 @@ func main() {
 
 }
 ```
+
+Use reflect to assert that two object (of unknwon type) are equal (deep equal)
+
+    // Instanciate an empty empty object of the same type than input.Set
+    t := reflect.TypeOf(input.Set).Elem()
+    a := reflect.New(t).Elem().Interface()
+    b := *input.Set
+    b.Nodes = nil
+    // Ignore if the update it is just appending the data to new node (not actually modifing it)
+    if !reflect.DeepEqual(a, b) {
+        // Check if the node updated as the lowest depth in the nodes list.
+        return nil, LogErr("Access denied", fmt.Errorf("This object belongs to more than one node, edition is locked. Edition is only possible at the root circle level."))
+    }
