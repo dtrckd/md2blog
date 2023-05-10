@@ -18,6 +18,14 @@ cred timeout store/cache
 
     git config --global credential.helper 'cache --timeout=3600'
 
+## Restore
+
+Various (equivalent) ways to discard unstaged change
+
+    git restore .
+    # or
+    git checkout -- .
+
 ## Reset
 
 cancel the last commit (commit on bad branch for example!)
