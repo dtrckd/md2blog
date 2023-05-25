@@ -30,7 +30,7 @@ Encrypt the new entry If ~/.ssh/known_hosts is encrypted (HashKnownHosts=True) :
 
 show fingerprint of a public key
 
-    #ssh-keygen  -l -f [-E md5] ~/.ssh/id_rsa.pub
+    ssh-keygen -E sha256 -l -f ~/.ssh/id_rsa.pub
 
 show/list fingerprint of authorized keys (sshd)
 
