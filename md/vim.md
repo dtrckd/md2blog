@@ -7,6 +7,10 @@ My shortcut:
 https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
 
 
+Open current window in a new tab
+
+    Ctrl + w, Shift + t 
+
 
 Insert newline between each line
 
