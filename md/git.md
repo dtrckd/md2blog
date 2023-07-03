@@ -202,6 +202,10 @@ Finally commit
 
 	git commit -m "'Merge' these changes"
 
+Cancel (e.g conflit)
+
+    git merge --abort
+
 ## Subtree
 
 Merge git repository in subdirectory - 
