@@ -1,6 +1,13 @@
 @git
 @recipes
 
+## Logs
+
+Search commits where a <pattern> has been introduced
+
+    git log -S <pattern> --source --all
+
+
 ## Stats
 
 count line of code, count files
