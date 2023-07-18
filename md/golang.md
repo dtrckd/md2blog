@@ -76,6 +76,23 @@ What's the difference betwen json.Unmarshall and json.Decode
     -> Decode operate on stream (e.g like http). Unmarshall on bytes (i.e need to be fully loaded in memory).
        Thus unmarshall may be a bit faster.
 
+## Formating
+
+The fmt package in Go provides several formatting options that can be used with the fmt.Printf function to print the representation of a struct given i
+ts address. Here are some commonly used formatting verbs:
+
+1. %v: Prints the default format for the value.
+2. %+v: Prints the struct fields with field names.
+3. %#v: Prints the Go-syntax representation of the value.
+4. %T: Prints the type of the value.
+5. %t: Prints the word true or false for bool values.
+6. %d: Prints the decimal representation of an integer.
+7. %b: Prints the binary representation of an integer.
+8. %x or %X: Prints the hexadecimal representation of an integer.
+9. %f: Prints the floating-point representation of a number.
+10. %s: Prints the string representation of a value.
+11. %p: Prints the address of a pointer.
+
 ## Using reflect
 
 Creating a new struct from an interface:

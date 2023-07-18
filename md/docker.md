@@ -3,6 +3,10 @@
 
 # Docker Recipes
 
+Show the ip address use to reach a container (like a mysql server)
+
+    docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mydb
+
 ## Cleaning
 
 **images**
