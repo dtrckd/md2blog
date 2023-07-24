@@ -1,3 +1,4 @@
+# Interactive rebase
 
 Rebase until the last 9 commits:
 

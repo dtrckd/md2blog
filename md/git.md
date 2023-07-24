@@ -86,10 +86,14 @@ Show the files modified in the last commit
 
 Show commits where a file was modified:
 
-    git log --pretty=oneline filename
+    git log --pretty=oneline -- filename
     git log --all --first-parent --remotes --reflog --author-date-order -- filename
     # With gitk
     gitk --all --first-parent --remotes --reflog --author-date-order -- filename
+
+Show successive diff of a file accros time (commits)
+
+    git log --follow --patch 
 
 with patch
 
