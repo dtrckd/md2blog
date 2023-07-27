@@ -1,10 +1,16 @@
 @vim
 
-My shortcut:
-- go ot last active tab `g<Tab>`
-
 * [Vim tips and tricks](html/vim-tips-tricks/home.html)
-https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
+* https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
+
+
+To replace all occurrences of a term under the cursor in Vim, you can use the following command:
+
+    :%s/<C-r><C-w>/new_term/g
+
+Go ot last active tab 
+
+    g<Tab>
 
 
 Open current window in a new tab
