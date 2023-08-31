@@ -2,6 +2,8 @@
 @bash
 @linux
 
+https://cheatography.com/bechtold/cheat-sheets/tmux-the-terminal-multiplexer/
+
 ## Utils
 
 reload tmuconf:
