@@ -2,6 +2,8 @@
 
 http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Commands.htm
 
+SQL Iceberg: https://www.avestura.dev/blog/explaining-the-postgres-meme
+
 show databases
 
     show databases;
