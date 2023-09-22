@@ -33,6 +33,12 @@ Some command
     maybe: echo "NEED_STATD=yes" >> /etc/default/ngs-common 
     maybe: echo "config.vm.synced_folder "~/src/data/vagrant_virt", "/home/vagrant/vagrant_projects", type: "nfs", nfs_version: 4, "nfs_udp": false, mount_options: ["rw", "vers=4", "tcp", "nolock"]" >> Vagrantfile
 
+Fix kvn mount timeout issue (`mount.nfs: Connection timed out`)
+
+    iptables -A INPUT -p tcp --dport 2049 -j ACCEPT # NFS
+    iptables -A INPUT -p tcp --dport 111 -j ACCEPT # RPC-Bind
+    iptables -A INPUT -p tcp --dport 20048 -j ACCEPT # mountd
+
 ## Utils
 
     vagrant plugin install vagrant-scp
