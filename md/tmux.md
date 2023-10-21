@@ -25,7 +25,7 @@ Rename a window
 
     <C-S> A
 
-Swap/move pane:
+Swap/switch pane:
 
     <C-s>swap-pane -t <pos>
 
