@@ -3,12 +3,13 @@ Here is a table comparing the usage and equivalence between using pip and conda 
 | Action                                   | pip Command                                          | conda Command                                      |
 |------------------------------------------|------------------------------------------------------|----------------------------------------------------|
 | Install a package                        | `pip install package_name`                           | `conda install package_name`                       |
-| Update a package                         | `pip install --upgrade package_name`                 | `conda update package_name`                        |
+| Update a package                         | `pip install -U package_name`                        | `conda update package_name`                        |
+| install from requirements                | `pip install -r requirements.txt`                    | `conda install --file requirements.txt`            |
 | Remove a package                         | `pip uninstall package_name`                         | `conda remove package_name`                        |
 | List installed packages                  | `pip list`                                           | `conda list`                                       |
 | Search for a package                     | `pip search package_name`                            | `conda search package_name`                        |
 | Install a specific version of a package  | `pip install package_name==version_number`           | `conda install package_name=version_number`        |
-| Update pip itself                        | `pip install --upgrade pip`                          | `conda update pip`                                 |
+| Update pip itself                        | `pip install -U pip`                                 | `conda update pip`                                 |
 | Install a package from a specific source | `pip install -i URL package_name`                    | `conda install --channel URL package_name`         |
 | Install a package without dependencies   | `pip install --no-deps package_name`                 | `conda install --no-deps package_name`             |
 | Show package information                 | `pip show package_name`                              | `conda info package_name`                          |
