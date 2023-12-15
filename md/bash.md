@@ -11,7 +11,7 @@ Compare two directory content
 
     diff -qNr .  /other/path/ | grep -vE "(\.git|\.pyc)"
 
-Copy file with the tree structure of the source file
+Copy file with the tree structure of the source file/target
 
     find /path/to/files -name '*.csv' | cpio -pdm /target
 
@@ -20,6 +20,10 @@ Delete multiple line around a matching pattern (grep + sed)
     grep -n -A1 -B2 PATTERN infile | \
     sed -n 's/^\([0-9]\{1,\}\).*/\1d/p' | \
     sed -f - infile
+
+Show processes and pid that open the most files
+
+    sudo lsof | awk '{print $1 " " $2}' | sort | uniq -c | sort -n -k3
 
 
 ### Syntax

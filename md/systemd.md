@@ -14,6 +14,7 @@
     systemctl reset-failed
 
 **debug**
+
     systemd-analyze verify <unit-name>
 
 **links**
