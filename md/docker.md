@@ -3,6 +3,11 @@
 
 # Docker Recipes
 
+Show the root command of each container
+
+    docker inspect -f "{{.Name}} {{.Path}} {{.Args}}" $(docker ps -q)
+
+
 Show the ip address use to reach a container (like a mysql server)
 
     docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mydb
