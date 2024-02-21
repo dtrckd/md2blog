@@ -307,7 +307,7 @@ https://blog.ostermiller.org/removing-and-purging-files-from-git-history/
 https://marcofranssen.nl/remove-files-from-git-history-using-git-filter-repo
 
 ### Rename branch master name
-    
+
 
     git branch -m master prod
 
@@ -328,3 +328,4 @@ https://marcofranssen.nl/remove-files-from-git-history-using-git-filter-repo
     git remote set-head origin -a
     git branch --set-upstream-to origin/main
     git branch -m master prod
+    

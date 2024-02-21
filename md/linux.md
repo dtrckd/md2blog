@@ -10,3 +10,8 @@ Compile an test kernel 6 on Debian
     make bindeb-pkg
     sudo apt install ../linux-image-6.6.0_6.6.0-1_amd64.deb
     sudo reboot
+
+
+remove bash encoded color in a file.
+
+    sed -r 's/\x1B\[[0-9;]*[mK]//g' file.txt
