@@ -25,6 +25,15 @@ Show processes and pid that open the most files
 
     sudo lsof | awk '{print $1 " " $2}' | sort | uniq -c | sort -n -k3
 
+Count the cummulative size (in percent) of processes : 
+
+    # show the %mem of precessees
+    # filter some processes by name
+    # sort by descending memory consumption
+    # sum the memory usage
+    # --
+    ps aux --sort=-%mem | grep -iE  "copilot|vim|lsp|gopls" | sort -nrk4 | awk 'NR<=100 {print $0}'  | awk '{sum+=$4} END {print sum}'
+
 
 ### Syntax
 
