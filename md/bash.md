@@ -23,7 +23,7 @@ Delete multiple line around a matching pattern (grep + sed)
 
 Show processes and pid that open the most files
 
-    sudo lsof | awk '{print $1 " " $2}' | sort | uniq -c | sort -n -k3
+    sudo lsof | awk '{print $1 " " $2}' | sort | uniq -c | sort -n -k1
 
 Count the cummulative size (in percent) of processes : 
 
