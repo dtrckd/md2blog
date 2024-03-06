@@ -8,7 +8,7 @@ To replace all occurrences of a term under the cursor in Vim, you can use the fo
 
     :%s/<C-r><C-w>/new_term/g
 
-Go ot last active tab 
+Go to last active tab 
 
     g<Tab>
 
