@@ -49,6 +49,23 @@ then select line to align and type `gq`.
 
     see [[ctags]]
 
+## Folding
+
+
+| Command | Description |
+| --- | --- |
+| `zc` | Close a fold |
+| `zo` | Open a fold |
+| `zC` | Close a fold and its children recursively |
+| `zO` | Open a fold and its children recursively |
+| `za` | Toggle fold status (open if closed, close if open) |
+| `zM` | Close all folds in the file |
+| `zR` | Open all folds in the file |
+| `zx` | Decrease fold level (increase the number of lines displayed for a fold) |
+| `zX` | Increase fold level (decrease the number of lines displayed for a fold) |
+| `zd` | Delete a fold (remove the fold, but keep the text) |
+| `zE` | Eliminate all folds (remove all folds, but keep the text) |
+
 ## Ycm
 
 **build**
