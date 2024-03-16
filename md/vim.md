@@ -66,6 +66,32 @@ then select line to align and type `gq`.
 | `zd` | Delete a fold (remove the fold, but keep the text) |
 | `zE` | Eliminate all folds (remove all folds, but keep the text) |
 
+## vim-surround
+
+| Command | Action                                         |
+|---------|------------------------------------------------|
+| `ys`    | Add surrounding                                |
+| `cs`    | Change surrounding                             |
+| `ds`    | Delete surrounding                             |
+| `S`     | Surround when in visual mode (selecting text)  |
+
+### Usage Examples
+
+1. **Adding Surrounding**:
+   - `ysiw"`: Add double quotes around the word under the cursor.
+   - `ys$)`: Add parentheses around the line (from the cursor to the end).
+
+2. **Changing Surrounding**:
+   - `cs"'`: Change surrounding from double quotes to single quotes.
+   - `cs[{`: Change surrounding from brackets to braces.
+
+3. **Deleting Surrounding**:
+   - `ds"`: Delete the double quotes surrounding the cursor's current position.
+   - `ds)`: Remove parentheses around the cursor.
+
+4. **Surrounding in Visual Mode**:
+   - Select text (`v` or `V` for line), then press `S"` to surround the selected text with double quotes.
+
 ## Ycm
 
 **build**
