@@ -33,6 +33,10 @@ Got resized from a smaller client. Exit tmux  and re attach with
 
     tmux attach -d [-t session]
 
+Change the layout from/to vertical/horizontal
+
+    <C-s> <A-S>[1-4]
+
 ## Pasting
 
 Enable mouse scroll in tmux
