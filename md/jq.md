@@ -19,6 +19,12 @@
    cat file.json | jq '{ field1: .key1, field2: .key2 }'
    ```
 
+5. extract sub key of an array of object (taking the 10 first only)
+
+   ```bash 
+    cat file.json | jq '.[:10] | .[] | {description}'
+    ```
+
 5. Sort JSON array:
    ```bash
    cat file.json | jq 'sort_by(.key)'

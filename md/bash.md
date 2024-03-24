@@ -35,6 +35,25 @@ Count the cummulative size (in percent) of processes :
     ps aux --sort=-%mem | grep -iE  "copilot|vim|lsp|gopls" | sort -nrk4 | awk 'NR<=100 {print $0}'  | awk '{sum+=$4} END {print sum}'
 
 
+
+Compile an test kernel 6 on Debian
+
+    tar xf linux-6.6.tar.xz
+    cd linux-6.6
+    cp /boot/config-x.x.x-x-amd64 ./.config
+    make olddefconfig
+    make menuconfig
+    make -j{NUM_CPU}
+    make bindeb-pkg
+    sudo apt install ../linux-image-6.6.0_6.6.0-1_amd64.deb
+    sudo reboot
+
+
+remove bash encoded color in a file.
+
+    sed -r 's/\x1B\[[0-9;]*[mK]//g' file.txt
+
+
 ### Syntax
 
 Manipulation de variables simples
