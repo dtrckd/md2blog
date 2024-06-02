@@ -172,8 +172,7 @@ Bring back lost commit did in a "detached branch"
 
 ## Rebase
 
-Rebase a branch in the current
-
+Rebase a branch in the current (it will rebase branch-name, waring !)
     git rebase <branch-name>
 
 In case of of rebase conflit, when resolved

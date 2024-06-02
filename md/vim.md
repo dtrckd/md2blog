@@ -3,6 +3,10 @@
 * [Vim tips and tricks](html/vim-tips-tricks/home.html)
 * https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
 
+Go to edit mode at the correct indentiion level: 
+
+    cc|S
+
 
 To replace all occurrences of a term under the cursor in Vim, you can use the following command:
 
@@ -66,7 +70,7 @@ then select line to align and type `gq`.
 | `zd` | Delete a fold (remove the fold, but keep the text) |
 | `zE` | Eliminate all folds (remove all folds, but keep the text) |
 
-## vim-surround
+## vim-surround (you surround me)
 
 | Command | Action                                         |
 |---------|------------------------------------------------|
