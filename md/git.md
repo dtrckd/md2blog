@@ -371,6 +371,11 @@ Remove the identified file (warning those command permanent remove bunch of file
     git prune
     #git push origin master --force
 
+Or with git filter-repo
+
+    git filter-repo --path path/to/your/folder --invert-paths
+
+
 All collaborator that cloned the repo must run
 
     git fetch origin
