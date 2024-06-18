@@ -1,6 +1,14 @@
 @git
 @recipes
 
+## Autogenerate release
+
+config in ~/.config/git-cliff
+
+    git cliff --unrealeased --latest --topo-order
+
+see template exampe at https://github.com/orhun/git-cliff/blob/main/cliff.toml
+
 ## Logs
 
 Search commits where a <pattern> has been introduced
