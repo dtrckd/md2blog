@@ -3,6 +3,10 @@
 * [Vim tips and tricks](html/vim-tips-tricks/home.html)
 * https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
 
+Copy the system message or error in the buffer : 
+
+    :put =execute('messages')
+
 Go to edit mode at the correct indentiion level: 
 
     cc|S
