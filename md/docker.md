@@ -14,6 +14,12 @@ Show the ip address use to reach a container (like a mysql server)
 
 ## Cleaning
 
+Recap
+    
+    docker volume rm $(docker volume ls -qf dangling=true)
+    docker system prune -a
+    #docker system prune --all --volumes --force
+
 **images**
 clean unused images
 
