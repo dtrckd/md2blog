@@ -7,6 +7,10 @@ Copy the system message or error in the buffer :
 
     :put =execute('messages')
 
+or
+
+    :messages
+
 Go to edit mode at the correct indentiion level: 
 
     cc|S
