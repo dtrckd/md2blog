@@ -33,7 +33,8 @@ Check
     sudo swapon --show
     free -h
 
----
+### Test of swap/VM configuration
+
 
 Value first
 
@@ -50,7 +51,7 @@ value second
 ```sh
 sudo sysctl -w vm.swappiness=10
 sudo sysctl -w vm.vfs_cache_pressure=50
-sudo sysctl -w vm.min_free_kbytes=65536
+sudo sysctl -w vm.min_free_kbytes=67584
 sudo sysctl -w vm.dirty_background_ratio=5
 sudo sysctl -w vm.dirty_ratio=10
 ```
