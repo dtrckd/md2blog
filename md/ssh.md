@@ -32,6 +32,9 @@ show fingerprint of a public key
 
     ssh-keygen -E sha256 -l -f ~/.ssh/id_rsa.pub
 
+    # for added key
+    ssh-add -l
+
 show/list fingerprint of authorized keys (sshd)
 
     ssh-keygen -l -f ~/.ssh/authorized_keys
