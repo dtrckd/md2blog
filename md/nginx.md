@@ -13,6 +13,14 @@ generate a certificate
 
     openssl req -x509 -new -newkey rsa:2048 -nodes -keyout postal.key -out postal.crt
 
+Or with a existing DNS
+
+```bash
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 \
+  -nodes -keyout example.com.key -out example.com.crt -subj "/CN=example.com" \
+  -addext "subjectAltName=DNS:example.com,DNS:*.example.com,IP:10.0.0.1"
+```
+
 then write `/etc/nginx/site-available/site` as
 
 ```

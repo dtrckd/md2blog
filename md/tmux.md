@@ -9,39 +9,46 @@ https://cheatography.com/bechtold/cheat-sheets/tmux-the-terminal-multiplexer/
 reload tmuconf:
 
     <C-s>source-file ~/.tmux.conf
-or
+    # or
+    <C-s> r
 
-    <prefix> r
 
 Rename a buffer:
 
     tmux rename -t _1-22097 2
 
+
 Rename a session
 
     <C-S> S
+
 
 Rename a window
 
     <C-S> A
 
+
 Swap/switch pane:
 
-    <C-s>swap-pane -t <pos>
+    :swap-pane -t <pos>
+
 
 Got resized from a smaller client. Exit tmux  and re attach with
 
     tmux attach -d [-t session]
 
+
 Change the layout from/to vertical/horizontal
 
-    <C-s> <A-S>[1-4]
+    <C-s><A-S>[1-4]
+
 
 ## Pasting
 
 Enable mouse scroll in tmux
 
-    <C-s>: set [-g] mouse on
+    : set [-g] mouse on
+
 
 copy paste (see alsotmux list-buffers)
 
@@ -65,7 +72,6 @@ if mouse is "on", just select the text with mouse, then you can paste directly w
 
 View paste buffers
 
-    <C-s>: show-buffers
     <C-s>#
 
 

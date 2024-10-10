@@ -5,7 +5,7 @@
 
 config in ~/.config/git-cliff
 
-    git cliff --unrealeased --latest --topo-order
+    git cliff --unreleased --latest --topo-order
 
 see template exampe at https://github.com/orhun/git-cliff/blob/main/cliff.toml
 

@@ -49,8 +49,13 @@ remove a domain from known_hosts
 
     ssh-keygen -R my-code.skusku.site
 
-**generate certificat and key for ssl**
+**generate certificate and key for ssl**
 
 
     sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout my_private.key -out my_certificate.crt
+
+    # OR using ED25519 encryption protocl
+
+    openssl genpkey -algorithm ED25519 -out my_private.key
+    openssl req -new -x509 -key my_private.key -out my_certificate.crt -days 3650
 
