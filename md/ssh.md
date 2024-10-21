@@ -3,6 +3,8 @@
 
 see https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files
 
+**Create**
+
 Create private and public keys (default -t rsa ???):
 
     ssh-keygen
@@ -26,7 +28,7 @@ Encrypt the new entry If ~/.ssh/known_hosts is encrypted (HashKnownHosts=True) :
 
     ssh-keygen -H
 
-**List**
+**list**
 
 show fingerprint of a public key
 
@@ -40,6 +42,16 @@ show/list fingerprint of authorized keys (sshd)
     ssh-keygen -l -f ~/.ssh/authorized_keys
 
 **remove**
+
+
+Remove a specific key:
+If you want to remove a specific key from the SSH agent, you need to provide the path to the key file. For example:
+
+    ssh-add -d /path/to/your/private_key
+
+To remove all keys from the SSH agent, use:
+
+    ssh-add -D
 
 remove an entry from the authorized_keys
 
