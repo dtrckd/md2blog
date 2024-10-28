@@ -32,6 +32,8 @@ show field
 
 create a database:
 
+    CREATE DATABASE nexctcloud;
+
 drop a database:
 
     DROP DATABASE nexctcloud;

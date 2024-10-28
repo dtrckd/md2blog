@@ -3,6 +3,16 @@
 * [Vim tips and tricks](html/vim-tips-tricks/home.html)
 * https://www.cs.oberlin.edu/~kuperman/help/vim/home.html
 
+---
+
+Insert Word Under Cursor into Command Line
+
+1. Place cursor on the desired word.
+2. Enter `:` for command-line mode.
+3. Use `Ctrl-R` then `Ctrl-W` to insert the word.
+
+---
+
 Copy the system message or error in the buffer : 
 
     :put =execute('messages')
@@ -11,34 +21,43 @@ or
 
     :messages
 
+---
+
 Go to edit mode at the correct indentiion level: 
 
     cc|S
 
+---
 
 To replace all occurrences of a term under the cursor in Vim, you can use the following command:
 
     :%s/<C-r><C-w>/new_term/g
 
+---
+
 Go to last active tab 
 
     g<Tab>
 
+---
 
 Open current window in a new tab
 
     Ctrl + w, Shift + t 
 
+---
 
 Insert newline between each line
 
     :s/\n/\r&/
 
+---
 
 Cut long line (modify text)
 
     :%norm! gww
 
+---
 
 Cut long line, when writting
 

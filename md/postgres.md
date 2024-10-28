@@ -12,3 +12,6 @@ docker run
 connect
 
     psql -h localhost -U postgres -d postgres
+
+
+try `rainfrog` ;)
