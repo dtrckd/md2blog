@@ -12,6 +12,11 @@ Show the ip address use to reach a container (like a mysql server)
 
     docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mydb
 
+Clean unused and orphan volumes, netwrok and container
+
+    docker system prune --volumes
+
+
 ## Cleaning
 
 Recap
@@ -52,7 +57,7 @@ Prune volume
 
     docker volume prune
 
-clean unused volumes, containers and images
+clean unused volumes, networks, containers and images
 
     docker system prune --all --force --volumes
 
