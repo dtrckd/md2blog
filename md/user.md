@@ -19,3 +19,9 @@ Remove user
 remove group
 
     delgroup GROUPNAME
+
+
+Make passwordless sudo
+
+    echo "alice ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/alice
+    sudo chmod 0440 /etc/sudoers.d/alice
