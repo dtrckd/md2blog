@@ -39,6 +39,21 @@ cd ../my-features/feature-c && claude
 
 Each Claude session works independently on its own branch. No conflicts, no context switching.
 
+
+## Structure Overview
+
+```
+parent-folder/
+├── my-project/          # main branch (your base)
+└── my-features/
+    ├── feature-a/       # branch: feature-a
+    ├── feature-b/       # branch: feature-b
+    └── feature-c/       # branch: feature-c
+```
+
+Each folder = independent workspace = separate Claude session = parallel work.
+
+
 ---
 
 ## Useful Commands
@@ -106,16 +121,4 @@ rm -rf ../my-features
 
 ---
 
-## Structure Overview
-
-```
-parent-folder/
-├── my-project/          # main branch (your base)
-└── my-features/
-    ├── feature-a/       # branch: feature-a
-    ├── feature-b/       # branch: feature-b
-    └── feature-c/       # branch: feature-c
-```
-
-Each folder = independent workspace = separate Claude session = parallel work.
 

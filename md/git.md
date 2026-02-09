@@ -1,6 +1,7 @@
 @git
 @recipes
 
+
 ## Autogenerate release
 
 config in ~/.config/git-cliff
@@ -27,7 +28,29 @@ and sumary
     git diff --shortstat (git hash-object -t tree /dev/null)
 
 
-## Global options
+## Merge Conflits
+
+```bash
+# Keep YOUR current branch version
+git checkout --ours <file> && git add <file>
+
+# Keep THEIR branch version (the one being merged)
+git checkout --theirs <file> && git add <file>
+```
+
+
+You can also specify the strategy during the merge itself:
+
+```bash
+# Prefer your branch for conflicts
+git merge -X ours <branch>
+
+# Prefer their branch for conflicts
+git merge -X theirs <branch>
+```
+
+
+## Global options
 
 cred timeout store/cache
 
