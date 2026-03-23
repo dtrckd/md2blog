@@ -50,6 +50,65 @@ git merge -X theirs <branch>
 ```
 
 
+## Squash all diffs into one fresh commit.
+
+
+Squash all op-specific differences into one fresh commit on top of dev. Then going forward, you rebase.
+
+How to do it
+
+    1. First, see what's actually different between dev and op
+    git diff dev..op --stat
+
+    2. Create a new branch from dev
+    git checkout dev
+    git checkout -b op-new
+
+    3. Apply all op differences as a single patch
+    git diff dev..op --no-color | git apply --whitespace=fix
+
+    4. Commit everything
+    git add -A
+    git commit -m "feat(op): private contributions"
+
+    5. Replace the old op branch
+    git branch -m op op-old      # keep old op as backup
+    git branch -m op-new op
+
+    6. Verify the result matches
+    git diff op op-old            # should be empty (same content)
+
+Now op is just dev + one clean commit. Going forward:
+
+    git checkout op
+    git rebase dev
+
+Once you're confident everything works, delete the backup:
+
+    git branch -D op-old
+
+
+  Going forward, as dev advances:
+
+  Before rebase:
+
+            A---B---C  (dev, new commits)
+           /
+      D---E
+           \
+            F  (op: your squashed commit)
+
+After git rebase dev:
+
+        A---B---C  (dev)
+                 \
+                  F'  (op: replayed on top)
+
+Git sees that E is the common ancestor, takes F, and replays it after C.
+
+
+
+
 ## Global options
 
 cred timeout store/cache
