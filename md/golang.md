@@ -1,8 +1,13 @@
 (use -v for verbose output)
 
-Install (don't add in go.mod if in a module)
+Install (don't add in go.mod if in a module or as a CLI tool for ex)
 
+    # @ deprecated ?
     GO111MODULE=off go get github.com/usr/repo
+
+    or
+
+    go install github.com/jstemmer/gotags@latest
 
 List installed package
 
