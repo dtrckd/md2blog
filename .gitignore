@@ -7,7 +7,6 @@ tags
 *~
 .session.vim
 *.byobu
-md/doc
 .obsidian/
 
 html/**
@@ -17,3 +16,6 @@ md/cheatsheets/
 md/lzone-cheat-sheets/
 md/reference/
 md/sigoden-notes/
+md/doc
+md/planD
+_md/
