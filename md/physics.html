@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equations Every Engineer Should Feel</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --accent: #b3541e;
+    --border: #ddd;
+    --code-bg: #f0efe9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  header {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 0;
+  }
+  h1 { font-size: 1.8rem; margin-bottom: .25rem; }
+  .subtitle { color: var(--muted); font-style: italic; margin-top: 0; }
+  .tabs {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding: 0 1.25rem;
+    display: flex;
+    gap: .5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .tabs button {
+    font-family: inherit;
+    font-size: .95rem;
+    padding: .5rem 1.1rem;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: #efefef;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+  }
+  .tabs button.active {
+    background: var(--bg);
+    color: var(--accent);
+    font-weight: bold;
+    position: relative;
+    top: 2px;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 4rem;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  h2 {
+    font-size: 1.25rem;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .formula {
+    font-family: 'Courier New', monospace;
+    background: var(--code-bg);
+    display: inline-block;
+    padding: .15rem .5rem;
+    border-radius: 4px;
+    font-size: 1.05em;
+  }
+  strong { color: var(--accent); }
+  ul { padding-left: 1.4rem; }
+  .label {
+    font-variant: small-caps;
+    letter-spacing: .03em;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  details {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    padding: .75rem 1rem;
+    margin: 1rem 0;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--accent);
+  }
+  details p { margin: .6rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Equations Every Engineer Should <em>Feel</em></h1>
+  <p class="subtitle">What each one says, when to use it, a concrete example — and where it stops being true.</p>
+</header>
+
+<nav class="tabs">
+  <button class="active" onclick="showTab('en', this)">English</button>
+  <button onclick="showTab('fr', this)">Français</button>
+  <button onclick="showTab('it', this)">Italiano</button>
+</nav>
+
+<main>
+
+<!-- ==================== ENGLISH ==================== -->
+<div id="en" class="tab-content active">
+
+<p>Knowing a formula is not the same as understanding it. Engineering intuition is the
+ability to look at a system and sense which equation it is about to violate.</p>
+
+<h2>1. Newton's Second Law — <span class="formula">F = ma</span></h2>
+<p><span class="label">What it says:</span> Force equals mass times acceleration. Everything that moves, or is prevented from moving, obeys this.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Any dynamics problem: vehicles, elevators, robotic arms, vibration.</li>
+  <li>Structural loads: a static structure is just the a = 0 case (sum of forces = 0).</li>
+  <li>Estimating loads from deceleration (crashes, hard braking, drop tests).</li>
+</ul>
+<p><span class="label">Example:</span> A 1000 kg car going 0–100 km/h (27.8 m/s) in 10 s needs an average
+acceleration of 2.78 m/s², so a net force of ~2.8 kN. Add drag and rolling
+resistance and you have your required wheel force — and thus engine torque.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Constant mass.</strong> Rockets burn fuel; the general form is F = dp/dt (force is the rate of change of momentum).</li>
+  <li><strong>Inertial reference frame.</strong> In a rotating or accelerating frame you must add fictitious forces (Coriolis, centrifugal).</li>
+  <li><strong>Classical speeds and scales.</strong> Near the speed of light → relativity; at atomic scales → quantum mechanics.</li>
+</ul>
+
+<details>
+<summary>Worked example — the "apparent mass" of an object falling on your foot (two methods, full derivations)</summary>
+<p>Drop an object of mass m from a height h onto your foot. What mass does your foot
+<em>feel</em> at the instant of impact? We answer twice — a quick estimate, then the full
+elastic model — both built from F = ma.</p>
+
+<p><strong>Step 1 — free fall (shared by both methods).</strong> We want the impact speed
+v₀ as a function of h. Two ways to get it.<br>
+<em>Energy:</em> at release the object holds only potential energy E = mgh; at impact,
+only kinetic energy E = ½mv₀². No friction, so energy is conserved:
+<span class="formula">mgh = ½mv₀² → v₀ = √(2gh)</span>.<br>
+<em>Integrating F = ma:</em> m·dv/dt = −mg → v(t) = g·t and h = ½g·t², so the fall lasts
+t = √(2h/g) and v₀ = g·t = √(2gh). Same result.<br>
+Note that m cancels — every mass falls the same way (Galileo). For h = 1 m:
+v₀ = √(2 × 9.81 × 1) ≈ 4.4 m/s.</p>
+
+<p><strong>Method A — quick estimate: constant deceleration.</strong></p>
+<p><strong>Step 2A.</strong> Assume the foot/shoe stops the object over a distance d (the
+crush of sole + skin — easy to estimate) with constant deceleration a. This is F = ma
+with a = const — the assumption Method B will drop. Integrate twice:
+v(t) = v₀ − a·t and x(t) = v₀·t − ½a·t². The object stops at t* = v₀/a, after a distance
+<span class="formula">d = v₀·t* − ½a·t*² = v₀²/2a</span>, i.e. v₀² = 2ad → a = gh/d.
+(One-line energy equivalent: the net braking force ma, acting over d, absorbs the
+kinetic energy: ma·d = ½mv₀² — same equation.)</p>
+<p><strong>Step 3A.</strong> Newton's second law during the stop: the ground must decelerate
+the object <em>and</em> support its weight, so
+<span class="formula">F = m(g + a) = mg·(1 + h/d)</span>.</p>
+<p><strong>Step 4A.</strong> Apparent mass: <span class="formula">m_app = F/g = m·(1 + h/d)</span>.
+With m = 1 kg, h = 1 m, d = 5 mm: m_app = 1 × (1 + 200) ≈ <strong>200 kg</strong>.
+This is an <em>average</em> force over the stop.</p>
+
+<p><strong>Method B — elastic contact (differential equation).</strong></p>
+<p><strong>Step 2B.</strong> Model the contact (sole, skin, floor) as a linear spring of
+stiffness k — Hooke's law: compressed by x, it pushes back with kx. With x positive
+downward, two forces act on the object: gravity mg down, spring kx up. Hence the ODE
+<span class="formula">m·ẍ = mg − kx</span>, with x(0) = 0, ẋ(0) = v₀.</p>
+<p><strong>Step 3B.</strong> Solve. Standard form: ẍ + ω²x = g, with ω = √(k/m). General
+solution = homogeneous part A·cos ωt + B·sin ωt, plus a constant particular solution
+x_p = g/ω² = mg/k — the static compression at which the spring alone balances the
+weight; the oscillation is centered there. Initial conditions: x(0) = 0 → A = −mg/k,
+ẋ(0) = v₀ → B = v₀/ω. Hence
+<span class="formula">x(t) = (mg/k)(1 − cos ωt) + (v₀/ω)·sin ωt</span>.
+The two oscillating terms combine into a single sine of amplitude
+R = √((mg/k)² + (v₀/ω)²) centered on mg/k, so the compression peaks at
+x_max = mg/k + R (equivalently, solving ẋ = 0).</p>
+<p><strong>Step 4B.</strong> Peak force and apparent mass, using v₀² = 2gh and ω² = k/m:
+<span class="formula">F = k·x_max = mg·(1 + √(1 + 2kh/mg))</span> →
+<span class="formula">m_app = m·(1 + √(1 + 2kh/mg))</span>.
+With m = 1 kg, h = 1 m, k = 10⁵ N/m (stiff sole): F ≈ 1.4 kN → m_app ≈ <strong>144 kg</strong>,
+delivered over ~10 ms (half a period π/ω). This is a <em>peak</em> force.<br>
+<em>Sanity check.</em> With v₀ = 0 (object gently placed, not dropped), x oscillates
+between 0 and 2mg/k: even a gently placed mass momentarily <em>doubles</em> its weight.
+And the impact term v₀/ω dominates as soon as h ≫ mg/k — here 1 m of drop versus
+mg/k ≈ 0.1 mm of static compression.</p>
+
+<p><strong>Why the two numbers differ.</strong> The spring force ramps from 0 to its peak, so
+its average is half the peak: for the same stopping distance, the elastic peak is ~2×
+the constant-deceleration average. Real contact (nonlinear, damped — add a term c·ẋ)
+sits in between. Both methods agree on the physics: the multiplier h/d (or √h) is
+huge, so a 1 kg tin "weighs" like a grown man for an instant — and a carpet (large d,
+small k) kills the peak, which is why the same drop on a carpet is harmless.</p>
+</details>
+
+<h2>2. Stress — <span class="formula">σ = F/A</span></h2>
+<p><span class="label">What it says:</span> Stress is force divided by the area it acts on. How <em>concentrated</em> a force is, not how big it is.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Sizing cables, bolts, columns, beams: keep σ below the material's yield strength (with a safety factor).</li>
+  <li>Explaining why a needle pierces skin (tiny A → huge σ) and why snowshoes keep you on top of snow (big A → small σ).</li>
+  <li>Pressure is the same idea: p = F/A for fluids.</li>
+</ul>
+<p><span class="label">Example:</span> A steel cable of 1 cm² (10⁻⁴ m²) cross-section holding 10 kN carries
+σ = 10⁴ / 10⁻⁴ = 100 MPa. Structural steel yields around 250 MPa — fine, with a safety factor of ~2.5.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Uniform distribution.</strong> F/A is an <em>average</em>. Near holes, notches, sharp corners and point loads, local stress can be several times higher (stress concentration factors).</li>
+  <li><strong>Simple tension only.</strong> Real parts see shear (τ), bending, and torsion — the full picture is the stress tensor.</li>
+  <li><strong>Homogeneous, isotropic material.</strong> Composites, wood, and welds have direction-dependent strength.</li>
+</ul>
+<details>
+<summary>Worked example — will a 10 mm bolt lift a 500 kg engine?</summary>
+<p>An engine hoist lifts a 500 kg engine; the whole load hangs on a single steel bolt of
+10 mm diameter, in tension. Does it hold?</p>
+<p><strong>Step 1 — the load.</strong> The bolt carries the weight:
+<span class="formula">F = m·g = 500 × 9.81 ≈ 4.9 kN</span>.</p>
+<p><strong>Step 2 — the area.</strong> Circular cross-section, radius r = 5 mm. Convert to metres
+first — this is where errors happen: r = 5 mm = 5×10⁻³ m, so
+<span class="formula">A = πr² = π × (5×10⁻³)² = π × 25×10⁻⁶ ≈ 7.85×10⁻⁵ m²</span> (78.5 mm²).</p>
+<p><strong>Step 3 — the stress.</strong>
+<span class="formula">σ = F/A = 4.9×10³ / 7.85×10⁻⁵ ≈ 62 MPa</span>.
+(Cross-check in mm: 4900 N / 78.5 mm² ≈ 62 N/mm² — same thing, 1 MPa = 1 N/mm².)</p>
+<p><strong>Step 4 — compare with the material.</strong> Structural steel yields at ~250 MPa,
+so the safety factor is 250/62 ≈ <strong>4</strong> — the bolt holds, comfortably.</p>
+<p><strong>Step 5 — the flip side.</strong> Put the same 4.9 kN on the 1 mm² (10⁻⁶ m²) edge
+of a chisel: σ = 4.9×10³ / 10⁻⁶ ≈ 4.9 GPa — far above the yield of any steel. The edge
+crushes its way into the material: that is exactly why cutting tools cut. Same force,
+tiny area.</p>
+<p><strong>Limits.</strong> σ = F/A is an average over a smooth cross-section: a real bolt
+check uses the thread-root area (smaller than πr²) and a stress-concentration factor at
+the threads, and dynamic (snatch) loads multiply F.</p>
+</details>
+
+<h2>3. Sensible Heat — <span class="formula">Q = mcΔT</span></h2>
+<p><span class="label">What it says:</span> The heat needed to change a body's temperature equals mass × specific heat capacity × temperature change.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Thermal budgets: how much energy to heat a room, a tank of water, an engine block.</li>
+  <li>Sizing cooling loops, radiators, HVAC, heatsinks.</li>
+  <li>Cooking, metallurgy, battery thermal management.</li>
+</ul>
+<p><span class="label">Example:</span> Heating 1 L of water (1 kg, c ≈ 4186 J/kg·K) from 20 °C to 100 °C needs
+Q = 1 × 4186 × 80 ≈ 335 kJ. A 2 kW kettle delivers that in ~170 s plus losses.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>No phase change.</strong> Melting or boiling happens at constant temperature; use latent heat instead: Q = mL.</li>
+  <li><strong>Constant c.</strong> Specific heat varies with temperature (and with pressure, for gases: c_p vs c_v).</li>
+  <li><strong>Uniform temperature.</strong> It gives the <em>total</em> energy, not how fast or where — heat flow needs Fourier's law and convection models.</li>
+</ul>
+<details>
+<summary>Worked example — heating a 200 L water tank</summary>
+<p>An electric water heater holds 200 L of water. How long does a 2.4 kW element take
+to bring it from 15 °C (cold mains water) to 60 °C, and what does it cost?</p>
+<p><strong>Step 1 — mass and ΔT.</strong> 1 L of water = 1 kg, so m = 200 kg;
+c = 4186 J/kg·K; ΔT = 60 − 15 = 45 K.</p>
+<p><strong>Step 2 — the energy.</strong>
+<span class="formula">Q = mcΔT = 200 × 4186 × 45 ≈ 3.77×10⁷ J</span> (about 38 MJ).</p>
+<p><strong>Step 3 — into kilowatt-hours.</strong> Joules are the physicist's unit; the
+bill comes in kWh. This conversion is the bridge to the electricity bill:
+1 kWh = 1000 W × 3600 s = 3.6×10⁶ J, so
+<span class="formula">Q = 3.77×10⁷ / 3.6×10⁶ ≈ 10.5 kWh</span>.</p>
+<p><strong>Step 4 — the time.</strong> Power is energy per unit time, so
+<span class="formula">t = Q/P = 3.77×10⁷ / 2400 ≈ 1.57×10⁴ s ≈ 4.4 h</span>.
+(Cross-check: 2.4 kW × 4.4 h ≈ 10.6 kWh — same energy.)</p>
+<p><strong>Step 5 — the cost.</strong> At 0.20 €/kWh: 10.5 × 0.20 ≈ <strong>2.1 €</strong>
+per full heat-up. Hot water is one of the biggest items on a home's energy bill —
+this is that calculation.</p>
+<p><strong>Limits.</strong> Ignores standing losses through the tank insulation (the real
+time is longer), assumes c constant and the temperature uniform — a real tank
+stratifies: hot on top, cold at the bottom.</p>
+</details>
+
+<h2>4. Electrical Power — <span class="formula">P = IV</span></h2>
+<p><span class="label">What it says:</span> Power equals current times voltage.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Sizing wires, fuses and power supplies: at fixed power, higher voltage means lower current, and since resistive losses are I²R, <strong>transmission losses drop quadratically</strong> — the reason the grid runs at hundreds of kilovolts.</li>
+  <li>Energy bills: power × time = energy (kWh).</li>
+  <li>Why your charger gets warm: any unwanted resistance dissipates I²R.</li>
+</ul>
+<p><span class="label">Example:</span> A 2.4 kW heater on a 230 V outlet draws ~10.4 A — fine on a 16 A
+breaker. The same heater on an old 110 V system would draw ~22 A, requiring much thicker cable.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>DC or purely resistive AC.</strong> With motors, transformers or capacitive loads, current and voltage shift out of phase: real power is P = V·I·cos φ. V·I alone is only <em>apparent</em> power (VA).</li>
+  <li><strong>Instantaneous vs average.</strong> For anything non-sinusoidal, you must integrate the instantaneous product.</li>
+</ul>
+
+<details>
+<summary>Worked example — power strip at the limit, and the coiled extension cord</summary>
+<p>A power strip rated 230 V / 16 A runs a 2 kW heater and a 1.5 kW kettle at the
+same time. Are you within the rating — and why does everyone insist you unroll an
+extension cord before plugging in a big load?</p>
+<p><strong>Step 1 — the current.</strong> Total power is 2000 + 1500 = 3500 W, so
+<span class="formula">I = P/V = 3500/230 ≈ 15.2 A</span>.
+Under 16 A — but right at the limit. Plug in anything else and the breaker trips.</p>
+<p><strong>Step 2 — the cable resistance.</strong> A coiled 25 m extension in 1.5 mm²
+copper: the current travels out and back, so L = 50 m of conductor. With copper's
+resistivity ρ = 1.68×10⁻⁸ Ω·m:
+<span class="formula">R = ρL/A = 1.68×10⁻⁸ × 50 / 1.5×10⁻⁶ ≈ 0.56 Ω</span>.</p>
+<p><strong>Step 3 — the heat in the cable.</strong>
+<span class="formula">I²R ≈ 15.2² × 0.56 ≈ 130 W</span>
+dissipated along the cable. Unrolled, that heat spreads over 25 m and is harmless;
+coiled in a tight bundle, the turns heat each other and the temperature climbs —
+melted insulation, and eventually a fire risk. This is the same I²R that makes
+high-voltage transmission efficient: at 230 kV instead of 230 V, the same power
+needs a thousandth of the current, and the loss shrinks by a factor of a million.</p>
+<p><strong>Limits.</strong> Assumes purely resistive loads (cos φ = 1) — a motor load
+of the same wattage draws more current for the same useful power.</p>
+</details>
+
+<h2>5. Ideal Gas Law — <span class="formula">PV = nRT</span></h2>
+<p><span class="label">What it says:</span> Pressure × volume = amount of gas × gas constant × absolute temperature.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Engines, compressors, pneumatic systems.</li>
+  <li>Pressure vessels and scuba tanks.</li>
+  <li>Tires, balloons, weather and altitude (air density).</li>
+</ul>
+<p><span class="label">Example:</span> A tire at 20 °C inflated to 2.5 bar, heated to 50 °C after highway
+driving: at fixed volume, P/T is constant, so P₂ = 2.5 × (323/293) ≈ 2.76 bar.
+This is why pressures are specified "cold". (Use Kelvin, always.)</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Ideal gas:</strong> molecules are point particles with zero volume and no mutual attraction.</li>
+  <li>Fails at <strong>high pressure</strong> or <strong>low temperature</strong> — near liquefaction, real gases need corrections (van der Waals, compressibility factor Z, steam tables).</li>
+  <li><strong>n must be constant.</strong> Open systems need the mass-flow form.</li>
+</ul>
+
+<details>
+<summary>Worked example — how long does a scuba tank last at 20 m?</summary>
+<p>A 12 L tank filled to 200 bar, a diver at 20 m depth breathing 15 L/min
+(measured at surface pressure). How long before the tank runs dry?</p>
+<p><strong>Step 1 — the air stored.</strong> At constant temperature, PV is constant,
+so the tank holds the equivalent of
+<span class="formula">V = 12 L × 200 = 2400 L</span>
+of air at surface pressure.</p>
+<p><strong>Step 2 — the pressure at depth.</strong> Water adds 1 bar every 10 m. At
+20 m the absolute pressure is
+<span class="formula">P = 1 + 20/10 = 3 bar</span>.
+Use absolute pressure, always — the gauge reads 2 bar, but physics counts from
+vacuum.</p>
+<p><strong>Step 3 — the consumption at depth.</strong> The lungs move the same volume
+per breath, but at ambient pressure. At fixed V and T, PV = nRT gives n ∝ P: each
+breath at 3 bar carries 3× the molecules. A surface consumption of 15 L/min
+becomes
+<span class="formula">15 × 3 = 45 L/min</span>
+of surface-equivalent air.</p>
+<p><strong>Step 4 — the autonomy.</strong>
+<span class="formula">2400 / 45 ≈ 53 min</span>
+— before any reserve.</p>
+<p><strong>Limits.</strong> The ideal gas law is fine here: even at 200 bar, air's
+compressibility factor Z departs from 1 by only a few percent. Real dives keep a
+~50 bar reserve, and consumption climbs fast with exertion, cold and stress.</p>
+</details>
+
+<h2>6. Second Law of Thermodynamics — <span class="formula">ΔS ≥ 0</span></h2>
+<p><span class="label">What it says:</span> The entropy of an isolated system never decreases. Every real process is irreversible to some degree.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>It sets the <em>ceiling</em> on every heat engine: Carnot efficiency η = 1 − T_cold/T_hot.</li>
+  <li>Explains why every energy conversion produces waste heat, why power plants need cooling towers.</li>
+  <li>Tells you which ideas to reject instantly: perpetual motion machines, "free energy" devices.</li>
+</ul>
+<p><span class="label">Example:</span> A coal plant with steam at 550 °C (823 K) rejecting heat at 30 °C
+(303 K) has a Carnot limit of 1 − 303/823 ≈ 63%. Real plants reach ~40% — the gap is friction, turbulence and finite temperature differences.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Isolated system.</strong> An open subsystem can see its entropy <em>decrease</em> — your freezer cools its interior — as long as it exports more entropy than it destroys.</li>
+  <li><strong>Macroscopic statement.</strong> Entropy is statistical: at microscopic scales, fluctuations can briefly violate the trend.</li>
+  <li><strong>Equilibrium-based.</strong> Far-from-equilibrium processes need extended frameworks.</li>
+</ul>
+
+<details>
+<summary>Worked example — why a heat pump delivers 3–4 kWh per kWh</summary>
+<p>Heat a house to 20 °C while it is 0 °C outside. A resistive heater turns
+1 kWh of electricity into exactly 1 kWh of heat. How much better can a heat
+pump do?</p>
+<p><strong>Step 1 — what the machine does.</strong> A heat pump takes Q_cold
+from the cold outside and delivers Q_hot inside, doing work
+<span class="formula">W = Q_hot − Q_cold</span>.
+Its heating coefficient of performance is
+<span class="formula">COP = Q_hot / W</span>.</p>
+<p><strong>Step 2 — the reversible limit.</strong> The best possible machine is
+reversible: zero net entropy production, ΔS = 0 overall. Entropy in equals
+entropy out, so
+<span class="formula">Q_hot / T_hot = Q_cold / T_cold</span>
+hence Q_cold = Q_hot × T_cold / T_hot.</p>
+<p><strong>Step 3 — substitute.</strong> With W = Q_hot − Q_cold, the COP of the
+Carnot machine collapses to the temperatures alone:
+<span class="formula">COP_Carnot = T_hot / (T_hot − T_cold)</span>.</p>
+<p><strong>Step 4 — plug in Kelvin.</strong> T_hot = 293 K, T_cold = 273 K:
+<span class="formula">COP = 293 / 20 ≈ 14.6</span>
+— the second law allows almost 15 kWh of heat per kWh of work.</p>
+<p><strong>Step 5 — reality.</strong> Friction, throttling and finite temperature
+differences in the exchangers produce entropy (ΔS > 0), and real machines reach
+a COP of ~3–4: 1 kWh of electricity still delivers 3–4 kWh of heat, versus
+exactly 1 kWh from a resistive heater.</p>
+<p><strong>Limits.</strong> COP falls as the outside gets colder — T_hot − T_cold
+grows and the denominator bites. That is why heat pumps struggle in deep
+cold.</p>
+</details>
+
+<h2>7. Mass–Energy Equivalence — <span class="formula">E = mc²</span></h2>
+<p><span class="label">What it says:</span> Mass is a form of energy. A small amount of mass corresponds to an enormous amount of energy, because c² ≈ 9 × 10¹⁶ J/kg.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Nuclear physics: fission and fusion convert a fraction of mass (the "mass defect") into energy.</li>
+  <li>Particle physics: pair creation, annihilation, decay energies.</li>
+  <li>Understanding why a reactor core the size of a car powers a submarine for 25 years.</li>
+</ul>
+<p><span class="label">Example:</span> Fission of one U-235 nucleus releases ~200 MeV because the fragments
+weigh ~0.1% less than the original nucleus. One kilogram of fully fissioned uranium yields ~8 × 10¹³ J — roughly the energy of 2–3 million kilograms of coal.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Not a recipe for converting matter at will.</strong> Only processes that change binding energy unlock it; you can't "burn" a brick into mc² of useful energy.</li>
+  <li><strong>Negligible at chemical scales.</strong> Chemistry safely assumes mass conservation.</li>
+  <li><strong>The full relation is E² = (pc)² + (mc²)².</strong> E = mc² alone is the <em>rest</em> energy.</li>
+</ul>
+<details>
+<summary>Worked example — the gram that vanishes each day in a reactor</summary>
+<p>A nuclear plant produces 1 GW of thermal power, day and night. How much
+mass actually disappears per day?</p>
+<p><strong>Step 1 — energy per day.</strong> Energy is power times time:
+<span class="formula">E = P·t = 10⁹ W × 86400 s = 8.64 × 10¹³ J</span>.</p>
+<p><strong>Step 2 — convert with E = mc².</strong> Solving for mass, with
+c² ≈ 9 × 10¹⁶ J/kg:
+<span class="formula">m = E / c² = 8.64 × 10¹³ / 9 × 10¹⁶ ≈ 9.6 × 10⁻⁴ kg</span>
+— about <strong>one gram per day</strong>.</p>
+<p><strong>Step 3 — compare with coal.</strong> The same daily energy from coal
+at ~25 MJ/kg requires
+<span class="formula">8.64 × 10¹³ / 2.5 × 10⁷ ≈ 3.5 × 10⁶ kg</span>
+≈ 3500 tonnes of coal per day. One gram of vanished mass versus thousands of
+tonnes of burned rock — that ratio is c² made visible.</p>
+<p><strong>Limits.</strong> The gram is the mass defect of the fission products
+weighing less than the original fuel — nothing is being "annihilated". And
+1 GW thermal ≠ 1 GW electric: a real plant delivers only ~1/3 of that as
+electricity.</p>
+</details>
+
+<h2>8. Kinetic Energy — <span class="formula">KE = ½mv²</span></h2>
+<p><span class="label">What it says:</span> The energy of a moving mass grows with the <em>square</em> of velocity. The low-speed limit of relativistic energy — and an insanely big deal in everyday life.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Crash engineering: doubling speed quadruples the energy a structure must absorb.</li>
+  <li>Braking: brakes convert KE into heat, so stopping distance scales with v².</li>
+  <li>Ballistics, flywheels, hydroelectric, wind power (available power scales with v³).</li>
+  <li>Orbital mechanics: escape velocity comes from setting ½mv² equal to gravitational potential energy.</li>
+</ul>
+<p><span class="label">Example:</span> At 130 km/h a car carries (13/9)² ≈ 2.1× the kinetic energy it has at
+90 km/h. That factor ~2 is both the extra crumple-zone energy in a crash and the extra braking distance — the entire physics behind speed limits.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Classical speeds.</strong> Near c, use KE = (γ − 1)mc². The error of ½mv² is ~1% already at ~0.1c.</li>
+  <li><strong>Translation only.</strong> A rotating body also stores ½Iω².</li>
+  <li><strong>It gives energy, not force.</strong> How destructive an impact is depends on stopping distance/time (back to F = ma and σ = F/A).</li>
+</ul>
+<details>
+<summary>Worked example — braking distance at 90 vs 130 km/h</summary>
+<p>A car travelling at 90 km/h must stop dead. How much road does it need —
+and what changes at 130 km/h?</p>
+<p><strong>Step 1 — where the force comes from.</strong> The brakes clamp the
+wheels, but the road stops the car: the tires transmit a maximum friction
+force F = μmg (μ ≈ 0.8 on dry asphalt). The work of that force over the
+distance d must absorb all the kinetic energy:
+<span class="formula">μmg·d = ½mv²</span>.</p>
+<p><strong>Step 2 — the mass cancels.</strong> Solving for d:
+<span class="formula">d = v² / (2μg)</span>
+— no mass left: a loaded truck and a motorcycle stop in nearly the same
+distance (same tires, same μ). Only speed, grip and g matter.</p>
+<p><strong>Step 3 — the numbers.</strong> 90 km/h = 25 m/s:
+<span class="formula">d = 25² / (2 × 0.8 × 9.81) ≈ 40 m</span>.
+At 130 km/h = 36.1 m/s:
+<span class="formula">d = 36.1² / (2 × 0.8 × 9.81) ≈ 83 m</span>.
+The ratio is (130/90)² ≈ <strong>2.1</strong> — the v² made concrete.</p>
+<p><strong>Step 4 — add reaction time.</strong> About 1 s passes before the
+brakes even bite, during which the car covers v × 1 s: <strong>25 m</strong>
+at 90 km/h, <strong>36 m</strong> at 130 km/h — often longer than the braking
+itself.</p>
+<p><strong>Limits.</strong> On wet asphalt μ drops to ≈ 0.4 and both distances
+double. Assumes tire-grip-limited braking at constant μ — no ABS cycling, no
+brake fade — and a flat, dry road.</p>
+</details>
+
+<h2>9. Surface-to-Volume Ratio — <span class="formula">S/V ∝ 1/L</span></h2>
+<p><span class="label">What it says:</span> Not one equation but a scaling law: surface grows as L² while volume grows as L³, so S/V ~ 1/L. Small things have a lot of surface per unit of stuff.</p>
+<p><span class="label">When it's useful:</span></p>
+<ul>
+  <li>Heat transfer: heating/cooling happens through surfaces, but thermal mass lives in the volume. Small objects heat and cool fast.</li>
+  <li>Biology: why cells are microscopic, why mice eat constantly and elephants need big ears.</li>
+  <li>Chemical engineering: catalysts and powders — grinding multiplies reactive surface.</li>
+  <li>Fins on radiators, heatsinks and motorcycle engines inflate S/V artificially.</li>
+</ul>
+<p><span class="label">Example:</span> Crushed ice chills a drink far faster than one big cube of the same
+mass: breaking a cube into 8 pieces doubles the total surface. Same physics as a CPU heatsink's fins.</p>
+<p><span class="label">Where it breaks (assumptions):</span></p>
+<ul>
+  <li><strong>Pure geometry.</strong> Conductivity, convection coefficient and heat capacity still decide the actual rates.</li>
+  <li><strong>Shape matters.</strong> S/V ∝ 1/L compares <em>similar</em> shapes at different sizes.</li>
+  <li><strong>Single-scale view.</strong> Roughness, porosity and fractal structures give surfaces far larger than the smooth-geometry estimate.</li>
+</ul>
+<details>
+<summary>Worked example — why babies need hats (and why crushed ice chills faster)</summary>
+<p>An adult finds a spring evening mild. A newborn in the same air is losing
+heat dangerously fast. Why is the difference geometry, not fragility?</p>
+<p><strong>Step 1 — the scaling law.</strong> For similar shapes, mass grows
+with volume, M ∝ V ∝ L³, while surface grows as S ∝ L². Eliminating L:
+<span class="formula">S ∝ M<sup>2/3</sup>, so S/V ∝ M<sup>−1/3</sup> ∝ 1/L</span>.
+The smaller the body, the more surface it carries per kilogram of stuff.</p>
+<p><strong>Step 2 — why it governs heat.</strong> Heat is lost through the
+surface, but stored (and produced) in the volume. The loss rate per kilogram
+therefore scales as S/V: small bodies cool fast, big ones hold their heat.</p>
+<p><strong>Step 3 — the numbers.</strong> A 3 kg newborn against a 70 kg adult,
+assumed roughly similar in shape:
+<span class="formula">(S/V)<sub>baby</sub> / (S/V)<sub>adult</sub> = (70/3)<sup>1/3</sup> ≈ 2.9</span>.
+The baby loses heat about <strong>3 times faster per kilogram</strong> — while
+its smaller absolute mass produces less heat in total. Hence the hat: the
+head is a disproportionately large share of a baby's surface.</p>
+<p><strong>Step 4 — same law in the kitchen.</strong> Split one ice cube into 8
+equal pieces: each side halves, so total surface goes from 6L² to 8 × 6(L/2)²
+= 12L² — <strong>double the surface at equal mass</strong>. That is why crushed
+ice chills a drink faster, and why the same trick cools a CPU (fins) or
+speeds up a catalyst (powder).</p>
+<p><strong>Limits.</strong> This is pure scaling: actual heat loss also follows
+Newton's cooling — rate ∝ surface × ΔT, with a convection coefficient h that
+wind and clothing change (a hat is an h-reducer on the body part that matters
+most).</p>
+</details>
+
+<h2>The Point</h2>
+<p>You don't need to solve these every day. You need to <em>feel</em> them — to notice when a
+design quietly assumes constant mass, uniform stress, no phase change, a resistive
+load, an ideal gas, an isolated system, a classical speed, or convenient geometry.
+Every equation above is a model, and every model is a list of assumptions wearing a
+mathematical costume. Engineering intuition is knowing where the costume ends.</p>
+
+</div>
+
+<!-- ==================== FRANÇAIS ==================== -->
+<div id="fr" class="tab-content">
+
+<p>Connaître une formule ne suffit pas : il faut la comprendre. L'intuition de
+l'ingénieur, c'est la capacité à regarder un système et à sentir quelle équation il
+est sur le point de violer.</p>
+
+<h2>1. Deuxième loi de Newton — <span class="formula">F = ma</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> La force est égale à la masse multipliée par l'accélération. Tout ce qui bouge — ou qu'on empêche de bouger — lui obéit.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Tout problème de dynamique : véhicules, ascenseurs, bras robotiques, vibrations.</li>
+  <li>Charges structurelles : une structure statique n'est que le cas a = 0 (somme des forces nulle).</li>
+  <li>Estimer les charges lors de décélérations (crashs, freinages violents, tests de chute).</li>
+</ul>
+<p><span class="label">Exemple :</span> Une voiture de 1000 kg passant de 0 à 100 km/h (27,8 m/s) en 10 s
+requiert une accélération moyenne de 2,78 m/s², soit une force nette d'environ 2,8 kN.
+Ajoutez la traînée et la résistance au roulement et vous obtenez la force nécessaire
+aux roues — et donc le couple moteur.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Masse constante.</strong> Une fusée brûle son carburant ; la forme générale est F = dp/dt (la force est la dérivée de la quantité de mouvement).</li>
+  <li><strong>Référentiel inertiel.</strong> Dans un référentiel tournant ou accéléré, il faut ajouter des forces fictives (Coriolis, centrifuge).</li>
+  <li><strong>Vitesses et échelles classiques.</strong> Proche de la vitesse de la lumière → relativité ; à l'échelle atomique → mécanique quantique.</li>
+</ul>
+
+<details>
+<summary>Exemple détaillé — la « masse apparente » d'un objet qui tombe sur votre pied (deux méthodes, démonstrations complètes)</summary>
+<p>Lâchez un objet de masse m d'une hauteur h sur votre pied. Quelle masse votre pied
+<em>ressent-il</em> à l'instant de l'impact ? Deux réponses — une estimation rapide, puis
+le modèle élastique complet — toutes deux construites à partir de F = ma.</p>
+
+<p><strong>Étape 1 — chute libre (commune aux deux méthodes).</strong> On cherche la
+vitesse d'impact v₀ en fonction de h. Deux façons de l'obtenir.<br>
+<em>Énergie :</em> au lâcher, l'objet n'a que de l'énergie potentielle E = mgh ; à
+l'impact, plus que de l'énergie cinétique E = ½mv₀². Sans frottements, l'énergie se
+conserve : <span class="formula">mgh = ½mv₀² → v₀ = √(2gh)</span>.<br>
+<em>En intégrant F = ma :</em> m·dv/dt = −mg → v(t) = g·t et h = ½g·t² ; la chute dure
+donc t = √(2h/g) et v₀ = g·t = √(2gh). Même résultat.<br>
+Remarquez que m se simplifie — toutes les masses tombent de la même façon (Galilée).
+Pour h = 1 m : v₀ = √(2 × 9,81 × 1) ≈ 4,4 m/s.</p>
+
+<p><strong>Méthode A — estimation rapide : décélération constante.</strong></p>
+<p><strong>Étape 2A.</strong> Supposons que le pied/la chaussure arrête l'objet sur une
+distance d (l'écrasement de la semelle et de la peau — facile à estimer) avec une
+décélération a constante. C'est F = ma avec a = const — l'hypothèse que la méthode B
+abandonnera. On intègre deux fois : v(t) = v₀ − a·t et x(t) = v₀·t − ½a·t². L'objet
+s'arrête à t* = v₀/a, après une distance
+<span class="formula">d = v₀·t* − ½a·t*² = v₀²/2a</span>, soit v₀² = 2ad → a = gh/d.
+(Équivalent énergétique en une ligne : la force nette de freinage ma, appliquée sur d,
+absorbe l'énergie cinétique : ma·d = ½mv₀² — même équation.)</p>
+<p><strong>Étape 3A.</strong> Deuxième loi de Newton pendant l'arrêt : le sol doit décélérer
+l'objet <em>et</em> supporter son poids, donc
+<span class="formula">F = m(g + a) = mg·(1 + h/d)</span>.</p>
+<p><strong>Étape 4A.</strong> Masse apparente : <span class="formula">m_app = F/g = m·(1 + h/d)</span>.
+Avec m = 1 kg, h = 1 m, d = 5 mm : m_app = 1 × (1 + 200) ≈ <strong>200 kg</strong>.
+C'est une force <em>moyenne</em> sur l'arrêt.</p>
+
+<p><strong>Méthode B — contact élastique (équation différentielle).</strong></p>
+<p><strong>Étape 2B.</strong> Modélisons le contact (semelle, peau, sol) comme un ressort
+linéaire de raideur k — loi de Hooke : comprimé de x, il repousse avec kx. Avec x
+positif vers le bas, deux forces agissent sur l'objet : le poids mg vers le bas, le
+ressort kx vers le haut. D'où l'équation <span class="formula">m·ẍ = mg − kx</span>,
+avec x(0) = 0, ẋ(0) = v₀.</p>
+<p><strong>Étape 3B.</strong> Résolution. Forme canonique : ẍ + ω²x = g, avec ω = √(k/m).
+Solution générale = solution homogène A·cos ωt + B·sin ωt, plus une solution particulière
+constante x_p = g/ω² = mg/k — la compression statique pour laquelle le ressort équilibre
+à lui seul le poids ; l'oscillation est centrée là. Conditions initiales : x(0) = 0 →
+A = −mg/k, ẋ(0) = v₀ → B = v₀/ω. D'où
+<span class="formula">x(t) = (mg/k)(1 − cos ωt) + (v₀/ω)·sin ωt</span>.
+Les deux termes oscillants se combinent en une seule sinusoïde d'amplitude
+R = √((mg/k)² + (v₀/ω)²) centrée sur mg/k ; la compression culmine donc à
+x_max = mg/k + R (ce qui revient à résoudre ẋ = 0).</p>
+<p><strong>Étape 4B.</strong> Force maximale et masse apparente, en utilisant v₀² = 2gh
+et ω² = k/m :
+<span class="formula">F = k·x_max = mg·(1 + √(1 + 2kh/mg))</span> →
+<span class="formula">m_app = m·(1 + √(1 + 2kh/mg))</span>.
+Avec m = 1 kg, h = 1 m, k = 10⁵ N/m (semelle rigide) : F ≈ 1,4 kN → m_app ≈
+<strong>144 kg</strong>, délivrés en ~10 ms (une demi-période π/ω). C'est une force de <em>pic</em>.<br>
+<em>Vérification.</em> Avec v₀ = 0 (objet posé doucement, sans chute), x oscille entre 0
+et 2mg/k : même une masse posée en douceur <em>double</em> momentanément son poids. Et le
+terme d'impact v₀/ω domine dès que h ≫ mg/k — ici 1 m de chute contre mg/k ≈ 0,1 mm de
+compression statique.</p>
+
+<p><strong>Pourquoi les deux chiffres diffèrent.</strong> La force du ressort monte de 0 à
+son pic, donc sa moyenne vaut la moitié du pic : à distance d'arrêt égale, le pic
+élastique vaut ~2× la moyenne à décélération constante. Le contact réel (non linéaire,
+amorti — ajoutez un terme c·ẋ) se situe entre les deux. Les deux méthodes s'accordent
+sur la physique : le multiplicateur h/d (ou √h) est énorme, donc une boîte de 1 kg
+« pèse » comme un homme adulte l'espace d'un instant — et un tapis (grand d, petit k)
+tue le pic, c'est pourquoi la même chute sur un tapis est inoffensive.</p>
+</details>
+
+<h2>2. Contrainte — <span class="formula">σ = F/A</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> La contrainte est une force divisée par la surface sur laquelle elle s'exerce. Elle mesure à quel point une force est <em>concentrée</em>, pas sa grandeur.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Dimensionner câbles, boulons, poteaux, poutres : garder σ sous la limite élastique du matériau (avec un facteur de sécurité).</li>
+  <li>Expliquer pourquoi une aiguille perce la peau (A minuscule → σ énorme) et pourquoi les raquettes empêchent de s'enfoncer dans la neige (A grande → σ faible).</li>
+  <li>La pression, c'est la même idée : p = F/A pour les fluides.</li>
+</ul>
+<p><span class="label">Exemple :</span> Un câble en acier de 1 cm² (10⁻⁴ m²) de section retenant 10 kN subit
+σ = 10⁴ / 10⁻⁴ = 100 MPa. L'acier de construction cède vers 250 MPa — c'est bon, avec un facteur de sécurité d'environ 2,5.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Répartition uniforme.</strong> F/A est une <em>moyenne</em>. Près des trous, entailles, angles vifs et charges ponctuelles, la contrainte locale peut être plusieurs fois plus élevée (facteurs de concentration de contrainte).</li>
+  <li><strong>Traction simple uniquement.</strong> Les pièces réelles subissent cisaillement (τ), flexion et torsion — l'image complète est le tenseur des contraintes.</li>
+  <li><strong>Matériau homogène et isotrope.</strong> Composites, bois et soudures ont une résistance qui dépend de la direction.</li>
+</ul>
+<details>
+<summary>Exemple détaillé — un boulon de 10 mm peut-il soulever un moteur de 500 kg ?</summary>
+<p>Une chèvre d'atelier soulève un moteur de 500 kg ; toute la charge tient sur un seul
+boulon en acier de 10 mm de diamètre, en traction. Est-ce que ça tient ?</p>
+<p><strong>Étape 1 — la charge.</strong> Le boulon porte le poids :
+<span class="formula">F = m·g = 500 × 9,81 ≈ 4,9 kN</span>.</p>
+<p><strong>Étape 2 — la section.</strong> Section circulaire, rayon r = 5 mm. Convertir d'abord
+en mètres — c'est là que les erreurs arrivent : r = 5 mm = 5×10⁻³ m, donc
+<span class="formula">A = πr² = π × (5×10⁻³)² = π × 25×10⁻⁶ ≈ 7,85×10⁻⁵ m²</span> (78,5 mm²).</p>
+<p><strong>Étape 3 — la contrainte.</strong>
+<span class="formula">σ = F/A = 4,9×10³ / 7,85×10⁻⁵ ≈ 62 MPa</span>.
+(Vérification en mm : 4900 N / 78,5 mm² ≈ 62 N/mm² — pareil, 1 MPa = 1 N/mm².)</p>
+<p><strong>Étape 4 — comparer au matériau.</strong> L'acier de construction cède vers
+250 MPa, donc le facteur de sécurité vaut 250/62 ≈ <strong>4</strong> — le boulon tient,
+largement.</p>
+<p><strong>Étape 5 — l'envers.</strong> Appliquez les mêmes 4,9 kN sur le tranchant d'un
+ciseau de 1 mm² (10⁻⁶ m²) : σ = 4,9×10³ / 10⁻⁶ ≈ 4,9 GPa — bien au-dessus de la limite
+élastique de n'importe quel acier. Le tranchant s'enfonce en écrasant la matière : c'est
+exactement pourquoi les outils coupent. Même force, surface minuscule.</p>
+<p><strong>Limites.</strong> σ = F/A est une moyenne sur une section lisse : un vrai calcul
+de boulon utilise la section en fond de filet (plus petite que πr²) et un facteur de
+concentration de contrainte au filetage, et les charges dynamiques (à-coups) multiplient F.</p>
+</details>
+
+<h2>3. Chaleur sensible — <span class="formula">Q = mcΔT</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> La chaleur nécessaire pour changer la température d'un corps est égale à la masse × la capacité thermique massique × la variation de température.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Bilans thermiques : quelle énergie pour chauffer une pièce, un réservoir d'eau, un bloc moteur.</li>
+  <li>Dimensionner boucles de refroidissement, radiateurs, CVC, dissipateurs.</li>
+  <li>Cuisine, métallurgie, gestion thermique des batteries.</li>
+</ul>
+<p><span class="label">Exemple :</span> Chauffer 1 L d'eau (1 kg, c ≈ 4186 J/kg·K) de 20 °C à 100 °C demande
+Q = 1 × 4186 × 80 ≈ 335 kJ. Une bouilloire de 2 kW le fait en ~170 s, pertes incluses.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Sans changement d'état.</strong> Fusion et ébullition se font à température constante ; il faut la chaleur latente : Q = mL.</li>
+  <li><strong>c constant.</strong> La capacité thermique varie avec la température (et avec la pression pour les gaz : c_p vs c_v).</li>
+  <li><strong>Température uniforme.</strong> Elle donne l'énergie <em>totale</em>, pas la vitesse ni la localisation — les flux de chaleur relèvent de la loi de Fourier et des modèles de convection.</li>
+</ul>
+<details>
+<summary>Exemple détaillé — chauffer un ballon de 200 L</summary>
+<p>Un chauffe-eau électrique contient 200 L d'eau. Combien de temps une résistance de
+2,4 kW met-elle pour la porter de 15 °C (eau froide du réseau) à 60 °C, et combien cela coûte-t-il ?</p>
+<p><strong>Étape 1 — masse et ΔT.</strong> 1 L d'eau = 1 kg, donc m = 200 kg ;
+c = 4186 J/kg·K ; ΔT = 60 − 15 = 45 K.</p>
+<p><strong>Étape 2 — l'énergie.</strong>
+<span class="formula">Q = mcΔT = 200 × 4186 × 45 ≈ 3,77×10⁷ J</span> (environ 38 MJ).</p>
+<p><strong>Étape 3 — en kilowattheures.</strong> Le joule est l'unité du physicien ; la
+facture, elle, arrive en kWh. Cette conversion est le pont vers la facture :
+1 kWh = 1000 W × 3600 s = 3,6×10⁶ J, donc
+<span class="formula">Q = 3,77×10⁷ / 3,6×10⁶ ≈ 10,5 kWh</span>.</p>
+<p><strong>Étape 4 — le temps.</strong> La puissance est une énergie par unité de temps, donc
+<span class="formula">t = Q/P = 3,77×10⁷ / 2400 ≈ 1,57×10⁴ s ≈ 4,4 h</span>.
+(Vérification : 2,4 kW × 4,4 h ≈ 10,6 kWh — même énergie.)</p>
+<p><strong>Étape 5 — le coût.</strong> À 0,20 €/kWh : 10,5 × 0,20 ≈ <strong>2,1 €</strong>
+par chauffe complète. L'eau chaude est l'un des premiers postes de la facture
+énergétique d'un logement — voilà ce calcul.</p>
+<p><strong>Limites.</strong> Ignore les pertes permanentes à travers l'isolant du ballon
+(le temps réel est plus long), suppose c constant et la température uniforme — un
+vrai ballon se stratifie : chaud en haut, froid en bas.</p>
+</details>
+
+<h2>4. Puissance électrique — <span class="formula">P = IV</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> La puissance est le produit du courant par la tension.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Dimensionner câbles, fusibles et alimentations : à puissance fixe, une tension plus élevée signifie un courant plus faible, et comme les pertes résistives valent I²R, <strong>les pertes de transport chutent quadratiquement</strong> — c'est pour cela que le réseau fonctionne à des centaines de kilovolts.</li>
+  <li>Factures d'énergie : puissance × temps = énergie (kWh).</li>
+  <li>Pourquoi votre chargeur chauffe : toute résistance parasite dissipe I²R.</li>
+</ul>
+<p><span class="label">Exemple :</span> Un radiateur de 2,4 kW sur une prise 230 V tire ~10,4 A — parfait sur un
+disjoncteur 16 A. Le même radiateur sur un vieux réseau 110 V tirerait ~22 A, exigeant un câble bien plus épais.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Continu ou alternatif purement résistif.</strong> Avec moteurs, transformateurs ou charges capacitives, courant et tension se déphasent : la puissance réelle est P = V·I·cos φ. Le produit V·I seul n'est que la puissance <em>apparente</em> (VA).</li>
+  <li><strong>Instantané vs moyenne.</strong> Pour tout signal non sinusoïdal, il faut intégrer le produit instantané.</li>
+</ul>
+
+<details>
+<summary>Exemple détaillé — multiprise à la limite, et la rallonge enroulée</summary>
+<p>Une multiprise de 230 V / 16 A alimente en même temps un radiateur de 2 kW et une
+bouilloire de 1,5 kW. Êtes-vous dans les limites — et pourquoi tout le monde
+insiste pour dérouler une rallonge avant d'y brancher une grosse charge ?</p>
+<p><strong>Étape 1 — le courant.</strong> La puissance totale est 2000 + 1500 = 3500 W, donc
+<span class="formula">I = P/V = 3500/230 ≈ 15,2 A</span>.
+En dessous de 16 A — mais à la limite. Branchez quoi que ce soit d'autre et le
+disjoncteur saute.</p>
+<p><strong>Étape 2 — la résistance du câble.</strong> Une rallonge de 25 m enroulée, en
+cuivre de 1,5 mm² : le courant fait l'aller-retour, donc L = 50 m de conducteur.
+Avec la résistivité du cuivre ρ = 1,68×10⁻⁸ Ω·m :
+<span class="formula">R = ρL/A = 1,68×10⁻⁸ × 50 / 1,5×10⁻⁶ ≈ 0,56 Ω</span>.</p>
+<p><strong>Étape 3 — la chaleur dans le câble.</strong>
+<span class="formula">I²R ≈ 15,2² × 0,56 ≈ 130 W</span>
+dissipés le long du câble. Déroulé, cette chaleur s'étale sur 25 m et reste sans
+danger ; enroulé en un paquet serré, les spires se chauffent mutuellement et la
+température grimpe — isolation fondue, et à terme risque d'incendie. C'est le même
+I²R qui rend le transport à haute tension efficace : à 230 kV au lieu de 230 V, la
+même puissance ne demande qu'un millième du courant, et les pertes chutent d'un
+facteur un million.</p>
+<p><strong>Limites.</strong> Suppose des charges purement résistives (cos φ = 1) — une
+charge à moteur de même puissance nominale tire plus de courant pour la même
+puissance utile.</p>
+</details>
+
+<h2>5. Loi des gaz parfaits — <span class="formula">PV = nRT</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> Pression × volume = quantité de gaz × constante des gaz × température absolue.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Moteurs, compresseurs, systèmes pneumatiques.</li>
+  <li>Réservoirs sous pression et bouteilles de plongée.</li>
+  <li>Pneus, ballons, météo et altitude (densité de l'air).</li>
+</ul>
+<p><span class="label">Exemple :</span> Un pneu gonflé à 2,5 bar à 20 °C, chauffé à 50 °C après de
+l'autoroute : à volume constant, P/T est constant, donc P₂ = 2,5 × (323/293) ≈ 2,76 bar.
+C'est pourquoi les pressions sont spécifiées « à froid ». (Toujours en kelvins.)</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Gaz parfait :</strong> les molécules sont des points sans volume ni interaction mutuelle.</li>
+  <li>Elle échoue à <strong>haute pression</strong> ou <strong>basse température</strong> — près de la liquéfaction, les gaz réels exigent des corrections (van der Waals, facteur de compressibilité Z, tables de vapeur).</li>
+  <li><strong>n constant.</strong> Les systèmes ouverts (fuites, écoulements) demandent la forme en débit massique.</li>
+</ul>
+
+<details>
+<summary>Exemple détaillé — quelle autonomie pour une bouteille de plongée à 20 m ?</summary>
+<p>Une bouteille de 12 L gonflée à 200 bar, un plongeur à 20 m de profondeur qui
+respire 15 L/min (mesuré à pression de surface). Combien de temps avant la panne
+sèche ?</p>
+<p><strong>Étape 1 — l'air embarqué.</strong> À température constante, PV est constant,
+donc la bouteille contient l'équivalent de
+<span class="formula">V = 12 L × 200 = 2400 L</span>
+d'air à pression de surface.</p>
+<p><strong>Étape 2 — la pression à profondeur.</strong> L'eau ajoute 1 bar tous les
+10 m. À 20 m, la pression absolue est
+<span class="formula">P = 1 + 20/10 = 3 bar</span>.
+Toujours en pression absolue — le manomètre indique 2 bar, mais la physique compte
+depuis le vide.</p>
+<p><strong>Étape 3 — la consommation à profondeur.</strong> Les poumons brassent le
+même volume à chaque inspiration, mais à la pression ambiante. À V et T fixés,
+PV = nRT donne n ∝ P : chaque inspiration à 3 bar emporte 3× plus de molécules.
+Une consommation de surface de 15 L/min devient
+<span class="formula">15 × 3 = 45 L/min</span>
+d'air équivalent-surface.</p>
+<p><strong>Étape 4 — l'autonomie.</strong>
+<span class="formula">2400 / 45 ≈ 53 min</span>
+— avant toute réserve.</p>
+<p><strong>Limites.</strong> Le gaz parfait convient ici : même à 200 bar, le facteur
+de compressibilité Z de l'air ne s'écarte de 1 que de quelques pour cent. En
+plongée réelle, on garde une réserve de ~50 bar, et la consommation grimpe vite
+avec l'effort, le froid et le stress.</p>
+</details>
+
+<h2>6. Deuxième principe de la thermodynamique — <span class="formula">ΔS ≥ 0</span></h2>
+<p><span class="label">Ce qu'il dit :</span> L'entropie d'un système isolé ne diminue jamais. Tout processus réel est irréversible dans une certaine mesure.</p>
+<p><span class="label">Quand il sert :</span></p>
+<ul>
+  <li>Il fixe le <em>plafond</em> de toute machine thermique : rendement de Carnot η = 1 − T_froide/T_chaude.</li>
+  <li>Il explique pourquoi toute conversion d'énergie produit de la chaleur perdue, et pourquoi les centrales ont besoin de tours de refroidissement.</li>
+  <li>Il dit quelles idées rejeter d'emblée : mouvement perpétuel, machines à « énergie libre ».</li>
+</ul>
+<p><span class="label">Exemple :</span> Une centrale à charbon avec de la vapeur à 550 °C (823 K) rejetant la
+chaleur à 30 °C (303 K) a une limite de Carnot de 1 − 303/823 ≈ 63 %. Les centrales réelles atteignent ~40 % — l'écart, ce sont les frottements, la turbulence et les écarts de température finis.</p>
+<p><span class="label">Où il s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Système isolé.</strong> Un sous-système ouvert peut voir son entropie <em>diminuer</em> — votre congélateur refroidit son intérieur — tant qu'il exporte plus d'entropie qu'il n'en détruit.</li>
+  <li><strong>Énoncé macroscopique.</strong> L'entropie est statistique : à l'échelle microscopique, des fluctuations peuvent brièvement contredire la tendance.</li>
+  <li><strong>Fondé sur l'équilibre.</strong> Les processus loin de l'équilibre demandent des cadres étendus.</li>
+</ul>
+
+<details>
+<summary>Exemple détaillé — pourquoi une pompe à chaleur délivre 3–4 kWh par kWh</summary>
+<p>Chauffer une maison à 20 °C quand il fait 0 °C dehors. Un radiateur
+électrique transforme 1 kWh d'électricité en exactement 1 kWh de chaleur.
+Combien mieux fait une pompe à chaleur ?</p>
+<p><strong>Étape 1 — ce que fait la machine.</strong> Une pompe à chaleur
+prélève Q_froide à l'extérieur froid et délivre Q_chaude à l'intérieur, en
+fournissant un travail
+<span class="formula">W = Q_chaude − Q_froide</span>.
+Son coefficient de performance en chauffage est
+<span class="formula">COP = Q_chaude / W</span>.</p>
+<p><strong>Étape 2 — la limite réversible.</strong> La meilleure machine possible
+est réversible : aucune production nette d'entropie, ΔS = 0 au total. L'entropie
+entrante égale l'entropie sortante, donc
+<span class="formula">Q_chaude / T_chaude = Q_froide / T_froide</span>
+soit Q_froide = Q_chaude × T_froide / T_chaude.</p>
+<p><strong>Étape 3 — substitution.</strong> Avec W = Q_chaude − Q_froide, le COP
+de la machine de Carnot ne dépend plus que des températures :
+<span class="formula">COP_Carnot = T_chaude / (T_chaude − T_froide)</span>.</p>
+<p><strong>Étape 4 — en kelvins.</strong> T_chaude = 293 K, T_froide = 273 K :
+<span class="formula">COP = 293 / 20 ≈ 14,6</span>
+— le deuxième principe autorise presque 15 kWh de chaleur par kWh de travail.</p>
+<p><strong>Étape 5 — la réalité.</strong> Frottements, laminage et écarts de
+température finis dans les échangeurs produisent de l'entropie (ΔS > 0) : les
+machines réelles plafonnent à un COP de ~3–4. Un kWh d'électricité délivre
+quand même 3–4 kWh de chaleur, contre exactement 1 kWh pour un radiateur.</p>
+<p><strong>Limites.</strong> Le COP chute quand il fait plus froid dehors —
+T_chaude − T_froide grandit et le dénominateur mord. C'est pourquoi les pompes
+à chaleur peinent par grand froid.</p>
+</details>
+
+<h2>7. Équivalence masse-énergie — <span class="formula">E = mc²</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> La masse est une forme d'énergie. Une petite masse correspond à une énergie énorme, car c² ≈ 9 × 10¹⁶ J/kg.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Physique nucléaire : fission et fusion convertissent une fraction de la masse (le « défaut de masse ») en énergie.</li>
+  <li>Physique des particules : création de paires, annihilation, énergies de désintégration.</li>
+  <li>Comprendre pourquoi un cœur de réacteur de la taille d'une voiture alimente un sous-marin pendant 25 ans.</li>
+</ul>
+<p><span class="label">Exemple :</span> La fission d'un noyau d'U-235 libère ~200 MeV parce que les fragments
+pèsent ~0,1 % de moins que le noyau initial. Un kilogramme d'uranium entièrement fissionné dégage ~8 × 10¹³ J — l'équivalent de 2 à 3 millions de kilogrammes de charbon.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Ce n'est pas une recette pour convertir la matière à volonté.</strong> Seuls les processus qui modifient l'énergie de liaison la libèrent ; on ne peut pas « brûler » une brique en mc² d'énergie utile.</li>
+  <li><strong>Négligeable aux échelles chimiques.</strong> La chimie suppose sans risque la conservation de la masse.</li>
+  <li><strong>La relation complète est E² = (pc)² + (mc²)².</strong> E = mc² seul n'est que l'énergie <em>au repos</em>.</li>
+</ul>
+<details>
+<summary>Exemple détaillé — le gramme qui disparaît chaque jour dans un réacteur</summary>
+<p>Une centrale nucléaire produit 1 GW de puissance thermique, jour et nuit.
+Quelle masse disparaît réellement chaque jour ?</p>
+<p><strong>Étape 1 — l'énergie d'une journée.</strong> L'énergie, c'est la
+puissance multipliée par le temps :
+<span class="formula">E = P·t = 10⁹ W × 86400 s = 8,64 × 10¹³ J</span>.</p>
+<p><strong>Étape 2 — conversion avec E = mc².</strong> En isolant la masse, avec
+c² ≈ 9 × 10¹⁶ J/kg :
+<span class="formula">m = E / c² = 8,64 × 10¹³ / 9 × 10¹⁶ ≈ 9,6 × 10⁻⁴ kg</span>
+— environ <strong>un gramme par jour</strong>.</p>
+<p><strong>Étape 3 — comparaison avec le charbon.</strong> La même énergie
+quotidienne avec du charbon à ~25 MJ/kg exige
+<span class="formula">8,64 × 10¹³ / 2,5 × 10⁷ ≈ 3,5 × 10⁶ kg</span>
+≈ 3500 tonnes de charbon par jour. Un gramme de masse évanouie contre des
+milliers de tonnes de roche brûlée — ce rapport, c'est c² rendu visible.</p>
+<p><strong>Limites.</strong> Ce gramme est le défaut de masse des produits de
+fission, qui pèsent moins que le combustible initial — rien n'est
+« annihilé ». Et 1 GW thermique ≠ 1 GW électrique : une centrale réelle ne
+restitue qu'environ 1/3 de cette énergie en électricité.</p>
+</details>
+
+<h2>8. Énergie cinétique — <span class="formula">Ec = ½mv²</span></h2>
+<p><span class="label">Ce qu'elle dit :</span> L'énergie d'une masse en mouvement croît avec le <em>carré</em> de la vitesse. C'est la limite à faible vitesse de l'énergie relativiste — et un facteur colossal dans la vie quotidienne.</p>
+<p><span class="label">Quand elle sert :</span></p>
+<ul>
+  <li>Sécurité routière : doubler la vitesse quadruple l'énergie qu'une structure doit absorber.</li>
+  <li>Freinage : les freins convertissent l'énergie cinétique en chaleur, donc la distance d'arrêt varie en v².</li>
+  <li>Balistique, volants d'inertie, hydroélectricité, éolien (la puissance disponible varie en v³).</li>
+  <li>Mécanique orbitale : la vitesse de libération vient de l'égalité entre ½mv² et l'énergie potentielle de gravitation.</li>
+</ul>
+<p><span class="label">Exemple :</span> À 130 km/h, une voiture emporte (13/9)² ≈ 2,1× l'énergie cinétique
+qu'elle a à 90 km/h. Ce facteur ~2, c'est à la fois l'énergie supplémentaire que la zone de déformation devra absorber lors d'un crash et la distance de freinage en plus — toute la physique derrière les limitations de vitesse.</p>
+<p><span class="label">Où elle s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Vitesses classiques.</strong> Proche de c, il faut Ec = (γ − 1)mc². L'erreur de ½mv² atteint ~1 % dès ~0,1c.</li>
+  <li><strong>Translation seule.</strong> Un corps en rotation stocke aussi ½Iω².</li>
+  <li><strong>Elle donne une énergie, pas une force.</strong> La destructivité d'un impact dépend de la distance/durée d'arrêt (retour à F = ma et σ = F/A).</li>
+</ul>
+<details>
+<summary>Exemple détaillé — distance de freinage à 90 contre 130 km/h</summary>
+<p>Une voiture lancée à 90 km/h doit s'arrêter net. Quelle longueur de route
+lui faut-il — et qu'est-ce qui change à 130 km/h ?</p>
+<p><strong>Étape 1 — d'où vient la force.</strong> Les freins serrent les
+roues, mais c'est la route qui arrête la voiture : les pneus transmettent une
+force de frottement maximale F = μmg (μ ≈ 0,8 sur asphalte sec). Le travail
+de cette force sur la distance d doit absorber toute l'énergie cinétique :
+<span class="formula">μmg·d = ½mv²</span>.</p>
+<p><strong>Étape 2 — la masse s'élimine.</strong> En isolant d :
+<span class="formula">d = v² / (2μg)</span>
+— plus de masse : un camion chargé et une moto s'arrêtent quasiment sur la
+même distance (mêmes pneus, même μ). Seuls comptent la vitesse, l'adhérence
+et g.</p>
+<p><strong>Étape 3 — les chiffres.</strong> 90 km/h = 25 m/s :
+<span class="formula">d = 25² / (2 × 0,8 × 9,81) ≈ 40 m</span>.
+À 130 km/h = 36,1 m/s :
+<span class="formula">d = 36,1² / (2 × 0,8 × 9,81) ≈ 83 m</span>.
+Le rapport vaut (130/90)² ≈ <strong>2,1</strong> — le v² rendu concret.</p>
+<p><strong>Étape 4 — ajouter le temps de réaction.</strong> Environ 1 s
+s'écoule avant même que les freins mordent, pendant lequel la voiture parcourt
+v × 1 s : <strong>25 m</strong> à 90 km/h, <strong>36 m</strong> à 130 km/h —
+souvent plus que le freinage lui-même.</p>
+<p><strong>Limites.</strong> Sur asphalte mouillé, μ tombe à ≈ 0,4 et les deux
+distances doublent. On suppose un freinage limité par l'adhérence des pneus à
+μ constant — pas de cyclage de l'ABS, pas d'échauffement des freins — et une
+route plane et sèche.</p>
+</details>
+
+<h2>9. Rapport surface/volume — <span class="formula">S/V ∝ 1/L</span></h2>
+<p><span class="label">Ce qu'il dit :</span> Pas une équation mais une loi d'échelle : la surface croît en L² tandis que le volume croît en L³, donc S/V ~ 1/L. Les petits objets ont beaucoup de surface par unité de matière.</p>
+<p><span class="label">Quand il sert :</span></p>
+<ul>
+  <li>Transferts thermiques : le chauffage et le refroidissement passent par les surfaces, mais la masse thermique réside dans le volume. Les petits objets chauffent et refroidissent vite.</li>
+  <li>Biologie : pourquoi les cellules sont microscopiques, pourquoi les souris mangent sans arrêt et pourquoi les éléphants ont de grandes oreilles.</li>
+  <li>Génie chimique : catalyseurs et poudres — broyer multiplie la surface réactive.</li>
+  <li>Les ailettes des radiateurs, dissipateurs et moteurs de moto gonflent artificiellement S/V.</li>
+</ul>
+<p><span class="label">Exemple :</span> De la glace pilée refroidit une boisson bien plus vite qu'un seul gros
+glaçon de même masse : casser un cube en 8 morceaux double la surface totale. Même physique que les ailettes d'un dissipateur de processeur.</p>
+<p><span class="label">Où il s'arrête (hypothèses) :</span></p>
+<ul>
+  <li><strong>Pure géométrie.</strong> Conductivité, coefficient de convection et capacité thermique décident toujours des vitesses réelles.</li>
+  <li><strong>La forme compte.</strong> S/V ∝ 1/L compare des formes <em>semblables</em> à différentes tailles.</li>
+  <li><strong>Vision à une seule échelle.</strong> Rugosité, porosité et structures fractales donnent des surfaces bien plus grandes que l'estimation lisse.</li>
+</ul>
+<details>
+<summary>Exemple détaillé — pourquoi les bébés ont besoin d'un bonnet (et pourquoi la glace pilée rafraîchit plus vite)</summary>
+<p>Un adulte trouve une soirée de printemps douce. Un nouveau-né, dans le
+même air, perd de la chaleur dangereusement vite. Pourquoi cette différence
+tient-elle à la géométrie et non à la fragilité ?</p>
+<p><strong>Étape 1 — la loi d'échelle.</strong> Pour des formes semblables, la
+masse croît avec le volume, M ∝ V ∝ L³, tandis que la surface croît en
+S ∝ L². En éliminant L :
+<span class="formula">S ∝ M<sup>2/3</sup>, donc S/V ∝ M<sup>−1/3</sup> ∝ 1/L</span>.
+Plus le corps est petit, plus il porte de surface par kilogramme de matière.</p>
+<p><strong>Étape 2 — pourquoi cela gouverne la chaleur.</strong> La chaleur se
+perd par la surface, mais elle est stockée (et produite) dans le volume. La
+vitesse de perte par kilogramme suit donc S/V : les petits corps refroidissent
+vite, les gros conservent leur chaleur.</p>
+<p><strong>Étape 3 — les chiffres.</strong> Un nouveau-né de 3 kg face à un
+adulte de 70 kg, supposés de forme à peu près semblable :
+<span class="formula">(S/V)<sub>bébé</sub> / (S/V)<sub>adulte</sub> = (70/3)<sup>1/3</sup> ≈ 2,9</span>.
+Le bébé perd sa chaleur environ <strong>3 fois plus vite par kilogramme</strong>
+— alors que sa masse absolue, plus faible, produit moins de chaleur au total.
+D'où le bonnet : la tête représente une part disproportionnée de la surface
+d'un bébé.</p>
+<p><strong>Étape 4 — la même loi en cuisine.</strong> Casser un glaçon en 8
+morceaux égaux : chaque arête est divisée par deux, donc la surface totale
+passe de 6L² à 8 × 6(L/2)² = 12L² — <strong>le double de surface à masse
+égale</strong>. C'est pourquoi la glace pilée rafraîchit une boisson plus vite,
+et pourquoi le même truc refroidit un processeur (ailettes) ou accélère un
+catalyseur (poudre).</p>
+<p><strong>Limites.</strong> C'est de la pure loi d'échelle : la perte réelle
+suit aussi la loi de Newton du refroidissement — vitesse ∝ surface × ΔT, avec
+un coefficient de convection h que le vent et les vêtements modifient (un
+bonnet est un réducteur de h sur la partie du corps qui compte le plus).</p>
+</details>
+
+<h2>Le fond</h2>
+<p>Pas besoin de résoudre ces équations tous les jours. Il faut les <em>ressentir</em> —
+remarquer quand une conception suppose silencieusement une masse constante, une
+contrainte uniforme, l'absence de changement d'état, une charge résistive, un gaz
+parfait, un système isolé, une vitesse classique ou une géométrie commode. Chaque
+équation ci-dessus est un modèle, et tout modèle est une liste d'hypothèses déguisée
+en mathématiques. L'intuition de l'ingénieur, c'est de savoir où s'arrête le déguisement.</p>
+
+</div>
+
+<!-- ==================== ITALIANO ==================== -->
+<div id="it" class="tab-content">
+
+<p>Conoscere una formula non è come capirla. L'intuizione dell'ingegnere è la capacità
+di guardare un sistema e percepire quale equazione sta per violare.</p>
+
+<h2>1. Seconda legge di Newton — <span class="formula">F = ma</span></h2>
+<p><span class="label">Cosa dice:</span> La forza è uguale alla massa per l'accelerazione. Tutto ciò che si muove — o che viene impedito di muoversi — le obbedisce.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Qualsiasi problema di dinamica: veicoli, ascensori, bracci robotici, vibrazioni.</li>
+  <li>Carichi strutturali: una struttura statica è solo il caso a = 0 (somma delle forze nulla).</li>
+  <li>Stimare i carichi da decelerazioni (incidenti, frenate brusche, test di caduta).</li>
+</ul>
+<p><span class="label">Esempio:</span> Un'auto da 1000 kg che passa da 0 a 100 km/h (27,8 m/s) in 10 s richiede
+un'accelerazione media di 2,78 m/s², quindi una forza netta di ~2,8 kN. Aggiungete
+attrito aerodinamico e resistenza al rotolamento e avete la forza necessaria alle
+ruote — e quindi la coppia del motore.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Massa costante.</strong> I razzi bruciano carburante; la forma generale è F = dp/dt (la forza è la derivata della quantità di moto).</li>
+  <li><strong>Sistema di riferimento inerziale.</strong> In un sistema rotante o accelerato bisogna aggiungere forze fittizie (Coriolis, centrifuga).</li>
+  <li><strong>Velocità e scale classiche.</strong> Vicino alla velocità della luce → relatività; a scala atomica → meccanica quantistica.</li>
+</ul>
+
+<details>
+<summary>Esempio svolto — la «massa apparente» di un oggetto che cade sul vostro piede (due metodi, derivazioni complete)</summary>
+<p>Lasciate cadere un oggetto di massa m da un'altezza h sul vostro piede. Che massa
+<em>sente</em> il piede all'istante dell'impatto? Due risposte — una stima rapida, poi il
+modello elastico completo — entrambe costruite a partire da F = ma.</p>
+
+<p><strong>Passo 1 — caduta libera (comune ai due metodi).</strong> Cerchiamo la velocità
+d'impatto v₀ in funzione di h. Due modi per ottenerla.<br>
+<em>Energia:</em> al rilascio l'oggetto ha solo energia potenziale E = mgh; all'impatto,
+solo energia cinetica E = ½mv₀². Senza attrito, l'energia si conserva:
+<span class="formula">mgh = ½mv₀² → v₀ = √(2gh)</span>.<br>
+<em>Integrando F = ma:</em> m·dv/dt = −mg → v(t) = g·t e h = ½g·t²; la caduta dura quindi
+t = √(2h/g) e v₀ = g·t = √(2gh). Stesso risultato.<br>
+Notate che m si semplifica — tutte le masse cadono allo stesso modo (Galileo). Per
+h = 1 m: v₀ = √(2 × 9,81 × 1) ≈ 4,4 m/s.</p>
+
+<p><strong>Metodo A — stima rapida: decelerazione costante.</strong></p>
+<p><strong>Passo 2A.</strong> Supponiamo che il piede/la scarpa fermi l'oggetto su una
+distanza d (lo schiacciamento di suola e pelle — facile da stimare) con decelerazione a
+costante. È F = ma con a = const — l'ipotesi che il metodo B abbandonerà. Si integra due
+volte: v(t) = v₀ − a·t e x(t) = v₀·t − ½a·t². L'oggetto si ferma a t* = v₀/a, dopo una
+distanza <span class="formula">d = v₀·t* − ½a·t*² = v₀²/2a</span>, cioè v₀² = 2ad → a = gh/d.
+(Equivalente energetico in una riga: la forza frenante netta ma, applicata su d, assorbe
+l'energia cinetica: ma·d = ½mv₀² — stessa equazione.)</p>
+<p><strong>Passo 3A.</strong> Seconda legge di Newton durante l'arresto: il suolo deve
+decelerare l'oggetto <em>e</em> sostenerne il peso, quindi
+<span class="formula">F = m(g + a) = mg·(1 + h/d)</span>.</p>
+<p><strong>Passo 4A.</strong> Massa apparente: <span class="formula">m_app = F/g = m·(1 + h/d)</span>.
+Con m = 1 kg, h = 1 m, d = 5 mm: m_app = 1 × (1 + 200) ≈ <strong>200 kg</strong>.
+È una forza <em>media</em> sull'arresto.</p>
+
+<p><strong>Metodo B — contatto elastico (equazione differenziale).</strong></p>
+<p><strong>Passo 2B.</strong> Modelliamo il contatto (suola, pelle, pavimento) come una
+molla lineare di rigidità k — legge di Hooke: compressa di x, respinge con kx. Con x
+positivo verso il basso, due forze agiscono sull'oggetto: il peso mg verso il basso,
+la molla kx verso l'alto. Da cui l'equazione <span class="formula">m·ẍ = mg − kx</span>,
+con x(0) = 0, ẋ(0) = v₀.</p>
+<p><strong>Passo 3B.</strong> Risoluzione. Forma standard: ẍ + ω²x = g, con ω = √(k/m).
+Soluzione generale = parte omogenea A·cos ωt + B·sin ωt, più una soluzione particolare
+costante x_p = g/ω² = mg/k — la compressione statica alla quale la molla da sola
+equilibra il peso; l'oscillazione è centrata lì. Condizioni iniziali: x(0) = 0 →
+A = −mg/k, ẋ(0) = v₀ → B = v₀/ω. Da cui
+<span class="formula">x(t) = (mg/k)(1 − cos ωt) + (v₀/ω)·sin ωt</span>.
+I due termini oscillanti si combinano in un'unica sinusoide di ampiezza
+R = √((mg/k)² + (v₀/ω)²) centrata su mg/k; la compressione raggiunge quindi il massimo a
+x_max = mg/k + R (il che equivale a risolvere ẋ = 0).</p>
+<p><strong>Passo 4B.</strong> Forza massima e massa apparente, usando v₀² = 2gh e ω² = k/m:
+<span class="formula">F = k·x_max = mg·(1 + √(1 + 2kh/mg))</span> →
+<span class="formula">m_app = m·(1 + √(1 + 2kh/mg))</span>.
+Con m = 1 kg, h = 1 m, k = 10⁵ N/m (suola rigida): F ≈ 1,4 kN → m_app ≈
+<strong>144 kg</strong>, erogati in ~10 ms (mezzo periodo π/ω). È una forza di <em>picco</em>.<br>
+<em>Verifica.</em> Con v₀ = 0 (oggetto appoggiato delicatamente, non in caduta), x oscilla
+tra 0 e 2mg/k: anche una massa appoggiata con cura <em>raddoppia</em> momentaneamente il
+suo peso. E il termine d'impatto v₀/ω domina non appena h ≫ mg/k — qui 1 m di caduta
+contro mg/k ≈ 0,1 mm di compressione statica.</p>
+
+<p><strong>Perché i due numeri differiscono.</strong> La forza della molla sale da 0 al
+picco, quindi la sua media è metà del picco: a parità di spazio d'arresto, il picco
+elastico è ~2× la media a decelerazione costante. Il contatto reale (non lineare,
+smorzato — aggiungete un termine c·ẋ) sta nel mezzo. Entrambi i metodi concordano
+sulla fisica: il moltiplicatore h/d (o √h) è enorme, quindi una lattina da 1 kg «pesa»
+come un uomo adulto per un istante — e un tappeto (grande d, piccola k) uccide il
+picco, ecco perché la stessa caduta sul tappeto è innocua.</p>
+</details>
+
+<h2>2. Tensione meccanica — <span class="formula">σ = F/A</span></h2>
+<p><span class="label">Cosa dice:</span> La tensione è una forza divisa per l'area su cui agisce. Misura quanto una forza è <em>concentrata</em>, non quanto è grande.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Dimensionare cavi, bulloni, colonne, travi: mantenere σ sotto il limite di snervamento del materiale (con un fattore di sicurezza).</li>
+  <li>Spiegare perché un ago fora la pelle (A minuscola → σ enorme) e perché le racchette da neve non affondano (A grande → σ piccola).</li>
+  <li>La pressione è la stessa idea: p = F/A per i fluidi.</li>
+</ul>
+<p><span class="label">Esempio:</span> Un cavo d'acciaio di 1 cm² (10⁻⁴ m²) di sezione che sostiene 10 kN porta
+σ = 10⁴ / 10⁻⁴ = 100 MPa. L'acciaio da costruzione snerva intorno a 250 MPa — va bene, con un fattore di sicurezza di ~2,5.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Distribuzione uniforme.</strong> F/A è una <em>media</em>. Vicino a fori, intagli, spigoli vivi e carichi puntuali, la tensione locale può essere molte volte superiore (fattori di concentrazione delle tensioni).</li>
+  <li><strong>Solo trazione semplice.</strong> I pezzi reali subiscono taglio (τ), flessione e torsione — il quadro completo è il tensore degli sforzi.</li>
+  <li><strong>Materiale omogeneo e isotropo.</strong> Compositi, legno e saldature hanno resistenza dipendente dalla direzione.</li>
+</ul>
+<details>
+<summary>Esempio svolto — un bullone da 10 mm solleva un motore da 500 kg?</summary>
+<p>Una gru da officina solleva un motore da 500 kg; tutto il carico grava su un solo
+bullone d'acciaio da 10 mm di diametro, in trazione. Regge?</p>
+<p><strong>Passo 1 — il carico.</strong> Il bullone sostiene il peso:
+<span class="formula">F = m·g = 500 × 9,81 ≈ 4,9 kN</span>.</p>
+<p><strong>Passo 2 — la sezione.</strong> Sezione circolare, raggio r = 5 mm. Convertire prima
+in metri — è qui che avvengono gli errori: r = 5 mm = 5×10⁻³ m, quindi
+<span class="formula">A = πr² = π × (5×10⁻³)² = π × 25×10⁻⁶ ≈ 7,85×10⁻⁵ m²</span> (78,5 mm²).</p>
+<p><strong>Passo 3 — la tensione.</strong>
+<span class="formula">σ = F/A = 4,9×10³ / 7,85×10⁻⁵ ≈ 62 MPa</span>.
+(Controllo in mm: 4900 N / 78,5 mm² ≈ 62 N/mm² — stessa cosa, 1 MPa = 1 N/mm².)</p>
+<p><strong>Passo 4 — confronto col materiale.</strong> L'acciaio da costruzione snerva verso
+250 MPa, quindi il fattore di sicurezza è 250/62 ≈ <strong>4</strong> — il bullone regge,
+ampiamente.</p>
+<p><strong>Passo 5 — il rovescio della medaglia.</strong> Mettete gli stessi 4,9 kN sul filo
+di uno scalpello di 1 mm² (10⁻⁶ m²): σ = 4,9×10³ / 10⁻⁶ ≈ 4,9 GPa — ben oltre lo
+snervamento di qualsiasi acciaio. Il filo si apre la strada schiacciando il materiale:
+è esattamente perché gli utensili da taglio tagliano. Stessa forza, area minuscola.</p>
+<p><strong>Limiti.</strong> σ = F/A è una media su una sezione liscia: una verifica reale del
+bullone usa l'area di fondo filetto (più piccola di πr²) e un fattore di concentrazione
+delle tensioni alla filettatura, e i carichi dinamici (strappi) moltiplicano F.</p>
+</details>
+
+<h2>3. Calore sensibile — <span class="formula">Q = mcΔT</span></h2>
+<p><span class="label">Cosa dice:</span> Il calore necessario per cambiare la temperatura di un corpo è uguale a massa × calore specifico × variazione di temperatura.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Bilanci termici: quanta energia per scaldare una stanza, un serbatoio d'acqua, un blocco motore.</li>
+  <li>Dimensionare circuiti di raffreddamento, radiatori, HVAC, dissipatori.</li>
+  <li>Cucina, metallurgia, gestione termica delle batterie.</li>
+</ul>
+<p><span class="label">Esempio:</span> Scaldare 1 L d'acqua (1 kg, c ≈ 4186 J/kg·K) da 20 °C a 100 °C richiede
+Q = 1 × 4186 × 80 ≈ 335 kJ. Un bollitore da 2 kW lo fa in ~170 s, perdite incluse.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Nessun cambiamento di fase.</strong> Fusione ed ebollizione avvengono a temperatura costante; serve il calore latente: Q = mL.</li>
+  <li><strong>c costante.</strong> Il calore specifico varia con la temperatura (e con la pressione, per i gas: c_p vs c_v).</li>
+  <li><strong>Temperatura uniforme.</strong> Dà l'energia <em>totale</em>, non la velocità né il luogo — i flussi di calore richiedono la legge di Fourier e i modelli di convezione.</li>
+</ul>
+<details>
+<summary>Esempio svolto — scaldare un serbatoio da 200 L</summary>
+<p>Uno scaldabagno elettrico contiene 200 L d'acqua. Quanto impiega una resistenza da
+2,4 kW a portarla da 15 °C (acqua fredda di rete) a 60 °C, e quanto costa?</p>
+<p><strong>Passo 1 — massa e ΔT.</strong> 1 L d'acqua = 1 kg, quindi m = 200 kg;
+c = 4186 J/kg·K; ΔT = 60 − 15 = 45 K.</p>
+<p><strong>Passo 2 — l'energia.</strong>
+<span class="formula">Q = mcΔT = 200 × 4186 × 45 ≈ 3,77×10⁷ J</span> (circa 38 MJ).</p>
+<p><strong>Passo 3 — in chilowattora.</strong> Il joule è l'unità del fisico; la bolletta
+arriva in kWh. Questa conversione è il ponte verso la bolletta:
+1 kWh = 1000 W × 3600 s = 3,6×10⁶ J, quindi
+<span class="formula">Q = 3,77×10⁷ / 3,6×10⁶ ≈ 10,5 kWh</span>.</p>
+<p><strong>Passo 4 — il tempo.</strong> La potenza è energia diviso il tempo, quindi
+<span class="formula">t = Q/P = 3,77×10⁷ / 2400 ≈ 1,57×10⁴ s ≈ 4,4 h</span>.
+(Verifica: 2,4 kW × 4,4 h ≈ 10,6 kWh — stessa energia.)</p>
+<p><strong>Passo 5 — il costo.</strong> A 0,20 €/kWh: 10,5 × 0,20 ≈ <strong>2,1 €</strong>
+per un riscaldamento completo. L'acqua calda è una delle voci più pesanti della
+bolletta energetica di casa — questo è quel calcolo.</p>
+<p><strong>Limiti.</strong> Ignora le perdite continue attraverso l'isolante del serbatoio
+(il tempo reale è più lungo), assume c costante e temperatura uniforme — un serbatoio
+reale si stratifica: caldo in alto, freddo in basso.</p>
+</details>
+
+<h2>4. Potenza elettrica — <span class="formula">P = IV</span></h2>
+<p><span class="label">Cosa dice:</span> La potenza è il prodotto di corrente e tensione.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Dimensionare cavi, fusibili e alimentatori: a potenza fissa, una tensione più alta significa corrente più bassa, e poiché le perdite resistive sono I²R, <strong>le perdite di trasmissione calano quadraticamente</strong> — ecco perché la rete funziona a centinaia di kilovolt.</li>
+  <li>Bollette: potenza × tempo = energia (kWh).</li>
+  <li>Perché il caricatore scalda: ogni resistenza parassita dissipa I²R.</li>
+</ul>
+<p><span class="label">Esempio:</span> Una stufa da 2,4 kW su una presa da 230 V assorbe ~10,4 A — perfetta su un
+interruttore da 16 A. La stessa stufa su un vecchio impianto a 110 V assorbirebbe ~22 A, richiedendo cavi molto più spessi.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Corrente continua o alternata puramente resistiva.</strong> Con motori, trasformatori o carichi capacitivi, corrente e tensione si sfasano: la potenza reale è P = V·I·cos φ. Il prodotto V·I da solo è solo potenza <em>apparente</em> (VA).</li>
+  <li><strong>Istantanea vs media.</strong> Per qualsiasi segnale non sinusoidale bisogna integrare il prodotto istantaneo.</li>
+</ul>
+
+<details>
+<summary>Esempio svolto — ciabatta al limite, e la prolunga avvolta</summary>
+<p>Una ciabatta da 230 V / 16 A alimenta contemporaneamente una stufa da 2 kW e un
+bollitore da 1,5 kW. Siete nei limiti — e perché tutti insistono che la prolunga
+va srotolata prima di collegare un carico grosso?</p>
+<p><strong>Passo 1 — la corrente.</strong> La potenza totale è 2000 + 1500 = 3500 W, quindi
+<span class="formula">I = P/V = 3500/230 ≈ 15,2 A</span>.
+Sotto i 16 A — ma al limite. Collegate qualsiasi altra cosa e l'interruttore scatta.</p>
+<p><strong>Passo 2 — la resistenza del cavo.</strong> Una prolunga da 25 m avvolta, in
+rame da 1,5 mm²: la corrente va e torna, quindi L = 50 m di conduttore.
+Con la resistività del rame ρ = 1,68×10⁻⁸ Ω·m:
+<span class="formula">R = ρL/A = 1,68×10⁻⁸ × 50 / 1,5×10⁻⁶ ≈ 0,56 Ω</span>.</p>
+<p><strong>Passo 3 — il calore nel cavo.</strong>
+<span class="formula">I²R ≈ 15,2² × 0,56 ≈ 130 W</span>
+dissipati lungo il cavo. Srotolato, questo calore si distribuisce su 25 m ed è
+innocuo; avvolto in un gomitolo compatto, le spire si scaldano a vicenda e la
+temperatura sale — isolante fuso, e alla fine rischio d'incendio. È lo stesso I²R
+che rende efficiente la trasmissione ad alta tensione: a 230 kV invece di 230 V,
+la stessa potenza richiede un millesimo della corrente, e le perdite calano di un
+fattore un milione.</p>
+<p><strong>Limiti.</strong> Assume carichi puramente resistivi (cos φ = 1) — un carico
+a motore della stessa potenza nominale assorbe più corrente per la stessa potenza
+utile.</p>
+</details>
+
+<h2>5. Legge dei gas ideali — <span class="formula">PV = nRT</span></h2>
+<p><span class="label">Cosa dice:</span> Pressione × volume = quantità di gas × costante dei gas × temperatura assoluta.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Motori, compressori, sistemi pneumatici.</li>
+  <li>Serbatoi in pressione e bombole da sub.</li>
+  <li>Pneumatici, palloncini, meteo e altitudine (densità dell'aria).</li>
+</ul>
+<p><span class="label">Esempio:</span> Un pneumatico gonfiato a 2,5 bar a 20 °C, riscaldato a 50 °C dopo
+l'autostrada: a volume costante, P/T è costante, quindi P₂ = 2,5 × (323/293) ≈ 2,76 bar.
+Ecco perché le pressioni si specificano "a freddo". (Sempre in kelvin.)</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Gas ideale:</strong> le molecole sono punti senza volume e senza interazioni reciproche.</li>
+  <li>Fallisce ad <strong>alta pressione</strong> o <strong>bassa temperatura</strong> — vicino alla liquefazione, i gas reali richiedono correzioni (van der Waals, fattore di comprimibilità Z, tabelle del vapore).</li>
+  <li><strong>n costante.</strong> I sistemi aperti (perdite, flussi) richiedono la forma in portata massica.</li>
+</ul>
+
+<details>
+<summary>Esempio svolto — quanto dura una bombola a 20 m di profondità?</summary>
+<p>Una bombola da 12 L caricata a 200 bar, un sub a 20 m di profondità che respira
+15 L/min (misurati a pressione di superficie). Quanto tempo prima di restare a
+secco?</p>
+<p><strong>Passo 1 — l'aria imbarcata.</strong> A temperatura costante, PV è costante,
+quindi la bombola contiene l'equivalente di
+<span class="formula">V = 12 L × 200 = 2400 L</span>
+di aria a pressione di superficie.</p>
+<p><strong>Passo 2 — la pressione in profondità.</strong> L'acqua aggiunge 1 bar ogni
+10 m. A 20 m la pressione assoluta è
+<span class="formula">P = 1 + 20/10 = 3 bar</span>.
+Sempre in pressione assoluta — il manometro segna 2 bar, ma la fisica conta dal
+vuoto.</p>
+<p><strong>Passo 3 — il consumo in profondità.</strong> I polmoni muovono lo stesso
+volume a ogni respiro, ma a pressione ambiente. A V e T fissati, PV = nRT dà
+n ∝ P: ogni respiro a 3 bar porta via 3× le molecole. Un consumo in superficie
+di 15 L/min diventa
+<span class="formula">15 × 3 = 45 L/min</span>
+di aria equivalente-superficie.</p>
+<p><strong>Passo 4 — l'autonomia.</strong>
+<span class="formula">2400 / 45 ≈ 53 min</span>
+— prima di qualsiasi riserva.</p>
+<p><strong>Limiti.</strong> Il gas ideale va bene qui: anche a 200 bar, il fattore di
+comprimibilità Z dell'aria si scosta da 1 solo di pochi punti percentuali. Nelle
+immersioni reali si tiene una riserva di ~50 bar, e il consumo sale in fretta con
+sforzo, freddo e stress.</p>
+</details>
+
+<h2>6. Secondo principio della termodinamica — <span class="formula">ΔS ≥ 0</span></h2>
+<p><span class="label">Cosa dice:</span> L'entropia di un sistema isolato non diminuisce mai. Ogni processo reale è in qualche misura irreversibile.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Fissa il <em>limite superiore</em> di ogni macchina termica: rendimento di Carnot η = 1 − T_fredda/T_calda.</li>
+  <li>Spiega perché ogni conversione di energia produce calore disperso e perché le centrali hanno bisogno di torri di raffreddamento.</li>
+  <li>Dice quali idee scartare subito: moto perpetuo, macchine a "energia libera".</li>
+</ul>
+<p><span class="label">Esempio:</span> Una centrale a carbone con vapore a 550 °C (823 K) che cede calore a 30 °C
+(303 K) ha un limite di Carnot di 1 − 303/823 ≈ 63%. Le centrali reali arrivano al ~40% — la differenza sono attriti, turbolenza e differenze di temperatura finite.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Sistema isolato.</strong> Un sottosistema aperto può vedere la sua entropia <em>diminuire</em> — il congelatore raffredda il suo interno — purché esporti più entropia di quanta ne distrugge.</li>
+  <li><strong>Enunciato macroscopico.</strong> L'entropia è statistica: a scala microscopica, le fluttuazioni possono violare brevemente la tendenza.</li>
+  <li><strong>Basato sull'equilibrio.</strong> I processi lontani dall'equilibrio richiedono quadri estesi.</li>
+</ul>
+
+<details>
+<summary>Esempio svolto — perché una pompa di calore eroga 3–4 kWh per kWh</summary>
+<p>Riscaldare una casa a 20 °C quando fuori ci sono 0 °C. Una stufa elettrica
+trasforma 1 kWh di elettricità in esattamente 1 kWh di calore. Quanto meglio
+fa una pompa di calore?</p>
+<p><strong>Passo 1 — cosa fa la macchina.</strong> Una pompa di calore preleva
+Q_fredda dall'esterno freddo e cede Q_calda all'interno, compiendo il lavoro
+<span class="formula">W = Q_calda − Q_fredda</span>.
+Il suo coefficiente di prestazione in riscaldamento è
+<span class="formula">COP = Q_calda / W</span>.</p>
+<p><strong>Passo 2 — il limite reversibile.</strong> La migliore macchina
+possibile è reversibile: nessuna produzione netta di entropia, ΔS = 0
+complessivamente. Entropia in entrata uguale a quella in uscita, quindi
+<span class="formula">Q_calda / T_calda = Q_fredda / T_fredda</span>
+cioè Q_fredda = Q_calda × T_fredda / T_calda.</p>
+<p><strong>Passo 3 — sostituzione.</strong> Con W = Q_calda − Q_fredda, il COP
+della macchina di Carnot dipende solo dalle temperature:
+<span class="formula">COP_Carnot = T_calda / (T_calda − T_fredda)</span>.</p>
+<p><strong>Passo 4 — in kelvin.</strong> T_calda = 293 K, T_fredda = 273 K:
+<span class="formula">COP = 293 / 20 ≈ 14,6</span>
+— il secondo principio permette quasi 15 kWh di calore per kWh di lavoro.</p>
+<p><strong>Passo 5 — la realtà.</strong> Attriti, laminazione e differenze di
+temperatura finite negli scambiatori producono entropia (ΔS > 0): le macchine
+reali arrivano a un COP di ~3–4. Un kWh di elettricità eroga comunque 3–4 kWh
+di calore, contro esattamente 1 kWh di una resistenza.</p>
+<p><strong>Limiti.</strong> Il COP cala quando fuori fa più freddo —
+T_calda − T_fredda cresce e il denominatore morde. Ecco perché le pompe di
+calore fanno fatica nel freddo intenso.</p>
+</details>
+
+<h2>7. Equivalenza massa-energia — <span class="formula">E = mc²</span></h2>
+<p><span class="label">Cosa dice:</span> La massa è una forma di energia. Una piccola massa corrisponde a un'energia enorme, perché c² ≈ 9 × 10¹⁶ J/kg.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Fisica nucleare: fissione e fusione convertono una frazione di massa (il "difetto di massa") in energia.</li>
+  <li>Fisica delle particelle: creazione di coppie, annichilazione, energie di decadimento.</li>
+  <li>Capire perché un nocciolo di reattore grande come un'auto alimenta un sottomarino per 25 anni.</li>
+</ul>
+<p><span class="label">Esempio:</span> La fissione di un nucleo di U-235 rilascia ~200 MeV perché i frammenti
+pesano ~0,1% in meno del nucleo originale. Un chilogrammo di uranio completamente fissionato produce ~8 × 10¹³ J — l'energia di 2–3 milioni di chilogrammi di carbone.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Non è una ricetta per convertire la materia a piacimento.</strong> Solo i processi che cambiano l'energia di legame la liberano; non si può "bruciare" un mattone in mc² di energia utile.</li>
+  <li><strong>Trascurabile alle scale chimiche.</strong> La chimica assume tranquillamente la conservazione della massa.</li>
+  <li><strong>La relazione completa è E² = (pc)² + (mc²)².</strong> E = mc² da sola è l'energia <em>a riposo</em>.</li>
+</ul>
+<details>
+<summary>Esempio svolto — il grammo che svanisce ogni giorno in un reattore</summary>
+<p>Una centrale nucleare produce 1 GW di potenza termica, giorno e notte.
+Quanta massa scompare davvero al giorno?</p>
+<p><strong>Passo 1 — l'energia di un giorno.</strong> L'energia è la potenza
+per il tempo:
+<span class="formula">E = P·t = 10⁹ W × 86400 s = 8,64 × 10¹³ J</span>.</p>
+<p><strong>Passo 2 — conversione con E = mc².</strong> Ricavando la massa, con
+c² ≈ 9 × 10¹⁶ J/kg:
+<span class="formula">m = E / c² = 8,64 × 10¹³ / 9 × 10¹⁶ ≈ 9,6 × 10⁻⁴ kg</span>
+— circa <strong>un grammo al giorno</strong>.</p>
+<p><strong>Passo 3 — confronto con il carbone.</strong> La stessa energia
+giornaliera da carbone a ~25 MJ/kg richiede
+<span class="formula">8,64 × 10¹³ / 2,5 × 10⁷ ≈ 3,5 × 10⁶ kg</span>
+≈ 3500 tonnellate di carbone al giorno. Un grammo di massa svanita contro
+migliaia di tonnellate di roccia bruciata — quel rapporto è c² reso
+visibile.</p>
+<p><strong>Limiti.</strong> Il grammo è il difetto di massa dei prodotti di
+fissione, che pesano meno del combustibile iniziale — nulla viene
+"annientato". E 1 GW termico ≠ 1 GW elettrico: una centrale reale restituisce
+solo ~1/3 di quell'energia come elettricità.</p>
+</details>
+
+<h2>8. Energia cinetica — <span class="formula">Ec = ½mv²</span></h2>
+<p><span class="label">Cosa dice:</span> L'energia di una massa in movimento cresce con il <em>quadrato</em> della velocità. È il limite a bassa velocità dell'energia relativistica — e un fattore enorme nella vita quotidiana.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Sicurezza stradale: raddoppiare la velocità quadruplica l'energia che una struttura deve assorbire.</li>
+  <li>Frenata: i freni convertono l'energia cinetica in calore, quindi lo spazio di arresto scala con v².</li>
+  <li>Balistica, volani, idroelettrico, eolico (la potenza disponibile scala con v³).</li>
+  <li>Meccanica orbitale: la velocità di fuga viene dall'uguagliare ½mv² all'energia potenziale gravitazionale.</li>
+</ul>
+<p><span class="label">Esempio:</span> A 130 km/h un'auto trasporta (13/9)² ≈ 2,1× l'energia cinetica che ha a
+90 km/h. Quel fattore ~2 è sia l'energia extra che la zona a deformazione controllata deve assorbire in un urto, sia lo spazio di frenata in più — tutta la fisica dietro i limiti di velocità.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Velocità classiche.</strong> Vicino a c, si usa Ec = (γ − 1)mc². L'errore di ½mv² è già ~1% a ~0,1c.</li>
+  <li><strong>Solo traslazione.</strong> Un corpo in rotazione immagazzina anche ½Iω².</li>
+  <li><strong>Dà energia, non forza.</strong> Quanto è distruttivo un impatto dipende dalla distanza/durata d'arresto (ritorno a F = ma e σ = F/A).</li>
+</ul>
+<details>
+<summary>Esempio svolto — spazio di frenata a 90 contro 130 km/h</summary>
+<p>Un'auto lanciata a 90 km/h deve fermarsi di colpo. Quanta strada le serve
+— e cosa cambia a 130 km/h?</p>
+<p><strong>Passo 1 — da dove viene la forza.</strong> I freni stringono le
+ruote, ma è la strada a fermare l'auto: i pneumatici trasmettono una forza di
+attrito massima F = μmg (μ ≈ 0,8 su asfalto asciutto). Il lavoro di questa
+forza sulla distanza d deve assorbire tutta l'energia cinetica:
+<span class="formula">μmg·d = ½mv²</span>.</p>
+<p><strong>Passo 2 — la massa si semplifica.</strong> Risolvendo per d:
+<span class="formula">d = v² / (2μg)</span>
+— niente più massa: un camion carico e una moto si fermano quasi nella stessa
+distanza (stessi pneumatici, stesso μ). Contano solo velocità, aderenza e g.</p>
+<p><strong>Passo 3 — i numeri.</strong> 90 km/h = 25 m/s:
+<span class="formula">d = 25² / (2 × 0,8 × 9,81) ≈ 40 m</span>.
+A 130 km/h = 36,1 m/s:
+<span class="formula">d = 36,1² / (2 × 0,8 × 9,81) ≈ 83 m</span>.
+Il rapporto è (130/90)² ≈ <strong>2,1</strong> — il v² reso concreto.</p>
+<p><strong>Passo 4 — aggiungere il tempo di reazione.</strong> Circa 1 s passa
+prima ancora che i freni entrino in azione, durante il quale l'auto percorre
+v × 1 s: <strong>25 m</strong> a 90 km/h, <strong>36 m</strong> a 130 km/h —
+spesso più della frenata stessa.</p>
+<p><strong>Limiti.</strong> Su asfalto bagnato μ scende a ≈ 0,4 e entrambe le
+distanze raddoppiano. Si assume una frenata limitata dall'aderenza dei
+pneumatici a μ costante — niente cicli dell'ABS, niente fading dei freni — e
+una strada piana e asciutta.</p>
+</details>
+
+<h2>9. Rapporto superficie/volume — <span class="formula">S/V ∝ 1/L</span></h2>
+<p><span class="label">Cosa dice:</span> Non un'equazione ma una legge di scala: la superficie cresce come L² mentre il volume cresce come L³, quindi S/V ~ 1/L. Gli oggetti piccoli hanno molta superficie per unità di materia.</p>
+<p><span class="label">Quando serve:</span></p>
+<ul>
+  <li>Trasferimento di calore: riscaldamento e raffreddamento passano attraverso le superfici, ma la massa termica vive nel volume. Gli oggetti piccoli si scaldano e raffreddano in fretta.</li>
+  <li>Biologia: perché le cellule sono microscopiche, perché i topi mangiano in continuazione e gli elefanti hanno orecchie grandi.</li>
+  <li>Ingegneria chimica: catalizzatori e polveri — macinare moltiplica la superficie reattiva.</li>
+  <li>Le alette di radiatori, dissipatori e motori delle moto gonfiano artificialmente S/V.</li>
+</ul>
+<p><span class="label">Esempio:</span> Il ghiaccio tritato raffredda una bevanda molto più in fretta di un unico
+grande cubetto della stessa massa: spezzare un cubo in 8 pezzi raddoppia la superficie totale. Stessa fisica delle alette di un dissipatore di CPU.</p>
+<p><span class="label">Dove smette di valere (ipotesi):</span></p>
+<ul>
+  <li><strong>Pura geometria.</strong> Conduttività, coefficiente di convezione e capacità termica decidono sempre i tassi reali.</li>
+  <li><strong>La forma conta.</strong> S/V ∝ 1/L confronta forme <em>simili</em> a dimensioni diverse.</li>
+  <li><strong>Visione a scala singola.</strong> Rugosità, porosità e strutture frattali danno superfici molto più grandi della stima liscia.</li>
+</ul>
+<details>
+<summary>Esempio svolto — perché i neonati hanno bisogno del cappellino (e perché il ghiaccio tritato raffredda più in fretta)</summary>
+<p>Un adulto trova mite una sera di primavera. Un neonato, nella stessa aria,
+perde calore pericolosamente in fretta. Perché la differenza è geometria e
+non fragilità?</p>
+<p><strong>Passo 1 — la legge di scala.</strong> Per forme simili, la massa
+cresce col volume, M ∝ V ∝ L³, mentre la superficie cresce come S ∝ L².
+Eliminando L:
+<span class="formula">S ∝ M<sup>2/3</sup>, quindi S/V ∝ M<sup>−1/3</sup> ∝ 1/L</span>.
+Più il corpo è piccolo, più superficie porta per chilogrammo di materia.</p>
+<p><strong>Passo 2 — perché governa il calore.</strong> Il calore si perde
+attraverso la superficie, ma è immagazzinato (e prodotto) nel volume. La
+velocità di perdita per chilogrammo scala quindi come S/V: i corpi piccoli si
+raffreddano in fretta, quelli grandi trattengono il calore.</p>
+<p><strong>Passo 3 — i numeri.</strong> Un neonato di 3 kg contro un adulto di
+70 kg, supposti di forma all'incirca simile:
+<span class="formula">(S/V)<sub>neonato</sub> / (S/V)<sub>adulto</sub> = (70/3)<sup>1/3</sup> ≈ 2,9</span>.
+Il neonato perde calore circa <strong>3 volte più in fretta per
+chilogrammo</strong> — mentre la sua massa assoluta, minore, produce meno
+calore in totale. Ecco il cappellino: la testa è una frazione
+sproporzionata della superficie di un neonato.</p>
+<p><strong>Passo 4 — la stessa legge in cucina.</strong> Spezzare un cubetto di
+ghiaccio in 8 pezzi uguali: ogni lato si dimezza, quindi la superficie totale
+passa da 6L² a 8 × 6(L/2)² = 12L² — <strong>il doppio della superficie a parità
+di massa</strong>. È per questo che il ghiaccio tritato raffredda una bevanda
+più in fretta, e perché lo stesso trucco raffredda una CPU (alette) o accelera
+un catalizzatore (polvere).</p>
+<p><strong>Limiti.</strong> È pura legge di scala: la perdita reale segue anche
+la legge di Newton del raffreddamento — velocità ∝ superficie × ΔT, con un
+coefficiente di convezione h che vento e vestiti modificano (un cappellino è
+un riduttore di h sulla parte del corpo che conta di più).</p>
+</details>
+
+<h2>Il punto</h2>
+<p>Non serve risolvere queste equazioni ogni giorno. Bisogna <em>sentirle</em> — accorgersi
+quando un progetto assume silenziosamente massa costante, tensione uniforme, assenza
+di cambiamenti di fase, un carico resistivo, un gas ideale, un sistema isolato, una
+velocità classica o una geometria comoda. Ogni equazione qui sopra è un modello, e
+ogni modello è una lista di ipotesi travestita da matematica. L'intuizione
+dell'ingegnere è sapere dove finisce il travestimento.</p>
+
+</div>
+
+</main>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.querySelectorAll('.tabs button').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
