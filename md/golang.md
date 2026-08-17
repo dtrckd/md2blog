@@ -1,17 +1,22 @@
-(use -v for verbose output)
 
-Install (don't add in go.mod if in a module or as a CLI tool for ex)
-
-    # @ deprecated ?
-    GO111MODULE=off go get github.com/usr/repo
-
-    or
+Install a CLI tool without touching go.mod
 
     go install github.com/jstemmer/gotags@latest
 
-List installed package
+    # GOPATH mode (GO111MODULE=off go get) was removed in Go 1.22
 
-    go list ...
+Pin a CLI tool *in* go.mod (Go 1.24+), then run it
+
+    go get -tool github.com/jstemmer/gotags
+    go tool gotags
+
+List installed binaries
+
+    ls $(go env GOBIN) $(go env GOPATH)/bin
+
+List packages of the current module
+
+    go list ./...
 
 List dependencies package
 
@@ -31,22 +36,36 @@ other uses
      # or
      go list -f '{{.ImportPath}} {{join .Imports "\n"}}' [path|...]
 
-Update a package at a given commit
+## Updating: module dependency vs installed binary
 
-    go get github.com/someone/some_module@af044c0995fe
+`go get` only edits the go.mod of the module you stand in (since Go 1.16 it installs nothing).
+An installed CLI has no go.mod, so `go get tool@latest` outside a module just errors with
+"go.mod file not found ... 'go get' is no longer supported outside a module".
+Update a binary the same way you installed it: `go install`.
 
-Update a package
+Update a dependency of the current module
 
     go get -u <package_name>
+    go get github.com/someone/some_module@af044c0995fe   # at a given commit/tag
 
-Update all package
+Update all dependencies of the current module
 
-    # Current Module
     go get -u
     go mod tidy
 
-    # Global
-    go get -u all
+    # test deps included
+    go get -u -t all
+
+Update a globally installed binary (re-run the install, it overwrites)
+
+    go install github.com/tomasz-tomczyk/crit/cmd/crit@latest
+
+Update every installed binary (no builtin for it; read the origin back from the binary)
+
+    # fish
+    for b in (go env GOPATH)/bin/*
+        go version -m $b | awk '/\tpath\t/{print $2"@latest"; exit}'
+    end | xargs -n1 go install
 
 Remove dependancie unuse
 
@@ -57,29 +76,24 @@ Change the go version of a module
     go mod edit -go=1.14
     #or simply edit go.mod manually...
 
-Install a given tag (only possible with mod in v1.11)
+Install a given tag
 
-    mkdir temp
-    cd temp
-    go mod init .
-    go get -d -v github.com/nsqio/nsq@v1.1.0
-    mkdir bin
-    go build -o bin/nsqd.exe github.com/nsqio/nsq/apps/ns
+    go install github.com/nsqio/nsq/apps/nsqd@v1.1.0
 
 
 Used forked repo or rename a module
 
     go mod edit -replace="github.com/someone/repo@v0.0.0=github.com/you/repo@v1.1.1"
 
-    # if buffy, just do
-    #rg before -l | xargs sed -i "s/before/after" 
+    # if busy, just do
+    #rg before -l | xargs sed -i "s/before/after/"
 
 
 ## Core
 
-What's the difference betwen json.Unmarshall and json.Decode
-    -> Decode operate on stream (e.g like http). Unmarshall on bytes (i.e need to be fully loaded in memory).
-       Thus unmarshall may be a bit faster.
+What's the difference betwen json.Unmarshal and json.NewDecoder(r).Decode
+    -> Decode operates on a stream (e.g like http), and can read several values in a row.
+       Unmarshal on bytes (i.e need to be fully loaded in memory), thus a bit faster.
 
 ## Formating
 
