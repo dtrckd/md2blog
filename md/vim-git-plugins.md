@@ -17,6 +17,22 @@ Shortcuts:
 - `:Gedit :0:%` — current file's staged/index version
 - In `:Git log`, cursor on a commit then `o`/`O`/`-` to open files at that commit
 
+### Conflict resolution
+
+3-way merge view — open a conflicted file then:
+
+    :Gvdiffsplit!
+
+Opens three vertical panes: left (ours/HEAD `//2`), center (working copy), right (theirs `//3`).
+
+    :diffget //2    " take from left (ours)
+    :diffget //3    " take from right (theirs)
+
+From the `:Git` status buffer, conflicted files appear under "Unmerged":
+- `dv` on a file — open it directly in 3-way diff view
+
+`:Git mergetool` loads all conflicted files into the quickfix list (`cnext`/`cprev` to navigate).
+
 ## vim-gitgutter
 
 Default mappings:
