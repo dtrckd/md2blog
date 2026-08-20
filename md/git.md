@@ -106,6 +106,8 @@ After git rebase dev:
 
 Git sees that E is the common ancestor, takes F, and replays it after C.
 
+> **Note:** Rebase doesn't sort by date — it *replays* commits. It takes commits on `op` that aren't on `dev` (your single commit F) and re-applies them on top of dev's tip. Dates are irrelevant; only graph topology matters. That's why F' always lands on top, no matter how old it is.
+
 
 
 
