@@ -49,6 +49,11 @@ git merge -X ours <branch>
 git merge -X theirs <branch>
 ```
 
+See the diff that cause a specific conflict:
+
+    git log --merge -p --left-right -- path/to/file
+
+
 
 ## Squash all diffs into one fresh commit.
 
